@@ -1,35 +1,17 @@
 package by.htp.itacademy.processor;
 
-import com.sun.source.tree.MethodTree;
-import com.sun.source.tree.VariableTree;
 import com.sun.tools.javac.code.Flags;
-import com.sun.tools.javac.code.Symbol.VarSymbol;
-import com.sun.tools.javac.code.TypeTag;
 import com.sun.tools.javac.model.JavacElements;
 import com.sun.tools.javac.processing.JavacProcessingEnvironment;
 import com.sun.tools.javac.tree.JCTree;
-import com.sun.tools.javac.tree.JCTree.JCBlock;
-import com.sun.tools.javac.tree.JCTree.JCCatch;
 import com.sun.tools.javac.tree.JCTree.JCExpression;
-import com.sun.tools.javac.tree.JCTree.JCExpressionStatement;
-import com.sun.tools.javac.tree.JCTree.JCFieldAccess;
-import com.sun.tools.javac.tree.JCTree.JCLiteral;
 import com.sun.tools.javac.tree.JCTree.JCMethodDecl;
-import com.sun.tools.javac.tree.JCTree.JCMethodInvocation;
-import com.sun.tools.javac.tree.JCTree.JCModifiers;
 import com.sun.tools.javac.tree.JCTree.JCStatement;
 import com.sun.tools.javac.tree.JCTree.JCVariableDecl;
 import com.sun.tools.javac.tree.JCTree.Tag;
 import com.sun.tools.javac.tree.TreeMaker;
 import com.sun.tools.javac.util.List;
-import com.sun.tools.javac.util.Name;
-import com.sun.tools.javadoc.JavaScriptScanner;
 
-import by.htp.itacademy.annotation.Time;
-import by.htp.itacademy.utility.log.DevLog;
-import sun.net.NetworkServer;
-
-import java.util.Collections;
 import java.util.Set;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.ProcessingEnvironment;
@@ -40,6 +22,8 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
+
+import by.htp.itacademy.annotation.Time;
 
 @SupportedAnnotationTypes(value = { CurrentTestTimeAnnotationProcessor.ANNOTATION_TYPE })
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
@@ -63,14 +47,13 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 		}
 
 		final Elements elements = javacProcessingEnv.getElementUtils();
-
+		JavacElements utils = (JavacElements) elements;
+		
 		final TypeElement annotation = elements.getTypeElement(ANNOTATION_TYPE);
 		if (annotation != null) {
 
 			final Set<? extends Element> methods = roundEnv.getElementsAnnotatedWith(annotation);
 
-			JavacElements utils = (JavacElements) elements;
-			
 			for (final Element m : methods) {
 
 				Time time = m.getAnnotation(Time.class);
@@ -95,15 +78,12 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 						
 						JCStatement log = log(utils, elapsedTime);
 						
-						newStatements = newStatements.appendList(frame(var_start));
-						
+						newStatements = newStatements.append(var_start);
 						for (JCStatement oldStatement : statements) {
 							newStatements = newStatements.append(oldStatement);
 						}
-						
-						newStatements = newStatements.appendList(frame(var_end));
-						
-						newStatements = newStatements.appendList(frame(log));
+						newStatements = newStatements.append(var_end);
+						newStatements = newStatements.append(log);
 						
 						((JCMethodDecl) blockNode).body.stats = newStatements;
 					}
@@ -127,12 +107,6 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 		JCVariableDecl var = maker.VarDef(maker.Modifiers(Flags.FINAL),
 				utils.getName(varName), maker.TypeIdent(com.sun.tools.javac.code.TypeTag.LONG), currentTime);
 		return var;
-	}
-	
-	private List<JCStatement> frame(JCStatement value) {
-		List<JCStatement> list = List.<JCStatement>nil();
-		list = list.append(value);
-		return list;
 	}
 	
 	private JCStatement log(JavacElements utils, JCExpression value) {
