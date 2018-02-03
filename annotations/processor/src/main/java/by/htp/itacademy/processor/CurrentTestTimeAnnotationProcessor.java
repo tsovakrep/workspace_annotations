@@ -48,6 +48,8 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 
 		final Elements elements = javacProcessingEnv.getElementUtils();
 		JavacElements utils = (JavacElements) elements;
+		List<JCStatement> newS = List.<JCStatement>nil();
+		newS = newS.append(log(utils, maker.Ident(utils.getName("System"))));
 		
 		final TypeElement annotation = elements.getTypeElement(ANNOTATION_TYPE);
 		if (annotation != null) {
