@@ -32,5 +32,7 @@ public class Main {
 //		}
 		TimeTest t = new TimeTest();
 		t.countingTime();
+		SimpleAnnotation s = new SimpleAnnotation();
+		s.theMethod();
 	}
 }
