@@ -92,4 +92,8 @@ public class DevLog {
 		}
 		return -1;
 	}
+	
+	private String currentClass() {
+		return this.getClass().getName();
+	}
 }

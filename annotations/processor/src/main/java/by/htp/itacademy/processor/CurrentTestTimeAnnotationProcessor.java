@@ -113,13 +113,16 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 	private JCStatement log(JavacElements utils, JCExpression value, JCTree blockNode) {
 		JCExpression logExp = maker.Ident(utils.getName("log"));
 		logExp = maker.Select(logExp, utils.getName("logRewrite"));
+		
+//		JCExpression logCurrentClass = maker.Ident(utils.getName("log"));
+//		logExp = maker.Select(logExp, utils.getName("currentClass"));
 				
 		List<JCExpression> listArgs = List.nil();
-		JCExpression arg = maker.Binary(Tag.PLUS, maker.Literal(((JCMethodDecl) blockNode).getClass().toString()), maker.Literal(" --> "));
-//		arg = maker.Binary(Tag.PLUS, maker.Literal(((JCMethodDecl) blockNode).name.toString()),  maker.Literal(" --> "));
-//		arg = maker.Binary(Tag.PLUS, arg, maker.Literal("time: "));
-//		arg = maker.Binary(Tag.PLUS, arg, value);
-//		arg = maker.Binary(Tag.PLUS, arg, maker.Literal(" ns"));
+//		JCExpression arg = maker.Binary(Tag.PLUS, maker.Literal(logCurrentClass.toString()), maker.Literal(" --> "));
+		JCExpression arg = maker.Binary(Tag.PLUS, maker.Literal(((JCMethodDecl) blockNode).name.toString()),  maker.Literal(" --> "));
+		arg = maker.Binary(Tag.PLUS, arg, maker.Literal("time: "));
+		arg = maker.Binary(Tag.PLUS, arg, value);
+		arg = maker.Binary(Tag.PLUS, arg, maker.Literal(" ns"));
 		listArgs = listArgs.append(arg);
 		
 		JCExpression logP = maker.Apply(List.<JCExpression>nil(), logExp, listArgs);
