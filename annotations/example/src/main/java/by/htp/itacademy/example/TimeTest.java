@@ -10,7 +10,7 @@ public class TimeTest {
 	
 	@Time(interval = TimeInterval.NANOSECOND)
 	public void countingTime() {
-		System.out.println("Test: ");
+		System.out.println("Hi, Tsovak ");
 	}
 }
 
