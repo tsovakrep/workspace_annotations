@@ -83,15 +83,9 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 
 						List<JCStatement> newStatements = List.nil();
 
-						JCExpression exp = maker.Ident(utils.getName("System"));
-						String methodName = "nanoTime";
-						exp = maker.Select(exp, utils.getName(methodName));
-						JCExpression currentTime = maker.Apply(List.<JCExpression>nil(), exp, List.<JCExpression>nil());
+						
 
-						String fieldName_start = "time_start";
-						JCVariableDecl var_start = maker.VarDef(maker.Modifiers(Flags.FINAL),
-								utils.getName(fieldName_start), maker.TypeIdent(com.sun.tools.javac.code.TypeTag.LONG),
-								currentTime);
+						
 
 						String fieldName_end = "time_end";
 						JCVariableDecl var_end = maker.VarDef(maker.Modifiers(Flags.FINAL),
@@ -124,7 +118,18 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 		return false;
 	}
 	
+	private JCExpression currentTime(JavacElements utils) {
+		JCExpression exp = maker.Ident(utils.getName("System"));
+		String methodName = "nanoTime";
+		exp = maker.Select(exp, utils.getName(methodName));
+		return maker.Apply(List.<JCExpression>nil(), exp, List.<JCExpression>nil());
+	}
 	
+	private JCStatement startTime(JavacElements utils, JCExpression currentTime, String varName) {
+		JCVariableDecl var = maker.VarDef(maker.Modifiers(Flags.FINAL),
+				utils.getName(varName), maker.TypeIdent(com.sun.tools.javac.code.TypeTag.LONG), currentTime);
+		return var;
+	}
 	
 	private JCStatement log(JavacElements utils, JCExpression value) {
 		JCExpression logExp = maker.Ident(utils.getName("log"));
