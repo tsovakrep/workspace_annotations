@@ -115,7 +115,8 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 				
 		List<JCExpression> listArgs = List.nil();
 		JCExpression arg = maker.Binary(Tag.PLUS, maker.Ident(((JCMethodDecl) blockNode).name),  maker.Literal(" --> "));
-		arg = maker.Binary(Tag.PLUS, maker.Literal("time: "), value);
+		arg = maker.Binary(Tag.PLUS, arg, maker.Literal("time: "));
+		arg = maker.Binary(Tag.PLUS, arg, value);
 		arg = maker.Binary(Tag.PLUS, arg, maker.Literal(" ns"));
 		listArgs = listArgs.append(arg);
 		
