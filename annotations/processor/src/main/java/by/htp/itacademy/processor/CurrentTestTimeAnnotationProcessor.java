@@ -82,15 +82,13 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 						final List<JCStatement> statements = ((JCMethodDecl) blockNode).body.stats;
 
 						List<JCStatement> newStatements = List.nil();
-
 						
-
+						JCExpression curTime = currentTime(utils);
 						
-
-						String fieldName_end = "time_end";
-						JCVariableDecl var_end = maker.VarDef(maker.Modifiers(Flags.FINAL),
-								utils.getName(fieldName_end), maker.TypeIdent(com.sun.tools.javac.code.TypeTag.LONG),
-								currentTime);
+						JCVariableDecl var_start = varTime(utils, curTime, "time_start");
+						
+						JCVariableDecl var_end = varTime(utils, curTime, "time_end");
+						
 
 						JCExpression elapsedTime = maker.Binary(Tag.MINUS,
 								maker.Ident(var_end.name), maker.Ident(var_start.name));
@@ -125,11 +123,13 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 		return maker.Apply(List.<JCExpression>nil(), exp, List.<JCExpression>nil());
 	}
 	
-	private JCStatement startTime(JavacElements utils, JCExpression currentTime, String varName) {
+	private JCVariableDecl varTime(JavacElements utils, JCExpression currentTime, String varName) {
 		JCVariableDecl var = maker.VarDef(maker.Modifiers(Flags.FINAL),
 				utils.getName(varName), maker.TypeIdent(com.sun.tools.javac.code.TypeTag.LONG), currentTime);
 		return var;
 	}
+	
+	
 	
 	private JCStatement log(JavacElements utils, JCExpression value) {
 		JCExpression logExp = maker.Ident(utils.getName("log"));
