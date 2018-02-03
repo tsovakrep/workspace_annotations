@@ -95,15 +95,15 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 						
 						JCStatement log = log(utils, elapsedTime);
 						
-						newStatements = newStatements.append(var_start);
+						newStatements = newStatements.appendList(frame(var_start));
 						
 						for (JCStatement oldStatement : statements) {
 							newStatements = newStatements.append(oldStatement);
 						}
 						
-						newStatements = newStatements.append(var_end);
+						newStatements = newStatements.appendList(frame(var_end));
 						
-						newStatements = newStatements.append(log);
+						newStatements = newStatements.appendList(frame(log));
 						
 						((JCMethodDecl) blockNode).body.stats = newStatements;
 					}
@@ -129,7 +129,11 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 		return var;
 	}
 	
-	
+	private List<JCStatement> frame(JCStatement value) {
+		List<JCStatement> list = List.<JCStatement>nil();
+		list = list.append(value);
+		return list;
+	}
 	
 	private JCStatement log(JavacElements utils, JCExpression value) {
 		JCExpression logExp = maker.Ident(utils.getName("log"));
