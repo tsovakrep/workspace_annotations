@@ -125,16 +125,16 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 	
 	
 	
-	private JCStatement log(JavacElements utils, JCExpression... listValue) {
+	private JCStatement log(JavacElements utils, JCExpression value) {
 		JCExpression logExp = maker.Ident(utils.getName("log"));
 		logExp = maker.Select(logExp, utils.getName("logRewrite"));
+				
+		List<JCExpression> listArgs = List.nil();
+		listArgs = listArgs.append(maker.Literal("time: "));
+		//listArgs = listArgs.append(value);
+		//listArgs = listArgs.append(maker.Literal(" ns"));
 		
-		List<JCExpression> list = List.nil();
-		for (JCExpression jcExpression : listValue) {
-			list = list.append(jcExpression);
-		}
-		
-		JCExpression logP = maker.Apply(List.<JCExpression>nil(), logExp, list);
+		JCExpression logP = maker.Apply(List.<JCExpression>nil(), logExp, listArgs);
 		return maker.Exec(logP);
 	}
 }
