@@ -76,7 +76,7 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 						JCExpression elapsedTime = maker.Binary(Tag.MINUS,
 								maker.Ident(var_end.name), maker.Ident(var_start.name));
 						
-						JCStatement log = log(utils, elapsedTime);
+						JCStatement log = log(utils, elapsedTime, blockNode);
 						
 						newStatements = newStatements.append(var_start);
 						for (JCStatement oldStatement : statements) {
@@ -109,12 +109,13 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 		return var;
 	}
 	
-	private JCStatement log(JavacElements utils, JCExpression value) {
+	private JCStatement log(JavacElements utils, JCExpression value, JCTree blockNode) {
 		JCExpression logExp = maker.Ident(utils.getName("log"));
 		logExp = maker.Select(logExp, utils.getName("logRewrite"));
 				
 		List<JCExpression> listArgs = List.nil();
-		JCExpression arg = maker.Binary(Tag.PLUS, maker.Literal("time: "), value);
+		JCExpression arg = maker.Binary(Tag.PLUS, maker.Ident(((JCMethodDecl) blockNode).name),  maker.Literal(" --> "));
+		arg = maker.Binary(Tag.PLUS, maker.Literal("time: "), value);
 		arg = maker.Binary(Tag.PLUS, arg, maker.Literal(" ns"));
 		listArgs = listArgs.append(arg);
 		
