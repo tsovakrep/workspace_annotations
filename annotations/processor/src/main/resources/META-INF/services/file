@@ -1,0 +1,9 @@
+by.htp.itacademy.processor.CustomAnnotationProcessor
+by.htp.itacademy.processor.DateFormatProcessor
+by.htp.itacademy.processor.HashedProcessor
+by.htp.itacademy.processor.TimeAnnotationProcessor
+by.htp.itacademy.processor.builder.BuilderProcessor
+by.htp.itacademy.processor.factory.FactoryProcessor
+by.htp.itacademy.processor.immutable.GeneratingAnnotationProcessor
+by.htp.itacademy.processor.immutable.SimpleAnnotationProcessor
+by.htp.itacademy.processor.immutable.MutatingAnnotationProcessor

@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>by.htp.itacademy</groupId>
+		<artifactId>annotations</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<groupId>by.htp.itacademy.annotations</groupId>
+	<artifactId>processor</artifactId>
+
+	<name>processor</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>by.htp.itacademy.annotations</groupId>
+			<artifactId>annotation</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun</groupId>
+			<artifactId>tools</artifactId>
+			<version>1.6.0</version>
+			<scope>system</scope>
+			<systemPath>C:\Program Files\Java\jdk1.8.0_161\lib\tools.jar</systemPath>
+		</dependency>
+
+		<!-- Java Poet to generate java files -->
+		<dependency>
+			<groupId>com.squareup</groupId>
+			<artifactId>javapoet</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+
+		<!-- Apache Commons StringUtils -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.0</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.7.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<compilerArgument>-proc:none</compilerArgument>
+				</configuration>
+				<!-- Using the Annotation Processor Tool -->
+				<!-- <configuration> <source>1.7</source> <target>1.7</target> <annotationProcessors> 
+					<proc>com.javacodegeeks.advanced.processor.MutatingAnnotationProcessor</proc> 
+					</annotationProcessors> </configuration> -->
+				<!-- <configuration> <source>1.8</source> <target>1.8</target> <encoding>UTF-8</encoding> 
+					<generatedSourcesDirectory>${project.build.directory} /generated-sources/</generatedSourcesDirectory> 
+					<annotationProcessors> <annotationProcessor> com.baeldung.annotation.processor.BuilderProcessor 
+					</annotationProcessor> </annotationProcessors> </configuration> -->
+				<!-- <configuration> <verbose>true</verbose> <fork>true</fork> <executable>${JAVA_HOME}/bin/javac</executable> 
+					<compilerArgument>-proc:none</compilerArgument></configuration> -->
+
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

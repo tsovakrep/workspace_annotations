@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Annotation Processor Plug-in
+Bundle-SymbolicName: by.htp.itacademy.transfer;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: by.htp.itacademy.annplug.annotation.plugin.activator.Activator
+Bundle-Vendor: JAVAWORLD
+Require-Bundle: org.eclipse.core.runtime, org.eclipse.jdt.apt.core
+Bundle-ActivationPolicy: lazy
+Export-Package: by.htp.itacademy.transfer, by.htp.itacademy.annplug.annotation
+Import-Package: by.htp.itacademy.annplug.annotation
