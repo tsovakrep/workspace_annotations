@@ -18,7 +18,7 @@ public class Main {
 		File startDir = new File(path);
 
 		for (File file : new FileFinder(startDir, "class").getFileContainer()) {
-			System.out.println(file.getAbsolutePath());
+			System.out.println("file path: " + file.getAbsolutePath());
 		}
 		
 		for (;;) {
