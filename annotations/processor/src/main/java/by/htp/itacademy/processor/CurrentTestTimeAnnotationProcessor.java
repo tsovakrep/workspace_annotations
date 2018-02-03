@@ -4,6 +4,7 @@ import com.sun.tools.javac.code.Flags;
 import com.sun.tools.javac.model.JavacElements;
 import com.sun.tools.javac.processing.JavacProcessingEnvironment;
 import com.sun.tools.javac.tree.JCTree;
+import com.sun.tools.javac.tree.JCTree.JCClassDecl;
 import com.sun.tools.javac.tree.JCTree.JCExpression;
 import com.sun.tools.javac.tree.JCTree.JCMethodDecl;
 import com.sun.tools.javac.tree.JCTree.JCStatement;
@@ -114,10 +115,11 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 		logExp = maker.Select(logExp, utils.getName("logRewrite"));
 				
 		List<JCExpression> listArgs = List.nil();
-		JCExpression arg = maker.Binary(Tag.PLUS, maker.Literal(((JCMethodDecl) blockNode).name.toString()),  maker.Literal(" --> "));
-		arg = maker.Binary(Tag.PLUS, arg, maker.Literal("time: "));
-		arg = maker.Binary(Tag.PLUS, arg, value);
-		arg = maker.Binary(Tag.PLUS, arg, maker.Literal(" ns"));
+		JCExpression arg = maker.Binary(Tag.PLUS, maker.Literal(((JCMethodDecl) blockNode).getClass().toString()), maker.Literal(" --> "));
+//		arg = maker.Binary(Tag.PLUS, maker.Literal(((JCMethodDecl) blockNode).name.toString()),  maker.Literal(" --> "));
+//		arg = maker.Binary(Tag.PLUS, arg, maker.Literal("time: "));
+//		arg = maker.Binary(Tag.PLUS, arg, value);
+//		arg = maker.Binary(Tag.PLUS, arg, maker.Literal(" ns"));
 		listArgs = listArgs.append(arg);
 		
 		JCExpression logP = maker.Apply(List.<JCExpression>nil(), logExp, listArgs);
