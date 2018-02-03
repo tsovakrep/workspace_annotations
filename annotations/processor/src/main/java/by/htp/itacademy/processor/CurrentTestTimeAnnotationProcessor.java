@@ -131,9 +131,9 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 		logExp = maker.Select(logExp, utils.getName("logRewrite"));
 				
 		List<JCExpression> listArgs = List.nil();
-		listArgs = listArgs.append(maker.Literal("time: + "));
-		//listArgs = listArgs.append(value);
-		listArgs = listArgs.append(maker.Literal(" + ns"));
+		JCExpression arg = maker.Binary(Tag.PLUS, maker.Literal("time: "), value);
+		arg = maker.Binary(Tag.PLUS, arg, maker.Literal(" ns"));
+		listArgs = listArgs.append(arg);
 		
 		JCExpression logP = maker.Apply(List.<JCExpression>nil(), logExp, listArgs);
 		return maker.Exec(logP);
