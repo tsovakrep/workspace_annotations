@@ -69,10 +69,10 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 
 		final TypeElement annotation = elements.getTypeElement(ANNOTATION_TYPE);
 		if (annotation != null) {
-			// Выбираем все элементы, у которых стоит наша аннотация
+
 			final Set<? extends Element> methods = roundEnv.getElementsAnnotatedWith(annotation);
 
-			JavacElements utils = (JavacElements) elements;// javacProcessingEnv.getElementUtils();
+			JavacElements utils = (JavacElements) elements;
 			
 			for (final Element m : methods) {
 
@@ -81,12 +81,9 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 				if (time != null) {
 					JCTree blockNode = utils.getTree(m);
 
-					// Нам нужны только описания методов
 					if (blockNode instanceof JCMethodDecl) {
-						// Получаем содержимое метода
 						final List<JCStatement> statements = ((JCMethodDecl) blockNode).body.stats;
 
-						// Новое тело метода
 						List<JCStatement> newStatements = List.nil();
 
 						JCExpression exp = maker.Ident(utils.getName("System"));
@@ -103,11 +100,6 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 						JCVariableDecl var_end = maker.VarDef(maker.Modifiers(Flags.FINAL),
 								utils.getName(fieldName_end), maker.TypeIdent(com.sun.tools.javac.code.TypeTag.LONG),
 								currentTime);
-
-						// JCExpression sysOut = maker.Ident(utils.getName("System"));
-						// sysOut = maker.Select(sysOut, utils.getName("out"));
-						// sysOut = maker.Select(sysOut, utils.getName("println"));
-						// JCExpression concSysOut = maker.Apply(List.<JCExpression>nil(), sysOut, arg2)
 
 						JCExpression printlnExpression = maker.Ident(utils.getName("System"));
 						printlnExpression = maker.Select(printlnExpression, utils.getName("out"));
