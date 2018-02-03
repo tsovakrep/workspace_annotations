@@ -159,8 +159,3 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 		return false;
 	}
 }
-
-
-
-
-
