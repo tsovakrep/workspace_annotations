@@ -48,15 +48,11 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 	private JavacProcessingEnvironment javacProcessingEnv;
 	private TreeMaker maker;
 
-	private final static DevLog log = new DevLog("C:/1/logTimeAnnotationProcessor.txt");
-
 	@Override
 	public void init(ProcessingEnvironment procEnv) {
 		super.init(procEnv);
 		this.javacProcessingEnv = (JavacProcessingEnvironment) procEnv;
-
 		this.maker = TreeMaker.instance(javacProcessingEnv.getContext());
-		
 	}
 
 	@Override
@@ -101,45 +97,28 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 								utils.getName(fieldName_end), maker.TypeIdent(com.sun.tools.javac.code.TypeTag.LONG),
 								currentTime);
 
-						JCExpression printlnExpression = maker.Ident(utils.getName("System"));
-						printlnExpression = maker.Select(printlnExpression, utils.getName("out"));
-						printlnExpression = maker.Select(printlnExpression, utils.getName("println"));
-
 						JCExpression elapsedTime = maker.Binary(com.sun.tools.javac.tree.JCTree.Tag.MINUS,
 								maker.Ident(var_end.name), maker.Ident(var_start.name));
-						log.logRewrite(elapsedTime);
-
-						List<JCExpression> printlnArgs = List.nil();
-						printlnArgs = printlnArgs.append(elapsedTime);
-						log.logRewrite("printlnArgs: " + printlnArgs);
-
-						JCExpression print = maker.Apply(List.<JCExpression>nil(), printlnExpression, printlnArgs);
-
-						JCExpressionStatement stmt = maker.Exec(print);
 						
-						
-						
-						
-						JCExpression log1 = maker.Ident(utils.getName("log"));
-						log1 = maker.Select(log1, utils.getName("logRewrite"));
+						JCExpression log = maker.Ident(utils.getName("log"));
+						log = maker.Select(log, utils.getName("logRewrite"));
 
-						List<JCExpression> logL = List.nil();
-						logL = logL.append(log1);
-
-						JCExpression logP = maker.Apply(List.<JCExpression>nil(), log1, printlnArgs);
+						List<JCExpression> addIntoLog = List.nil();
+						addIntoLog = addIntoLog.append(elapsedTime);
+						
+						JCExpression logP = maker.Apply(List.<JCExpression>nil(), log, addIntoLog);
 
 						JCExpressionStatement stmt1 = maker.Exec(logP);
-						
-						
 
 						newStatements = newStatements.append(var_start);
+						
 						for (JCStatement oldStatement : statements) {
 							newStatements = newStatements.append(oldStatement);
 						}
+						
 						newStatements = newStatements.append(var_end);
-						newStatements = newStatements.append(stmt);
-						newStatements = newStatements.append(stmt1);
-						log.logRewrite(newStatements);
+						newStatements = newStatements.append(addIntoLog);
+						
 						((JCMethodDecl) blockNode).body.stats = newStatements;
 					}
 				}
