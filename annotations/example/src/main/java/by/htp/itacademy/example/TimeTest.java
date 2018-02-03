@@ -1,6 +1,7 @@
 package by.htp.itacademy.example;
 
 import by.htp.itacademy.annotation.Time;
+import by.htp.itacademy.annotation.Time.TimeInterval;
 import by.htp.itacademy.utility.log.DevLog;
 
 public class TimeTest {
@@ -8,7 +9,7 @@ public class TimeTest {
 	@SuppressWarnings("unused")
 	private final static DevLog log = new DevLog("C:/1/logTimeAnnotationProcessor.txt");
 	
-	@Time
+	@Time(interval = TimeInterval.NANOSECOND, format="method time: %s ns")
 	public void countingTime() {
 		System.out.println("Hi, Tsovak ");
 	}

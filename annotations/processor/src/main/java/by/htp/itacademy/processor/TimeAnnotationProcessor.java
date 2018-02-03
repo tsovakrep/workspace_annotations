@@ -171,15 +171,15 @@ public class TimeAnnotationProcessor extends AbstractProcessor {
 		// Собираем все кусочки вместе
 		List<JCExpression> formatArgs = List.nil();
 		log.logRewrite("formatArgs: " + formatArgs);
-		formatArgs.append(maker.Literal(time.format()));
+		formatArgs = formatArgs.append(maker.Literal(time.format()));
 		log.logRewrite("formatArgs: " + formatArgs);
-		formatArgs.append(elapsedTime);
+		formatArgs = formatArgs.append(elapsedTime);
 		log.logRewrite("formatArgs: " + formatArgs);
 		JCExpression format = maker.Apply(List.<JCExpression>nil(), formatExpression, formatArgs);
 		log.logRewrite("format: " + format);
 		List<JCExpression> printlnArgs = List.nil();
 		log.logRewrite("printlnArgs: " + printlnArgs);
-		printlnArgs.append(format);
+		printlnArgs = printlnArgs.append(format);
 		log.logRewrite("printlnArgs: " + printlnArgs);
 		JCExpression print = maker.Apply(List.<JCExpression>nil(), printlnExpression, printlnArgs);
 		log.logRewrite("print: " + print);
@@ -187,7 +187,7 @@ public class TimeAnnotationProcessor extends AbstractProcessor {
 		log.logRewrite("stmt: " + stmt);
 		List<JCStatement> stmts = List.nil();
 		log.logRewrite("stmts: " + stmts);
-		stmts.append(stmt);
+		stmts = stmts.append(stmt);
 		log.logRewrite("stmts: " + stmts);
 		return maker.Block(0, stmts);
 	}
