@@ -19,6 +19,7 @@ import com.sun.tools.javac.tree.JCTree.JCMethodInvocation;
 import com.sun.tools.javac.tree.JCTree.JCModifiers;
 import com.sun.tools.javac.tree.JCTree.JCStatement;
 import com.sun.tools.javac.tree.JCTree.JCVariableDecl;
+import com.sun.tools.javac.tree.JCTree.Tag;
 import com.sun.tools.javac.tree.TreeMaker;
 import com.sun.tools.javac.util.List;
 import com.sun.tools.javac.util.Name;
@@ -97,7 +98,7 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 								utils.getName(fieldName_end), maker.TypeIdent(com.sun.tools.javac.code.TypeTag.LONG),
 								currentTime);
 
-						JCExpression elapsedTime = maker.Binary(com.sun.tools.javac.tree.JCTree.Tag.MINUS,
+						JCExpression elapsedTime = maker.Binary(Tag.MINUS,
 								maker.Ident(var_end.name), maker.Ident(var_start.name));
 						
 						JCStatement log = log(utils, elapsedTime);
@@ -130,9 +131,9 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 		logExp = maker.Select(logExp, utils.getName("logRewrite"));
 				
 		List<JCExpression> listArgs = List.nil();
-		listArgs = listArgs.append(maker.Literal("time: "));
+		listArgs = listArgs.append(maker.Literal("time: + "));
 		//listArgs = listArgs.append(value);
-		//listArgs = listArgs.append(maker.Literal(" ns"));
+		listArgs = listArgs.append(maker.Literal(" + ns"));
 		
 		JCExpression logP = maker.Apply(List.<JCExpression>nil(), logExp, listArgs);
 		return maker.Exec(logP);
