@@ -100,16 +100,8 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 						JCExpression elapsedTime = maker.Binary(com.sun.tools.javac.tree.JCTree.Tag.MINUS,
 								maker.Ident(var_end.name), maker.Ident(var_start.name));
 						
-						JCExpression log = maker.Ident(utils.getName("log"));
-						log = maker.Select(log, utils.getName("logRewrite"));
-
-						List<JCExpression> addIntoLog = List.nil();
-						addIntoLog = addIntoLog.append(elapsedTime);
+						JCStatement log = log(utils, elapsedTime);
 						
-						JCExpression logP = maker.Apply(List.<JCExpression>nil(), log, addIntoLog);
-
-						JCExpressionStatement stmt1 = maker.Exec(logP);
-
 						newStatements = newStatements.append(var_start);
 						
 						for (JCStatement oldStatement : statements) {
@@ -117,7 +109,8 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 						}
 						
 						newStatements = newStatements.append(var_end);
-						newStatements = newStatements.append(addIntoLog);
+						
+						newStatements = newStatements.append(log);
 						
 						((JCMethodDecl) blockNode).body.stats = newStatements;
 					}
@@ -128,5 +121,20 @@ public class CurrentTestTimeAnnotationProcessor extends AbstractProcessor {
 		}
 
 		return false;
+	}
+	
+	
+	
+	private JCStatement log(JavacElements utils, JCExpression... listValue) {
+		JCExpression logExp = maker.Ident(utils.getName("log"));
+		logExp = maker.Select(logExp, utils.getName("logRewrite"));
+		
+		List<JCExpression> list = List.nil();
+		for (JCExpression jcExpression : listValue) {
+			list = list.append(jcExpression);
+		}
+		
+		JCExpression logP = maker.Apply(List.<JCExpression>nil(), logExp, list);
+		return maker.Exec(logP);
 	}
 }
