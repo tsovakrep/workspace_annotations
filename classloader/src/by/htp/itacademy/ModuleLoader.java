@@ -32,6 +32,7 @@ public class ModuleLoader extends ClassLoader {
 	}
 
 	private byte[] fetchClassFromFS(String path) throws FileNotFoundException, IOException {
+		
 		InputStream is = new FileInputStream(new File(path));
 
 		// Get the size of the file
