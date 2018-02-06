@@ -15,18 +15,18 @@ public class Main {
 		String absolutePath = mai.getAbsolutePath();
 		int lastIn = absolutePath.lastIndexOf('\\');
 		String path = absolutePath.substring(0, lastIn);
-		File startDir = new File(path);
+		File startDir = new File("E:\\eclipse\\workspace\\victor\\hotel");
 
 		for (File file : new FileFinder(startDir, "class").getFileContainer()) {
 			System.out.println("file path: " + file.getAbsolutePath());
 		}
 		
-		for (;;) {
-			ClassLoader cl = new MainLoader();
-			Class<?> clazz = Class.forName("by.htp.Tsovak", true, cl);
-			Object obj = clazz.newInstance();
-			System.out.println(obj);
-			new BufferedReader(new InputStreamReader(System.in)).readLine();
-		}
+//		for (;;) {
+//			ClassLoader cl = new MainLoader();
+//			Class<?> clazz = Class.forName("by.htp.Tsovak", true, cl);
+//			Object obj = clazz.newInstance();
+//			System.out.println(obj);
+//			new BufferedReader(new InputStreamReader(System.in)).readLine();
+//		}
 	}
 }
