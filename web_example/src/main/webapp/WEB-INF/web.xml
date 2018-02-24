@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<display-name>Archetype Created Web Application</display-name>
+	
+	<servlet>
+	<servlet-name>dispatcher</servlet-name>
+	<servlet-class>by.htp.itacademy.controller.AppServletDispatcher</servlet-class>
+	<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+	<servlet-name>dispatcher</servlet-name>
+	<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<listener>
+	<listener-class>by.htp.itacademy.listener.AppServletContextListener</listener-class>
+	</listener>
+
+	<welcome-file-list>
+		<welcome-file>login.jsp</welcome-file>
+	</welcome-file-list>
+	<jsp-config>
+		<jsp-property-group>
+			<url-pattern>*.jsp</url-pattern>
+			<page-encoding>UTF-8</page-encoding>
+		</jsp-property-group>
+	</jsp-config>
+</web-app>

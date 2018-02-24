@@ -1,4 +1,4 @@
-package by.htp.itacademy;
+package by.htp.itacademy.module;
 
 public class ModulePrinter implements Module {
 

@@ -1,11 +1,11 @@
-package by.htp.itacademy;
+package by.htp.itacademy.module;
 
 import java.io.File;
 
 public class ModuleEngine {
 
 	public static void main(String args[]) {
-		String modulePath = args[0];
+		String modulePath = "E:\\eclipse\\workspace_annotations\\nhn\\bin\\by\\htp";
 
 		ModuleLoader loader = new ModuleLoader(modulePath, ClassLoader.getSystemClassLoader());
 

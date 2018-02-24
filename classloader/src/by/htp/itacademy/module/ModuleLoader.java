@@ -1,4 +1,4 @@
-package by.htp.itacademy;
+package by.htp.itacademy.module;
 
 import java.io.File;
 import java.io.FileInputStream;
