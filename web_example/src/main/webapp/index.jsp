@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
 <title>Demo Ajax</title>
-<script type="text/javascript" src="web/js/jquery-3.3.1.js"></script>
+<!--  <script type="text/javascript" src="web/js/jquery-3.3.1.js"></script>-->
 </head>
 <body>
 	<h2 id="demo">Hello Admin</h2>
@@ -17,9 +17,14 @@
 	<script type="text/javascript">
 		document.addEventListener("click", myFunction);
 	
-		function myFunction() {
-			document.getElementById("demo").innerHTML = "Hello Tsovak";
-		}
+		//function myFunction() {
+			//document.getElementById("demo").innerHTML = "Hello Tsovak";
+		//}
 	</script>
+	
+	<form action="index/show" method="post">
+		Name:<input type="text" name="userName" /><br /> 
+		<input type="submit" value="login" />
+	</form>
 </body>
 </html>

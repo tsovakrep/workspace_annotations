@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class BaseServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
 	private ControllerFactory factory;
 
 	public BaseServlet() {
@@ -18,7 +19,7 @@ public class BaseServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) {
+	protected void service(HttpServletRequest request, HttpServletResponse response) {       
 		try {
 			String name = getControllerName(request);
 			if (name == null)

@@ -24,7 +24,6 @@ public class AppServletRequestListener implements ServletRequestListener {
 	public void requestInitialized(ServletRequestEvent sre) {
 		//ServletRequest sr = sre.getServletRequest();
 		//System.out.println("sr initialized: " + sr);
-		
 	}
 
 }

@@ -1,5 +1,6 @@
 package by.htp.itacademy.listener;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
@@ -10,51 +11,33 @@ import javax.servlet.ServletContextListener;
 public class AppServletContextListener implements ServletContextListener {
 
 	@Override
-	public void contextDestroyed(ServletContextEvent arg0) {
-		System.out.println("context Destroyed!");
+	public void contextDestroyed(ServletContextEvent sce) {
+		System.out.println("context destroyed");
 	}
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		ServletContext context = sce.getServletContext();
-		
-		
-		Set<String> list = context.getResourcePaths("/WEB-INF/page");
-		context.setAttribute("pages", list);
-//		for (String string : list) {
-//			System.out.println(string);
-//		}
-		
-//		for (Map.Entry<String, ? extends ServletRegistration> servlet : context.getServletRegistrations().entrySet()) {
-//			ServletRegistration servletReg = servlet.getValue();
-//			if (servletReg.getClassName().startsWith("by.htp")) {
-////				System.out.println(servlet.getKey() + " : " + servletReg.getClassName());
-//				for (String url : servletReg.getMappings()) {
-////					System.out.println("url mapping" + " : " + url);
-//				}
-//				if (AppServletDispatcher.class.getName().equals(servlet.getValue().getClassName())) {
-//					servletReg.addMapping("/");
-//					servletReg.addMapping("/go/ts");
-//					servletReg.addMapping("/welcome");
-//					servletReg.addMapping("/welcome/tsovak");
-//					servletReg.addMapping("/welcome/palakian");
-//				}
-//			}
-//		}
+//		ServletContext context = sce.getServletContext();
+//		Set<String> pages = new HashSet<>();
+//		pages = findFileInPath(context, "/WEB-INF/pages/", pages);
+//		
+//		context.setAttribute("pages", pages);
 
 		System.out.println("context initilized");
-		// ServletRegistration.Dynamic asr = context.
-		// ServletRegistration.Dynamic asr =
-		// context.addServlet(WelcomeServlet.class.getSimpleName(),
-		// WelcomeServlet.class);
-		// if (asr != null) {
-		// asr.setLoadOnStartup(0);
-		// asr.addMapping("/welcome");
-		// asr.addMapping("/welcome/tsovak");
-		// asr.addMapping("/root");
-		//
-		// } else {
-		// System.out.println("servlet WelcomServlet allready exists");
-		// }
+	}
+	
+	private Set<String> findFileInPath(ServletContext context, String path, Set<String> temp) {
+		Set<String> list = context.getResourcePaths(path);
+		Set<String> linkedSet = new HashSet<>();
+		linkedSet.addAll(list);
+		
+		for (String file : linkedSet) {
+			if(file.endsWith("/")) {
+				findFileInPath(context, file, temp);
+			} else {
+				temp.add(file);
+			}
+		}
+		return temp;
 	}
 }

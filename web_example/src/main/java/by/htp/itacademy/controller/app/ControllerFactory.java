@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ControllerFactory {
+	protected Map<String, Class<?>> map;
+	
     public ControllerFactory() {
         map = defaultMap();
     }
@@ -27,5 +29,4 @@ public class ControllerFactory {
         return map;
     }
 
-    protected Map<String, Class<?>> map;
 }

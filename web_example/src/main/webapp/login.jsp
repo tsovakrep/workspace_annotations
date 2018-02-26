@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
@@ -13,10 +12,8 @@
 </head>
 <body>
 	<form action="go/roor" method="post">
-		Name:<input type="text" name="userName" /><br /> Password:<input
-			type="password" name="userPass" /><br /> <input type="submit"
-			value="login" />
-
+		Name:<input type="text" name="userName" /><br /> 
+		<input type="submit" value="login" />
 	</form>
 
 	<form action="simple" method="post">
@@ -31,7 +28,7 @@
 		<input type="submit" value="getWelPalakian" />
 	</form>
 
-	<form action="go/ts" method="get">
+	<form action="go/ts/rt" method="get">
 		<input type="submit" value="root" />
 	</form>
 
