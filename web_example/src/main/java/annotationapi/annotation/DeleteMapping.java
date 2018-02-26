@@ -1,4 +1,4 @@
-package annotation;
+package annotationapi.annotation;
 
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RUNTIME)
 @Target(METHOD)
-public @interface GetMapping {
+public @interface DeleteMapping {
 	
 	String value() default"";
 }

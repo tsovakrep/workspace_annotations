@@ -1,4 +1,4 @@
-package annotation;
+package annotationapi.annotation;
 
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 
 @Documented
 @Retention(RUNTIME)
-@Target({ TYPE, METHOD })
+@Target({ TYPE })
 public @interface Mapping {
 	String value() default "";
 }

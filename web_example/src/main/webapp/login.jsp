@@ -16,24 +16,8 @@
 		<input type="submit" value="login" />
 	</form>
 
-	<form action="simple" method="post">
+	<form action="simple" method="get">
 		<input type="submit" value="get" />
-	</form>
-
-	<form action="welcome/tsovak" method="get">
-		<input type="submit" value="getWelTso" />
-	</form>
-
-	<form action="welcome/palakian" method="post">
-		<input type="submit" value="getWelPalakian" />
-	</form>
-
-	<form action="go/ts/rt" method="get">
-		<input type="submit" value="root" />
-	</form>
-
-	<form action="welcome" method="get">
-		<input type="submit" value="welcome" />
 	</form>
 </body>
 </html>
