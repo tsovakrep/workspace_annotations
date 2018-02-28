@@ -10,9 +10,17 @@ import javax.servlet.ServletContextListener;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
+import annotationapi.annotation.Controller;
+import annotationapi.util.AnnotationFinder;
+import annotationapi.util.FileFinder;
+import annotationapi.util.exception.ClassFindException;
+
 
 public class AppServletContextListener implements ServletContextListener {
 
+	private static final String RESOURRCE_PATH_CLASSES = "/WEB-INF/classes/";
+	private static final String RESOURRCE_PATH_PAGES = "/WEB-INF/pages/";
+	
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
 		System.out.println("context destroyed");
@@ -20,31 +28,43 @@ public class AppServletContextListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-//		ServletContext context = sce.getServletContext();
-//		
-//		Set<String> pages = new HashSet<>();
-//		pages = findFilesInPath(context, "/WEB-INF/pages/", pages);
-//		context.setAttribute("pages", pages);
-//		
-//		HttpClient httpClient = HttpClientBuilder.create().build();
-//		context.setAttribute("httpClient", httpClient);
+		ServletContext context = sce.getServletContext();
 		
+		context.setAttribute("annotationfinder", getAnnotationFinder(context));
+		context.setAttribute("pages", getPages(context));
+		context.setAttribute("httpclient", getHttpClient());
 		
 		System.out.println("context initilized");
 	}
 	
-	private Set<String> findFilesInPath(ServletContext context, String path, Set<String> temp) {
-		Set<String> list = context.getResourcePaths(path);
-		Set<String> linkedSet = new HashSet<>();
-		linkedSet.addAll(list);
+	private Set<String> getPages(ServletContext context) {
+		Set<String> pages = new HashSet<>();
+		pages = new FileFinder().searchResourceFiles(context, RESOURRCE_PATH_PAGES, pages);
+		return pages;
+	}
+	
+	private AnnotationFinder getAnnotationFinder(ServletContext context) {
+		Set<String> fileClass = new HashSet<>();
+		fileClass = new FileFinder().searchResourceFiles(context, RESOURRCE_PATH_CLASSES, fileClass);
+
+		AnnotationFinder af = new AnnotationFinder(Controller.class);
 		
-		for (String file : linkedSet) {
-			if(file.endsWith("/")) {
-				findFilesInPath(context, file, temp);
-			} else {
-				temp.add(file);
+		for (String file : fileClass) {
+			try {
+				af.searchAnnotation(Class.forName(file.replaceAll(RESOURRCE_PATH_CLASSES, "").replaceAll(".class", "").replaceAll("/", ".")));
+			} catch (ClassFindException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
-		return temp;
+		
+		return af;
+	}
+	
+	private HttpClient getHttpClient() {
+		return HttpClientBuilder.create().build();
 	}
 }

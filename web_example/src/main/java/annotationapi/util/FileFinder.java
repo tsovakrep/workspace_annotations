@@ -4,7 +4,11 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import javax.servlet.ServletContext;
 
 public class FileFinder {
 
@@ -12,6 +16,10 @@ public class FileFinder {
 	private String[] extensions;
 
 	private List<File> fileContainer;
+	
+	public FileFinder() {
+		super();
+	}
 
 	public FileFinder(File path, String... extensions) {
 		this.path = path;
@@ -44,5 +52,20 @@ public class FileFinder {
 	public List<File> getFileContainer() {
 		fileFind(path, extensions);
 		return fileContainer;
+	}
+	
+	public Set<String> searchResourceFiles(ServletContext context, String resourcePath, Set<String> temp) {
+		Set<String> list = context.getResourcePaths(resourcePath);
+		Set<String> linkedSet = new HashSet<>();
+		linkedSet.addAll(list);
+		
+		for (String file : linkedSet) {
+			if(file.endsWith("/")) {
+				searchResourceFiles(context, file, temp);
+			} else {
+				temp.add(file);
+			}
+		}
+		return temp;
 	}
 }

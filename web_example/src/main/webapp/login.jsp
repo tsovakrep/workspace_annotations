@@ -8,7 +8,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
 <title>Demo</title>
-<script type="text/javascript" src="web/js/jquery-3.3.1.js"></script>
 </head>
 <body>
 	<form action="go/roor" method="post">

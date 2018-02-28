@@ -21,14 +21,12 @@ public class Simple {
 	@Autoinitialization
 	private String str;
 
-	@GetMapping("welcome")
+	@GetMapping("welcome/{user}")
 	public void login(@PathVariable("name") String name, 
 					  @ReqParam(value = "userName", defaultValue = "Tsovak") String value, 
 					  HttpSession session) 
 							  throws ServletException, IOException {
 		
-//		System.out.println("GET -- Simple -- " + request + " : " + response);
-//
 //		String url = request.getRequestURI();
 //		System.out.println("url: " + url);
 //
@@ -37,7 +35,7 @@ public class Simple {
 
 	}
 
-	@PostMapping("welcome/{user}")
+	@PostMapping("welcome")
 	protected void logout(@ReqBody String body, HttpSession session)
 			throws ServletException, IOException {
 //		System.out.println("POST -- Simple -- " + request + " : " + response);
