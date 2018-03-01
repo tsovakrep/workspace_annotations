@@ -32,10 +32,7 @@ public class AppServletDispatcher extends HttpServlet {
 		
 		
 		
-		String path = request.getRequestURI().substring(request.getContextPath().length());
 		System.out.println("request.getRequestURI(): " + request.getRequestURI());
-		System.out.println("path: " + path);
-		System.out.println("request.getContextPath(): " + request.getContextPath());
 //		ServletContext sc = getServletContext();
 //		Set<String> list = (Set<String>) sc.getAttribute("pages");
 //		System.out.println(list);
@@ -60,10 +57,7 @@ public class AppServletDispatcher extends HttpServlet {
 		MethodContainer mc = methodContainer.get(request.getRequestURI());
 		//System.out.println(mc.getUrl() + " : " + mc.getMethod().getName());
 		
-		String path = request.getRequestURI().substring(request.getContextPath().length());
 		System.out.println("request.getRequestURI(): " + request.getRequestURI());
-		System.out.println("path: " + path);
-		System.out.println("request.getContextPath(): " + request.getContextPath());
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
