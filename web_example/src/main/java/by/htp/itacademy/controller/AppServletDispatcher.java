@@ -29,6 +29,12 @@ public class AppServletDispatcher extends HttpServlet {
 		System.out.println(methodContainer);
 		MethodContainer mc = methodContainer.get(request.getRequestURI());
 		System.out.println(mc.getUrl() + " : " + mc.getMethod().getName());
+		for (Object ob : mc.getMethodParameterTypes()) {
+			System.out.println(ob);
+		}
+		for (Object ob : mc.getParameterTypes()) {
+			System.out.println(ob);
+		}
 		
 		
 		
