@@ -10,12 +10,12 @@
 <title>Demo</title>
 </head>
 <body>
-	<form action="go/roor" method="post">
+	<form action="simple/welcome/{user}" method="post">
 		Name:<input type="text" name="userName" /><br /> 
 		<input type="submit" value="login" />
 	</form>
 
-	<form action="simple" method="get">
+	<form action="simple/welcome" method="get">
 		<input type="submit" value="get" />
 	</form>
 </body>

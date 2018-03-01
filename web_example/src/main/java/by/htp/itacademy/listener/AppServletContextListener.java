@@ -13,7 +13,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import annotationapi.annotation.Controller;
 import annotationapi.util.AnnotationFinder;
 import annotationapi.util.FileFinder;
-import annotationapi.util.exception.ClassFindException;
 
 
 public class AppServletContextListener implements ServletContextListener {
@@ -29,7 +28,7 @@ public class AppServletContextListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		ServletContext context = sce.getServletContext();
-		
+
 		context.setAttribute("annotationfinder", getAnnotationFinder(context));
 		context.setAttribute("pages", getPages(context));
 		context.setAttribute("httpclient", getHttpClient());
@@ -47,16 +46,14 @@ public class AppServletContextListener implements ServletContextListener {
 		Set<String> fileClass = new HashSet<>();
 		fileClass = new FileFinder().searchResourceFiles(context, RESOURRCE_PATH_CLASSES, fileClass);
 
-		AnnotationFinder af = new AnnotationFinder(Controller.class);
+		AnnotationFinder af = new AnnotationFinder(Controller.class, context);
 		
 		for (String file : fileClass) {
 			try {
-				af.searchAnnotation(Class.forName(file.replaceAll(RESOURRCE_PATH_CLASSES, "").replaceAll(".class", "").replaceAll("/", ".")));
-			} catch (ClassFindException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Class<?> clazz = Class.forName(file.replaceAll(RESOURRCE_PATH_CLASSES, "").replaceAll(".class", "").replaceAll("/", "."));
+				af.searchAnnotation(clazz);			
+				af.fillingMethodContainer(clazz);
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

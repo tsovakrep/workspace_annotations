@@ -32,11 +32,12 @@ public class Simple {
 //
 //		RequestDispatcher rd = request.getRequestDispatcher("/welcome");
 //		rd.forward(request, response);
+		
 
 	}
 
 	@PostMapping("welcome")
-	protected void logout(@ReqBody String body, HttpSession session)
+	public void logout(@ReqBody String body, HttpSession session)
 			throws ServletException, IOException {
 //		System.out.println("POST -- Simple -- " + request + " : " + response);
 //		RequestDispatcher rd = request.getRequestDispatcher("/welcome");

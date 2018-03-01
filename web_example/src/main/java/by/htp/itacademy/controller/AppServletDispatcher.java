@@ -2,7 +2,7 @@ package by.htp.itacademy.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -12,29 +12,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import annotationapi.annotation.Controller;
 import annotationapi.util.AnnotationFinder;
-import annotationapi.util.exception.ClassFindException;
-import chaincasttype.CastChain;
-import chaincasttype.FacadeCast;
+import annotationapi.util.HttpMethod;
+import annotationapi.util.MethodContainer;
+
 
 @SuppressWarnings("serial")
 public class AppServletDispatcher extends HttpServlet {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		AnnotationFinder af = new AnnotationFinder();
-//		try {
-//			af.annotationFind(Simple.class);
-//		} catch (ClassFindException e) {
-//			e.printStackTrace();
-//		}
-//		System.out.println(af.getAnnotationConteiner());
-//		
-//		Controller controller = (Controller) af.getAnnotation(Simple.class, Controller.class);
-//		System.out.println("controller: " + controller);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ServletContext sc = request.getServletContext();
+		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
+		Map<String, MethodContainer> methodContainer = af.getMethodContainer();
+		System.out.println(methodContainer);
+		MethodContainer mc = methodContainer.get(request.getRequestURI());
+		System.out.println(mc.getUrl() + " : " + mc.getMethod().getName());
 		
+		
+		
+		String path = request.getRequestURI().substring(request.getContextPath().length());
+		System.out.println("request.getRequestURI(): " + request.getRequestURI());
+		System.out.println("path: " + path);
+		System.out.println("request.getContextPath(): " + request.getContextPath());
 //		ServletContext sc = getServletContext();
 //		Set<String> list = (Set<String>) sc.getAttribute("pages");
 //		System.out.println(list);
@@ -47,33 +48,36 @@ public class AppServletDispatcher extends HttpServlet {
 	}
 
 	@Override
-	protected void doHead(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doHead(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ServletContext sc = request.getServletContext();
+		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
+		Map<String, MethodContainer> methodContainer = af.getMethodContainer();
+		System.out.println(methodContainer);
+		MethodContainer mc = methodContainer.get(request.getRequestURI());
+		//System.out.println(mc.getUrl() + " : " + mc.getMethod().getName());
+		
 		String path = request.getRequestURI().substring(request.getContextPath().length());
 		System.out.println("request.getRequestURI(): " + request.getRequestURI());
 		System.out.println("path: " + path);
 		System.out.println("request.getContextPath(): " + request.getContextPath());
 		
-		resp.setContentType("text/html");
-		PrintWriter out = resp.getWriter();
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
 		
 		String n = request.getParameter("userName");
 		out.print("Welcome " + n);
 	}
 
 	@Override
-	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
 	@Override
-	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	}
-
-	@Override
-	protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
 }

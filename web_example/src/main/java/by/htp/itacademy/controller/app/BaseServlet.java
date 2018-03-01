@@ -8,10 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import annotationapi.util.AnnotationFinder;
-import annotationapi.util.exception.ClassFindException;
-import by.htp.itacademy.controller.Simple;
-
 public class BaseServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
