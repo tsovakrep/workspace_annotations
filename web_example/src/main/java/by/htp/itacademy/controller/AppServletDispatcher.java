@@ -18,16 +18,10 @@ public class AppServletDispatcher extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		System.out.println(request.getMethod());
 		System.out.println("request.getRequestURI(): " + request.getRequestURI());
-		Set<String> pages = (Set<String>) request.getServletContext().getAttribute("pages");
-		String pa = null;
-		for (String page : pages) {
-			//System.out.println(page);
-			pa = page;
-		}
-		System.out.println("page: " + pa);
-		RequestDispatcher rd = request.getRequestDispatcher(pa);
-		rd.forward(request, response);
+//		RequestDispatcher rd = request.getRequestDispatcher("");
+//		rd.forward(request, response);
 	}
 
 	@Override
@@ -38,7 +32,7 @@ public class AppServletDispatcher extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		System.out.println(request.getMethod());
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
@@ -54,7 +48,7 @@ public class AppServletDispatcher extends HttpServlet {
 	@Override
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 	}
 
 }

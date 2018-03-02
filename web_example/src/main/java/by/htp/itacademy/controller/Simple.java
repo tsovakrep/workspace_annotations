@@ -27,23 +27,12 @@ public class Simple {
 					  @ReqParam(value = "userName", defaultValue = "Tsovak") String value2,
 					  HttpSession session) 
 							  throws ServletException, IOException {
-		
-//		String url = request.getRequestURI();
-//		System.out.println("url: " + url);
-//
-//		RequestDispatcher rd = request.getRequestDispatcher("/welcome");
-//		rd.forward(request, response);
-		
-
 	}
 
 	@PostMapping("welcome/{user}")
 	public void logout(@PathVariable("name") String name, 
 					   @ReqBody String body, HttpSession session)
 							throws ServletException, IOException {
-//		System.out.println("POST -- Simple -- " + request + " : " + response);
-//		RequestDispatcher rd = request.getRequestDispatcher("/welcome");
-//		rd.forward(request, response);
 	}
 	
 	@DeleteMapping("order/{value}")
