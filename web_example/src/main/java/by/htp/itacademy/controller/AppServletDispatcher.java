@@ -24,20 +24,20 @@ public class AppServletDispatcher extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		ServletContext sc = request.getServletContext();
-//		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
-//		Map<String, MethodContainer> methodContainer = af.getMethodContainer();
-//		System.out.println(methodContainer);
-//		MethodContainer mc = methodContainer.get(request.getRequestURI());
-//		System.out.println(mc.getUrl() + " : " + mc.getMethod().getName());
-//		for (Object ob : mc.getMethodParameterTypes()) {
-//			System.out.println(ob);
-//		}
-//		for (Object ob : mc.getParameterTypes()) {
-//			System.out.println(ob);
-//		}
-//		Map<String, Annotation> map = mc.mapAnnotationForMethodParameters();
-//		System.out.println(map);
+		ServletContext sc = request.getServletContext();
+		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
+		Map<String, MethodContainer> methodContainer = af.getMethodContainer();
+		System.out.println(methodContainer);
+		MethodContainer mc = methodContainer.get(request.getRequestURI());
+		System.out.println(mc.getUrl() + " : " + mc.getMethod().getName());
+		for (Object ob : mc.getMethodParameterTypes()) {
+			System.out.println(ob);
+		}
+		for (Object ob : mc.getParameterTypes()) {
+			System.out.println(ob);
+		}
+		Map<String, Annotation> map = mc.mapAnnotationForMethodParameters();
+		System.out.println(map);
 		
 		System.out.println("request.getRequestURI(): " + request.getRequestURI());
 //		ServletContext sc = getServletContext();
@@ -59,14 +59,22 @@ public class AppServletDispatcher extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext sc = request.getServletContext();
 		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
+		
+		String uri = request.getRequestURI();
+		
 		Map<String, MethodContainer> methodContainer = af.getMethodContainer();
 		for(Map.Entry<String, MethodContainer> meth : methodContainer.entrySet()) {
 			System.out.println(meth.getKey() + " : " + meth.getValue());
+			if (meth.getKey().endsWith("}")) {
+				String lastWord = uri.substring(uri.lastIndexOf("/"), uri.length());
+				uri = meth.getKey();
+				System.out.println(lastWord);
+			}
 		}
 		//System.out.println(methodContainer);
-		MethodContainer mc = methodContainer.get(request.getRequestURI());
+		MethodContainer mc = methodContainer.get(uri);
 		System.out.println("mc: " + mc);
-//		System.out.println(mc.getUrl() + " : " + mc.getMethod().getName());
+		System.out.println(mc.getUrl() + " : " + mc.getMethod().getName());
 		
 		System.out.println("request.getRequestURI(): " + request.getRequestURI());
 		
