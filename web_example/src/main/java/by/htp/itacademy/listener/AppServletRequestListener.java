@@ -20,14 +20,7 @@ public class AppServletRequestListener implements ServletRequestListener {
 
 	@Override
 	public void requestDestroyed(ServletRequestEvent sre) {
-		//ServletRequest sr = sre.getServletRequest();
-		//System.out.println("sr destroyed: " + sr);
-		//ServletRegistration serReg = (ServletRegistration) sr.getAttribute("welcomeserv");
-		//System.out.println("attribute: " + sr.getAttribute("welcomeserv"));
-		//serReg.addMapping("welcome/tsovakpalakian");
-//		String tsovak = sr.getAttribute("tsovak").toString();
-//		System.out.println(tsovak);
-		
+		sre.getServletRequest();
 	}
 
 	@Override
