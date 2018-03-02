@@ -9,6 +9,7 @@ import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -18,12 +19,6 @@ import org.apache.http.util.EntityUtils;
 
 @WebListener
 public class AppServletRequestListener implements ServletRequestListener {
-
-	@Override
-	public void requestDestroyed(ServletRequestEvent sre) {
-		ServletRequest sr = sre.getServletRequest();
-//		System.out.println("sr destroyed: " + sr);
-	}
 
 	@Override
 	public void requestInitialized(ServletRequestEvent sre) {
@@ -46,10 +41,18 @@ public class AppServletRequestListener implements ServletRequestListener {
 		
 		
 		ServletRequest sr = sre.getServletRequest();
-
-		String uri = ((HttpServletRequest) sr).getRequestURI();
+		HttpServletRequest httpServletRequest = (HttpServletRequest) sr;
+		HttpSession httpSession = httpServletRequest.getSession();
+		System.out.println("language: " + httpSession.getAttribute("language"));
+		
+		String uri = httpServletRequest.getRequestURI();
 		System.out.println(uri);
 //		System.out.println("sr initialized: " + sr);
 	}
 
+	@Override
+	public void requestDestroyed(ServletRequestEvent sre) {
+		ServletRequest sr = sre.getServletRequest();
+//		System.out.println("sr destroyed: " + sr);
+	}
 }
