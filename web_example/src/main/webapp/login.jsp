@@ -19,7 +19,7 @@
 		<input type="submit" value="get" />
 	</form>
 	
-	<form action="simple" method="get">
+	<form action="" method="get">
 		<input type="submit" value="delete" />
 	</form>
 </body>
