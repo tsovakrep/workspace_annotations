@@ -22,7 +22,7 @@ public class AppServletDispatcher extends HttpServlet {
 		Set<String> pages = (Set<String>) request.getServletContext().getAttribute("pages");
 		String pa = null;
 		for (String page : pages) {
-			System.out.println(page);
+			//System.out.println(page);
 			pa = page;
 		}
 		System.out.println("page: " + pa);
