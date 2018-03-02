@@ -21,8 +21,8 @@ public class AppServletDispatcher extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		System.out.println(request.getMethod());
-		System.out.println("request.getRequestURI(): " + request.getRequestURI());
+//		System.out.println(request.getMethod());
+//		System.out.println("request.getRequestURI(): " + request.getRequestURI());
 //		RequestDispatcher rd = request.getRequestDispatcher("");
 //		rd.forward(request, response);
 		
@@ -32,7 +32,7 @@ public class AppServletDispatcher extends HttpServlet {
 		String uri = request.getRequestURI();
 		String[] arrUri = uri.split("/");
 		for (String string : arrUri) {
-			System.out.println(string);
+//			System.out.println(string);
 		}
 
 		int index = arrUri.length - 2;
@@ -49,9 +49,9 @@ public class AppServletDispatcher extends HttpServlet {
 				}
 			}
 		}
-		System.out.println(arrUri[arrUri.length - 1]);
-		System.out.println("uri: " + uri);
-		System.out.println(methodContainer);
+//		System.out.println(arrUri[arrUri.length - 1]);
+//		System.out.println("uri: " + uri);
+//		System.out.println(methodContainer);
 	}
 
 	@Override

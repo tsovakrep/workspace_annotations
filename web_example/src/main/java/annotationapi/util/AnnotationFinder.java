@@ -179,8 +179,6 @@ public class AnnotationFinder {
 		for (Annotation classAnnotation : classAnnotations) {
 			if (Mapping.class.getName().equals(classAnnotation.annotationType().getName())) {
 				Mapping mapping = (Mapping) classAnnotation;
-				System.out.println(contextPath);
-				System.out.println(mapping.value());
 				
 				if (!mapping.value().equals("/")) {
 					return mappingValue  = contextPath.concat(mapping.value());
