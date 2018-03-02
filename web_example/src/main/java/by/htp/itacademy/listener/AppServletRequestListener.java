@@ -46,14 +46,7 @@ public class AppServletRequestListener implements ServletRequestListener {
 		
 		
 		ServletRequest sr = sre.getServletRequest();
-		
-		try {
-			Thread.sleep(9000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-//		System.out.println(sr.);
+
 		String uri = ((HttpServletRequest) sr).getRequestURI();
 		System.out.println(uri);
 //		System.out.println("sr initialized: " + sr);
