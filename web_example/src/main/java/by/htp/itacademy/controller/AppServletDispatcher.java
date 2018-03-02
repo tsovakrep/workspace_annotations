@@ -60,7 +60,10 @@ public class AppServletDispatcher extends HttpServlet {
 		ServletContext sc = request.getServletContext();
 		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
 		Map<String, MethodContainer> methodContainer = af.getMethodContainer();
-		System.out.println(methodContainer);
+		for(Map.Entry<String, MethodContainer> meth : methodContainer.entrySet()) {
+			System.out.println(meth.getKey() + " : " + meth.getValue());
+		}
+		//System.out.println(methodContainer);
 		MethodContainer mc = methodContainer.get(request.getRequestURI());
 		System.out.println("mc: " + mc);
 //		System.out.println(mc.getUrl() + " : " + mc.getMethod().getName());
