@@ -13,10 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import annotationapi.util.AnnotationFinder;
-import annotationapi.util.HttpMethod;
-import annotationapi.util.MethodContainer;
-
 @SuppressWarnings("serial")
 public class AppServletDispatcher extends HttpServlet {
 

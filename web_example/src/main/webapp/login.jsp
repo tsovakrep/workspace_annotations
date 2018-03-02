@@ -12,14 +12,14 @@
 <body>
 	<form action="simple/welcome/Tsovak" method="post">
 		Name:<input type="text" name="userName" /><br /> 
-		<input type="submit" value="login" />
+		<input type="submit" value="post" />
 	</form>
 
-	<form action="simple/welcome" method="get">
+	<form action="simplewelcome" method="get">
 		<input type="submit" value="get" />
 	</form>
 	
-	<form action="simple" method="get">
+	<form action="simple1" method="get">
 		<input type="submit" value="delete" />
 	</form>
 </body>
