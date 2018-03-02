@@ -15,11 +15,11 @@
 		<input type="submit" value="post" />
 	</form>
 
-	<form action="simplewelcome" method="get">
+	<form action="simple/welcome" method="get">
 		<input type="submit" value="get" />
 	</form>
 	
-	<form action="simple1" method="get">
+	<form action="simple" method="get">
 		<input type="submit" value="delete" />
 	</form>
 </body>
