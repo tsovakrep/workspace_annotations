@@ -17,81 +17,65 @@ import annotationapi.util.AnnotationFinder;
 import annotationapi.util.HttpMethod;
 import annotationapi.util.MethodContainer;
 
-
 @SuppressWarnings("serial")
 public class AppServletDispatcher extends HttpServlet {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		ServletContext sc = request.getServletContext();
-//		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
-//		Map<String, MethodContainer> methodContainer = af.getMethodContainer();
-//		System.out.println(methodContainer);
-//		MethodContainer mc = methodContainer.get(request.getRequestURI());
-//		System.out.println(mc.getUrl() + " : " + mc.getMethod().getName());
-//		for (Object ob : mc.getMethodParameterTypes()) {
-//			System.out.println(ob);
-//		}
-//		for (Object ob : mc.getParameterTypes()) {
-//			System.out.println(ob);
-//		}
-//		Map<String, Annotation> map = mc.mapAnnotationForMethodParameters();
-//		System.out.println(map);
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// ServletContext sc = request.getServletContext();
+		// AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
+		// Map<String, MethodContainer> methodContainer = af.getMethodContainer();
+		// System.out.println(methodContainer);
+		// MethodContainer mc = methodContainer.get(request.getRequestURI());
+		// System.out.println(mc.getUrl() + " : " + mc.getMethod().getName());
+		// for (Object ob : mc.getMethodParameterTypes()) {
+		// System.out.println(ob);
+		// }
+		// for (Object ob : mc.getParameterTypes()) {
+		// System.out.println(ob);
+		// }
+		// Map<String, Annotation> map = mc.mapAnnotationForMethodParameters();
+		// System.out.println(map);
+
 		System.out.println("request.getRequestURI(): " + request.getRequestURI());
-//		ServletContext sc = getServletContext();
-//		Set<String> list = (Set<String>) sc.getAttribute("pages");
-//		System.out.println(list);
-//		
-//		System.out.println(req.getRequestURI());
-//		System.out.println(req.getRequestURL());
-//
-//		RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
-//		rd.forward(req, resp);
+		// ServletContext sc = getServletContext();
+		// Set<String> list = (Set<String>) sc.getAttribute("pages");
+		// System.out.println(list);
+		//
+		// System.out.println(req.getRequestURI());
+		// System.out.println(req.getRequestURL());
+		//
+		// RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
+		// rd.forward(req, resp);
 	}
 
 	@Override
-	protected void doHead(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doHead(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ServletContext sc = request.getServletContext();
-		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
-		
-		String uri = request.getRequestURI();
-		
-		Map<String, MethodContainer> methodContainer = af.getMethodContainer();
-		for(Map.Entry<String, MethodContainer> meth : methodContainer.entrySet()) {
-			System.out.println(meth.getKey() + " : " + meth.getValue());
-			if (meth.getKey().endsWith("}")) {
-				String lastWord = uri.substring(uri.lastIndexOf("/"), uri.length());
-				uri = meth.getKey();
-				System.out.println(lastWord);
-			}
-		}
-		//System.out.println(methodContainer);
-//		MethodContainer mc = methodContainer.get(uri);
-//		System.out.println("mc: " + mc);
-//		System.out.println(mc.getUrl() + " : " + mc.getMethod().getName());
-//		
-//		System.out.println("request.getRequestURI(): " + request.getRequestURI());
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		
+
 		String n = request.getParameter("userName");
 		out.print("Welcome " + n);
 	}
 
 	@Override
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPut(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 	}
 
 	@Override
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 	}
 
 }

@@ -46,7 +46,7 @@ public class Simple {
 //		rd.forward(request, response);
 	}
 	
-	@DeleteMapping("welcome/{value}")
+	@DeleteMapping("order/{value}")
 	public void detete() {
 		
 	}
