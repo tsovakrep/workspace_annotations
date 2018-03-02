@@ -12,9 +12,8 @@
 </head>
 <body>
 	<h2>Hello Palakian</h2>
-	<form action="simple/welcome/Tsovak" method="post">
-		Name:<input type="text" name="userName" /><br /> 
-		<input type="submit" value="post" />
+	<form action="go" method="get">
+		<input type="submit" value="get" />
 	</form>
 </body>
 </html>
