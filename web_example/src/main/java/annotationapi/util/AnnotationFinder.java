@@ -181,9 +181,9 @@ public class AnnotationFinder {
 				Mapping mapping = (Mapping) classAnnotation;
 				System.out.println(mapping.value().length());
 				if (mapping.value() == "/") {
-					mappingValue  = contextPath.concat(mapping.value());
+					return mappingValue  = contextPath.concat(mapping.value());
 				}
-				return mappingValue;
+				return mappingValue = contextPath;
 			}
 		}
 		return null;

@@ -17,7 +17,7 @@ import annotationapi.annotation.ReqParam;
 import annotationapi.util.ResponseEntity;
 
 @Controller
-@Mapping("/")
+@Mapping("2wfadf")
 public class Simple {
 	
 	@Autoinitialization
