@@ -2,6 +2,7 @@ package by.htp.itacademy.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.Set;
 
@@ -35,8 +36,8 @@ public class AppServletDispatcher extends HttpServlet {
 		for (Object ob : mc.getParameterTypes()) {
 			System.out.println(ob);
 		}
-		
-		
+		Map<String, Annotation> map = mc.mapAnnotationForMethodParameters();
+		System.out.println(map);
 		
 		System.out.println("request.getRequestURI(): " + request.getRequestURI());
 //		ServletContext sc = getServletContext();
@@ -78,6 +79,7 @@ public class AppServletDispatcher extends HttpServlet {
 
 	@Override
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	}
 
 }

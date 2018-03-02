@@ -10,13 +10,17 @@
 <title>Demo</title>
 </head>
 <body>
-	<form action="simple/welcome/{user}" method="post">
+	<form action="simple/welcome/Tsovak" method="post">
 		Name:<input type="text" name="userName" /><br /> 
 		<input type="submit" value="login" />
 	</form>
 
 	<form action="simple/welcome" method="get">
 		<input type="submit" value="get" />
+	</form>
+	
+	<form action="simple" method="get">
+		<input type="submit" value="delete" />
 	</form>
 </body>
 </html>

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import annotationapi.annotation.Autoinitialization;
 import annotationapi.annotation.Controller;
+import annotationapi.annotation.DeleteMapping;
 import annotationapi.annotation.GetMapping;
 import annotationapi.annotation.Mapping;
 import annotationapi.annotation.PathVariable;
@@ -21,9 +22,10 @@ public class Simple {
 	@Autoinitialization
 	private String str;
 
-	@GetMapping("welcome/{user}")
+	@GetMapping("welcome")
 	public void login(@PathVariable("name") String name, 
 					  @ReqParam(value = "userName", defaultValue = "Tsovak") String value, 
+					  @ReqParam(value = "userName", defaultValue = "Tsovak") String value2,
 					  HttpSession session) 
 							  throws ServletException, IOException {
 		
@@ -36,11 +38,16 @@ public class Simple {
 
 	}
 
-	@PostMapping("welcome")
+	@PostMapping("welcome/{user}")
 	public void logout(@ReqBody String body, HttpSession session)
 			throws ServletException, IOException {
 //		System.out.println("POST -- Simple -- " + request + " : " + response);
 //		RequestDispatcher rd = request.getRequestDispatcher("/welcome");
 //		rd.forward(request, response);
+	}
+	
+	@DeleteMapping
+	public void detete() {
+		
 	}
 }

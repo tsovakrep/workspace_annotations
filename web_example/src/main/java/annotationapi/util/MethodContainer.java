@@ -2,6 +2,7 @@ package annotationapi.util;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -23,18 +24,6 @@ public class MethodContainer {
 		this.mapOfAnnotations = mapOfAnnotations();
 	}
 	
-	private Map<String, Annotation> mapOfAnnotations() {
-		mapOfAnnotations = new ConcurrentHashMap<>();
-		Annotation[][] parameterAnnotations = method.getParameterAnnotations();
-		for (Annotation[] annotations : parameterAnnotations) {
-			for (Annotation annotation : annotations) {
-				String annotName = annotation.annotationType().getName();
-				mapOfAnnotations.put(annotName, annotation);
-			}
-		}
-		return mapOfAnnotations;
-	}
-	
 	public String getUrl() {
 		return url;
 	}
@@ -51,8 +40,19 @@ public class MethodContainer {
 		return parameterTypes;
 	}
 
-	public Map<String, Annotation> getMapOfAnnotations() {
+	public Map<String, Annotation> mapAnnotationForMethodParameters() {
 		return mapOfAnnotations;
 	}
 
+	private Map<String, Annotation> mapOfAnnotations() {
+		mapOfAnnotations = new ConcurrentHashMap<>();
+		Parameter[] parameters = method.getParameters();
+		for (Parameter parameter : parameters) {
+			Annotation[] annotations = parameter.getAnnotations();
+			for (Annotation annotation : annotations) {
+				mapOfAnnotations.put(parameter.getName(), annotation);
+			}
+		}
+		return mapOfAnnotations;
+	}
 }

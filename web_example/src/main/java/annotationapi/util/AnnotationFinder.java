@@ -35,7 +35,7 @@ public class AnnotationFinder {
 	public Map<Class<?>, List<Annotation>> getAnnotationConteiner() {
 		return annotationConteiner;
 	}
-	
+
 	public Map<String, MethodContainer> getMethodContainer() {
 		return METHOD_CONTAINER;
 	}
@@ -55,7 +55,7 @@ public class AnnotationFinder {
 
 		annotClass(clazz);
 	}
-	
+
 	public void fillingMethodContainer(Class<?> clazz) {
 		getMethodContainer(clazz);
 	}
@@ -65,7 +65,7 @@ public class AnnotationFinder {
 		Annotation[] classAnnotation = clazz.getAnnotations();
 		for (Annotation annotation : classAnnotation) {
 			if (this.desirerAnnotation.getName().equals(annotation.annotationType().getName())) {
-				listOfAnnotations.add(annotation);	
+				listOfAnnotations.add(annotation);
 				annotField(clazz);
 				annotMethod(clazz);
 				methodParameterAnnotation(clazz);
@@ -108,58 +108,99 @@ public class AnnotationFinder {
 			}
 		}
 	}
-	
+
 	private Map<String, MethodContainer> getMethodContainer(Class<?> clazz) {
 		String contextPath = context.getContextPath().concat("/");
 		String mappingValue = null;
-		
+
 		if (clazz.isAnnotationPresent(desirerAnnotation)) {
 			Annotation[] classAnnotations = clazz.getAnnotations();
-			for (Annotation classAnnotation : classAnnotations) {
-				if (Mapping.class.getName().equals(classAnnotation.annotationType().getName())) {
-					Mapping mapping = (Mapping) classAnnotation;
-					mappingValue = contextPath.concat(mapping.value().concat("/"));
-				}
+
+			mappingValue = mappingAnnotation(classAnnotations, mappingValue, contextPath);
+			controllerAnnotation(clazz, classAnnotations, mappingValue);
+
+		}
+		return METHOD_CONTAINER;
+	}
+
+	private void getMapping(Annotation methtodAnnotation, String mappingValue, Method method) {
+		if (GetMapping.class.getName().equals(methtodAnnotation.annotationType().getName())) {
+			GetMapping getMapping = (GetMapping) methtodAnnotation;
+			String getMappingValue = getMapping.value();
+			if (getMappingValue.length() != 0) {
+				mappingValue = mappingValue.concat("/");
 			}
-			for (Annotation classAnnotation : classAnnotations) {
-				if (Controller.class.getName().equals(classAnnotation.annotationType().getName())) {
-					Method[] methods = clazz.getMethods();
-					for (Method method : methods) {
-						Annotation[] mehtodAnnotations = method.getAnnotations();
-						for (Annotation methtodAnnotation : mehtodAnnotations) {
-							if (GetMapping.class.getName().equals(methtodAnnotation.annotationType().getName())) {
-								GetMapping getMapping = (GetMapping) methtodAnnotation;
-								String getMappingValue = getMapping.value();
-								String url = mappingValue.concat(getMappingValue);
-								MethodContainer mc = new MethodContainer(url, method, HttpMethod.GET);
-								METHOD_CONTAINER.put(url, mc);
-							}
-							if(PostMapping.class.getName().equals(methtodAnnotation.annotationType().getName())) {
-								PostMapping postMapping = (PostMapping) methtodAnnotation;
-								String postMappingValue = postMapping.value();
-								String url = mappingValue.concat(postMappingValue);
-								MethodContainer mc = new MethodContainer(url, method, HttpMethod.POST);
-								METHOD_CONTAINER.put(url, mc);
-							}
-							if(PutMapping.class.getName().equals(methtodAnnotation.annotationType().getName())) {
-								PutMapping putMapping = (PutMapping) methtodAnnotation;
-								String putMappingValue = putMapping.value();
-								String url = mappingValue.concat(putMappingValue);
-								MethodContainer mc = new MethodContainer(url, method, HttpMethod.PUT);
-								METHOD_CONTAINER.put(url, mc);
-							}
-							if(DeleteMapping.class.getName().equals(methtodAnnotation.annotationType().getName())) {
-								DeleteMapping deleteMapping = (DeleteMapping) methtodAnnotation;
-								String deleteMappingValue = deleteMapping.value();
-								String url = mappingValue.concat(deleteMappingValue);
-								MethodContainer mc = new MethodContainer(url, method, HttpMethod.DELETE);
-								METHOD_CONTAINER.put(url, mc);
-							}
-						}
+			String uri = mappingValue.concat(getMappingValue);
+			MethodContainer mc = new MethodContainer(uri, method, HttpMethod.GET);
+			METHOD_CONTAINER.put(uri, mc);
+		}
+	}
+
+	private void postMapping(Annotation methtodAnnotation, String mappingValue, Method method) {
+		if (PostMapping.class.getName().equals(methtodAnnotation.annotationType().getName())) {
+			PostMapping postMapping = (PostMapping) methtodAnnotation;
+			String postMappingValue = postMapping.value();
+			System.out.println(postMappingValue);
+			if (postMappingValue.length() != 0) {
+				mappingValue = mappingValue.concat("/");
+			}
+			String uri = mappingValue.concat(postMappingValue);
+			MethodContainer mc = new MethodContainer(uri, method, HttpMethod.POST);
+			METHOD_CONTAINER.put(uri, mc);
+		}
+	}
+
+	private void putMapping(Annotation methtodAnnotation, String mappingValue, Method method) {
+		if (PutMapping.class.getName().equals(methtodAnnotation.annotationType().getName())) {
+			PutMapping putMapping = (PutMapping) methtodAnnotation;
+			String putMappingValue = putMapping.value();
+			if (putMappingValue.length() != 0) {
+				mappingValue = mappingValue.concat("/");
+			}
+			String uri = mappingValue.concat(putMappingValue);
+			MethodContainer mc = new MethodContainer(uri, method, HttpMethod.PUT);
+			METHOD_CONTAINER.put(uri, mc);
+		}
+	}
+
+	private void deleteMapping(Annotation methtodAnnotation, String mappingValue, Method method) {
+		if (DeleteMapping.class.getName().equals(methtodAnnotation.annotationType().getName())) {
+			DeleteMapping deleteMapping = (DeleteMapping) methtodAnnotation;
+			String deleteMappingValue = deleteMapping.value();
+			if (deleteMappingValue.length() != 0) {
+				mappingValue = mappingValue.concat("/");
+			}
+			String uri = mappingValue.concat(deleteMappingValue);
+			MethodContainer mc = new MethodContainer(uri, method, HttpMethod.DELETE);
+			METHOD_CONTAINER.put(uri, mc);
+		}
+	}
+
+	private String mappingAnnotation(Annotation[] classAnnotations, String mappingValue, String contextPath) {
+		for (Annotation classAnnotation : classAnnotations) {
+			if (Mapping.class.getName().equals(classAnnotation.annotationType().getName())) {
+				Mapping mapping = (Mapping) classAnnotation;
+				return mappingValue = contextPath.concat(mapping.value());
+			}
+		}
+		return null;
+	}
+
+	private void controllerAnnotation(Class<?> clazz, Annotation[] classAnnotations, String mappingValue) {
+		for (Annotation classAnnotation : classAnnotations) {
+			if (Controller.class.getName().equals(classAnnotation.annotationType().getName())) {
+				Method[] methods = clazz.getMethods();
+				for (Method method : methods) {
+					Annotation[] mehtodAnnotations = method.getAnnotations();
+					for (Annotation methtodAnnotation : mehtodAnnotations) {
+
+						getMapping(methtodAnnotation, mappingValue, method);
+						postMapping(methtodAnnotation, mappingValue, method);
+						putMapping(methtodAnnotation, mappingValue, method);
+						deleteMapping(methtodAnnotation, mappingValue, method);
 					}
 				}
 			}
 		}
-		return METHOD_CONTAINER;
 	}
 }
