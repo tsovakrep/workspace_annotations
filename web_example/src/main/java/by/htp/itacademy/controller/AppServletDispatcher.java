@@ -57,14 +57,15 @@ public class AppServletDispatcher extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		ServletContext sc = request.getServletContext();
-//		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
-//		Map<String, MethodContainer> methodContainer = af.getMethodContainer();
-//		System.out.println(methodContainer);
-//		MethodContainer mc = methodContainer.get(request.getRequestURI());
+		ServletContext sc = request.getServletContext();
+		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
+		Map<String, MethodContainer> methodContainer = af.getMethodContainer();
+		System.out.println(methodContainer);
+		MethodContainer mc = methodContainer.get(request.getRequestURI());
+		System.out.println("mc: " + mc);
 //		System.out.println(mc.getUrl() + " : " + mc.getMethod().getName());
 		
-//		System.out.println("request.getRequestURI(): " + request.getRequestURI());
+		System.out.println("request.getRequestURI(): " + request.getRequestURI());
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
