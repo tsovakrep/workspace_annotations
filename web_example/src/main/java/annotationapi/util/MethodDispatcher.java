@@ -6,7 +6,6 @@ import javax.servlet.ServletContext;
 
 public class MethodDispatcher {
 
-	
 	private void callMethod() {
 //		ServletContext sc = request.getServletContext();
 //		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
