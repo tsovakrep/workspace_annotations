@@ -179,7 +179,10 @@ public class AnnotationFinder {
 		for (Annotation classAnnotation : classAnnotations) {
 			if (Mapping.class.getName().equals(classAnnotation.annotationType().getName())) {
 				Mapping mapping = (Mapping) classAnnotation;
-				return mappingValue = contextPath.concat(mapping.value());
+				if (mappingValue != "/") {
+					mappingValue  = contextPath.concat(mapping.value());
+				}
+				return mappingValue;
 			}
 		}
 		return null;
