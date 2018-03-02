@@ -20,6 +20,8 @@ public class AppServletRequestListener implements ServletRequestListener {
 
 	@Override
 	public void requestDestroyed(ServletRequestEvent sre) {
+		ServletRequest sr = sre.getServletRequest();
+		System.out.println("sr destroyed: " + sr);
 	}
 
 	@Override
