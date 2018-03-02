@@ -14,6 +14,7 @@ import annotationapi.annotation.PathVariable;
 import annotationapi.annotation.PostMapping;
 import annotationapi.annotation.ReqBody;
 import annotationapi.annotation.ReqParam;
+import annotationapi.util.ResponseEntity;
 
 @Controller
 @Mapping("simple")
@@ -23,10 +24,11 @@ public class Simple {
 	private String str;
 
 	@GetMapping("welcome")
-	public void login(@ReqParam(value = "userName", defaultValue = "Tsovak") String value, 
+	public ResponseEntity login(@ReqParam(value = "userName", defaultValue = "Tsovak") String value, 
 					  @ReqParam(value = "userName", defaultValue = "Tsovak") String value2,
 					  HttpSession session) 
 							  throws ServletException, IOException {
+		return null;
 	}
 
 	@PostMapping("welcome/{user}")
