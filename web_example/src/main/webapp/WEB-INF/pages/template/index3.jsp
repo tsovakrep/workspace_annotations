@@ -9,7 +9,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
 <title>Demo Ajax</title>
-<script type="text/javascript" src="web/js/jquery-3.3.1.js"></script>
 </head>
 <body>
 	<h2>Hello Palakian</h2>

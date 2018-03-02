@@ -2,6 +2,7 @@ package by.htp.itacademy.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,8 +19,14 @@ public class AppServletDispatcher extends HttpServlet {
 			throws ServletException, IOException {
 
 		System.out.println("request.getRequestURI(): " + request.getRequestURI());
-		
-		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+		Set<String> pages = (Set<String>) request.getServletContext().getAttribute("pages");
+		String pa = null;
+		for (String page : pages) {
+			System.out.println(page);
+			pa = page;
+		}
+		System.out.println("page: " + pa);
+		RequestDispatcher rd = request.getRequestDispatcher(pa);
 		rd.forward(request, response);
 	}
 
