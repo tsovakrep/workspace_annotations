@@ -23,8 +23,7 @@ public class Simple {
 	private String str;
 
 	@GetMapping("welcome")
-	public void login(@PathVariable("name") String name, 
-					  @ReqParam(value = "userName", defaultValue = "Tsovak") String value, 
+	public void login(@ReqParam(value = "userName", defaultValue = "Tsovak") String value, 
 					  @ReqParam(value = "userName", defaultValue = "Tsovak") String value2,
 					  HttpSession session) 
 							  throws ServletException, IOException {
@@ -39,8 +38,9 @@ public class Simple {
 	}
 
 	@PostMapping("welcome/{user}")
-	public void logout(@ReqBody String body, HttpSession session)
-			throws ServletException, IOException {
+	public void logout(@PathVariable("name") String name, 
+					   @ReqBody String body, HttpSession session)
+							throws ServletException, IOException {
 //		System.out.println("POST -- Simple -- " + request + " : " + response);
 //		RequestDispatcher rd = request.getRequestDispatcher("/welcome");
 //		rd.forward(request, response);

@@ -140,7 +140,6 @@ public class AnnotationFinder {
 		if (PostMapping.class.getName().equals(methtodAnnotation.annotationType().getName())) {
 			PostMapping postMapping = (PostMapping) methtodAnnotation;
 			String postMappingValue = postMapping.value();
-			System.out.println(postMappingValue);
 			if (postMappingValue.length() != 0) {
 				mappingValue = mappingValue.concat("/");
 			}
