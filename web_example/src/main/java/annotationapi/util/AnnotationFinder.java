@@ -123,7 +123,7 @@ public class AnnotationFinder {
 		return METHOD_CONTAINER;
 	}
 
-	private void getMapping(Annotation methtodAnnotation, String mappingValue, Method method) {
+	private void getMapping(Class<?> clazz, Annotation methtodAnnotation, String mappingValue, Method method) {
 		if (GetMapping.class.getName().equals(methtodAnnotation.annotationType().getName())) {
 			GetMapping getMapping = (GetMapping) methtodAnnotation;
 			String getMappingValue = getMapping.value();
@@ -131,12 +131,12 @@ public class AnnotationFinder {
 				mappingValue = mappingValue.concat("/");
 			}
 			String uri = mappingValue.concat(getMappingValue);
-			ServletContainer mc = new ServletContainer(uri, method, HttpMethod.GET);
+			ServletContainer mc = new ServletContainer(uri, clazz, method, HttpMethod.GET);
 			METHOD_CONTAINER.put(uri, mc);
 		}
 	}
 
-	private void postMapping(Annotation methtodAnnotation, String mappingValue, Method method) {
+	private void postMapping(Class<?> clazz, Annotation methtodAnnotation, String mappingValue, Method method) {
 		if (PostMapping.class.getName().equals(methtodAnnotation.annotationType().getName())) {
 			PostMapping postMapping = (PostMapping) methtodAnnotation;
 			String postMappingValue = postMapping.value();
@@ -144,12 +144,12 @@ public class AnnotationFinder {
 				mappingValue = mappingValue.concat("/");
 			}
 			String uri = mappingValue.concat(postMappingValue);
-			ServletContainer mc = new ServletContainer(uri, method, HttpMethod.POST);
+			ServletContainer mc = new ServletContainer(uri, clazz, method, HttpMethod.POST);
 			METHOD_CONTAINER.put(uri, mc);
 		}
 	}
 
-	private void putMapping(Annotation methtodAnnotation, String mappingValue, Method method) {
+	private void putMapping(Class<?> clazz, Annotation methtodAnnotation, String mappingValue, Method method) {
 		if (PutMapping.class.getName().equals(methtodAnnotation.annotationType().getName())) {
 			PutMapping putMapping = (PutMapping) methtodAnnotation;
 			String putMappingValue = putMapping.value();
@@ -157,12 +157,12 @@ public class AnnotationFinder {
 				mappingValue = mappingValue.concat("/");
 			}
 			String uri = mappingValue.concat(putMappingValue);
-			ServletContainer mc = new ServletContainer(uri, method, HttpMethod.PUT);
+			ServletContainer mc = new ServletContainer(uri, clazz, method, HttpMethod.PUT);
 			METHOD_CONTAINER.put(uri, mc);
 		}
 	}
 
-	private void deleteMapping(Annotation methtodAnnotation, String mappingValue, Method method) {
+	private void deleteMapping(Class<?> clazz, Annotation methtodAnnotation, String mappingValue, Method method) {
 		if (DeleteMapping.class.getName().equals(methtodAnnotation.annotationType().getName())) {
 			DeleteMapping deleteMapping = (DeleteMapping) methtodAnnotation;
 			String deleteMappingValue = deleteMapping.value();
@@ -170,7 +170,7 @@ public class AnnotationFinder {
 				mappingValue = mappingValue.concat("/");
 			}
 			String uri = mappingValue.concat(deleteMappingValue);
-			ServletContainer mc = new ServletContainer(uri, method, HttpMethod.DELETE);
+			ServletContainer mc = new ServletContainer(uri, clazz, method, HttpMethod.DELETE);
 			METHOD_CONTAINER.put(uri, mc);
 		}
 	}
@@ -197,10 +197,10 @@ public class AnnotationFinder {
 					Annotation[] mehtodAnnotations = method.getAnnotations();
 					for (Annotation methtodAnnotation : mehtodAnnotations) {
 
-						getMapping(methtodAnnotation, mappingValue, method);
-						postMapping(methtodAnnotation, mappingValue, method);
-						putMapping(methtodAnnotation, mappingValue, method);
-						deleteMapping(methtodAnnotation, mappingValue, method);
+						getMapping(clazz, methtodAnnotation, mappingValue, method);
+						postMapping(clazz, methtodAnnotation, mappingValue, method);
+						putMapping(clazz, methtodAnnotation, mappingValue, method);
+						deleteMapping(clazz, methtodAnnotation, mappingValue, method);
 					}
 				}
 			}

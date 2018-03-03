@@ -25,7 +25,7 @@ public class AppServletDispatcher extends HttpServlet {
 
 		try {
 			new MethodDispatcher().callMethod(request, response);
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -46,7 +46,7 @@ public class AppServletDispatcher extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			new MethodDispatcher().callMethod(request, response);
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

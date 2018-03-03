@@ -16,7 +16,7 @@ public class MethodDispatcher {
 	private String pathVariableValue;
 
 	public void callMethod(HttpServletRequest request, HttpServletResponse response) 
-			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException {
 
 		ServletContext sc = request.getServletContext();
 		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
@@ -33,7 +33,7 @@ public class MethodDispatcher {
 
 		HttpSession session = request.getSession();
 		
-		scont.getMethod().invoke(new DefaultController(), session);
+		scont.getMethod().invoke(scont.getServletClassName().newInstance(), session);
 		String lang = session.getAttribute("language").toString();
 		System.out.println(lang);
 //		System.out.println("mc: " + mc);
