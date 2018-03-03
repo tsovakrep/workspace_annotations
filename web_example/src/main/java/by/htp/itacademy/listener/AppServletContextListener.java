@@ -32,6 +32,8 @@ public class AppServletContextListener implements ServletContextListener {
 		context.setAttribute("pages", getPages(context));
 		context.setAttribute("httpclient", getHttpClient());
 		
+		System.out.println(context.getAttributeNames());
+		
 		System.out.println("context initilized");
 	}
 	
