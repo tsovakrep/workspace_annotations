@@ -6,6 +6,11 @@ public class ResponseEntity<T> {
 	private String page;
 	private HttpStatus status;
 
+	
+	public ResponseEntity(String page) {
+		this.page = page;
+	}
+
 	public ResponseEntity(HttpStatus status) {
 		this.status = status;
 	}
