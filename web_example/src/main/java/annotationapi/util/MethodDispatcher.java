@@ -1,42 +1,64 @@
 package annotationapi.util;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import by.htp.itacademy.controller.DefaultController;
 
 public class MethodDispatcher {
+	
+	private boolean isPathVariable = false;
+	private String pathVariableValue;
 
-	private void callMethod() {
-//		ServletContext sc = request.getServletContext();
-//		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
-//
-//		String uri = request.getRequestURI();
-//		String[] arrUri = uri.split("/");
-//		for (String string : arrUri) {
-//			System.out.println(string);
-//		}
-//
-//		int index = arrUri.length - 2;
-//
-//		Map<String, MethodContainer> methodContainer = af.getMethodContainer();
-//		for (Map.Entry<String, MethodContainer> meth : methodContainer.entrySet()) {
-//			System.out.println();
-//			System.out.println(meth.getKey() + " : " + meth.getValue());
-//			if (meth.getKey().endsWith("}")) {
-//				String[] arrMeth = meth.getKey().split("/");
-//
-//				if (arrUri[index].equals(arrMeth[index])) {
-//					uri = meth.getKey();
-//				}
-//			}
-//		}
-//		System.out.println(arrUri[arrUri.length - 1]);
+	public void callMethod(HttpServletRequest request, HttpServletResponse response) 
+			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+
+		ServletContext sc = request.getServletContext();
+		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
+
+		Map<String, ServletContainer> methodContainerMap = af.getMethodContainer();
+
+		String uri = request.getRequestURI();
+		
+		uri = changeUri(uri, methodContainerMap);
+		
 //		System.out.println("uri: " + uri);
-//		System.out.println(methodContainer);
-//		MethodContainer mc = methodContainer.get(uri);
+//		System.out.println(methodContainerMap);
+		ServletContainer scont = methodContainerMap.get(uri);
+
+		HttpSession session = request.getSession();
+		
+		scont.getMethod().invoke(new DefaultController(), session);
+		String lang = session.getAttribute("language").toString();
+		System.out.println(lang);
 //		System.out.println("mc: " + mc);
 //		System.out.println(mc.getUrl() + " : " + mc.getMethod().getName());
-//
-//		System.out.println("request.getRequestURI(): " + request.getRequestURI());
+
+		System.out.println("request.getRequestURI(): " + request.getRequestURI());
+	}
+
+	private String changeUri(String uri, Map<String, ServletContainer> methodContainerMap) {
+		
+		for (Map.Entry<String, ServletContainer> meth : methodContainerMap.entrySet()) {
+			
+			int index = meth.getKey().indexOf("{");
+			if (index == -1) {
+				continue;
+			}
+			
+			String mehtSub = meth.getKey().substring(0, index);
+			if (uri.contains(mehtSub)) {
+				isPathVariable = true;
+				pathVariableValue = uri.substring(index);
+				System.out.println("pathVariableValue: " + pathVariableValue);
+				return meth.getKey();
+			}
+		}
+		return uri;
 	}
 }

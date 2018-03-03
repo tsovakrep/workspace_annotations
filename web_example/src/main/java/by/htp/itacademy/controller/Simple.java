@@ -24,7 +24,7 @@ public class Simple {
 	private String str;
 
 	@GetMapping("welcome")
-	public ResponseEntity login(@ReqParam(value = "userName", defaultValue = "Tsovak") String value, 
+	public ResponseEntity<?> login(@ReqParam(value = "userName", defaultValue = "Tsovak") String value, 
 					  @ReqParam(value = "userName", defaultValue = "Tsovak") String value2,
 					  HttpSession session) 
 							  throws ServletException, IOException {

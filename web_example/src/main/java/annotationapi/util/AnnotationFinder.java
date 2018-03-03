@@ -23,7 +23,7 @@ public class AnnotationFinder {
 	private ServletContext context;
 	private List<Annotation> listOfAnnotations;
 	private Class<? extends Annotation> desirerAnnotation;
-	private static final Map<String, MethodContainer> METHOD_CONTAINER = new ConcurrentHashMap<>();;
+	private static final Map<String, ServletContainer> METHOD_CONTAINER = new ConcurrentHashMap<>();;
 
 	public AnnotationFinder(Class<? extends Annotation> desirerAnnotation, ServletContext context) {
 		this.desirerAnnotation = desirerAnnotation;
@@ -36,7 +36,7 @@ public class AnnotationFinder {
 		return annotationConteiner;
 	}
 
-	public Map<String, MethodContainer> getMethodContainer() {
+	public Map<String, ServletContainer> getMethodContainer() {
 		return METHOD_CONTAINER;
 	}
 
@@ -109,7 +109,7 @@ public class AnnotationFinder {
 		}
 	}
 
-	private Map<String, MethodContainer> getMethodContainer(Class<?> clazz) {
+	private Map<String, ServletContainer> getMethodContainer(Class<?> clazz) {
 		String contextPath = context.getContextPath().concat("/");
 		String mappingValue = null;
 
@@ -131,7 +131,7 @@ public class AnnotationFinder {
 				mappingValue = mappingValue.concat("/");
 			}
 			String uri = mappingValue.concat(getMappingValue);
-			MethodContainer mc = new MethodContainer(uri, method, HttpMethod.GET);
+			ServletContainer mc = new ServletContainer(uri, method, HttpMethod.GET);
 			METHOD_CONTAINER.put(uri, mc);
 		}
 	}
@@ -144,7 +144,7 @@ public class AnnotationFinder {
 				mappingValue = mappingValue.concat("/");
 			}
 			String uri = mappingValue.concat(postMappingValue);
-			MethodContainer mc = new MethodContainer(uri, method, HttpMethod.POST);
+			ServletContainer mc = new ServletContainer(uri, method, HttpMethod.POST);
 			METHOD_CONTAINER.put(uri, mc);
 		}
 	}
@@ -157,7 +157,7 @@ public class AnnotationFinder {
 				mappingValue = mappingValue.concat("/");
 			}
 			String uri = mappingValue.concat(putMappingValue);
-			MethodContainer mc = new MethodContainer(uri, method, HttpMethod.PUT);
+			ServletContainer mc = new ServletContainer(uri, method, HttpMethod.PUT);
 			METHOD_CONTAINER.put(uri, mc);
 		}
 	}
@@ -170,7 +170,7 @@ public class AnnotationFinder {
 				mappingValue = mappingValue.concat("/");
 			}
 			String uri = mappingValue.concat(deleteMappingValue);
-			MethodContainer mc = new MethodContainer(uri, method, HttpMethod.DELETE);
+			ServletContainer mc = new ServletContainer(uri, method, HttpMethod.DELETE);
 			METHOD_CONTAINER.put(uri, mc);
 		}
 	}

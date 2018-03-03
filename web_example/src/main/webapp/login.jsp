@@ -15,12 +15,13 @@
 		<input type="submit" value="post" />
 	</form>
 
-	<form action="simple/welcome" method="get">
-		<input type="submit" value="get" />
+	<form action="callMethod" method="get">
+		<input type="submit" value="callMethod" />
 	</form>
 	
 	<form action="" method="get">
 		<input type="submit" value="delete" />
 	</form>
+	<script type="text/javascript"src="web/js/loadHomePage.js"></script>
 </body>
 </html>

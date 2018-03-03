@@ -27,6 +27,7 @@ public class AppServletContextListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
+			
 		ServletContext context = sce.getServletContext();
 		context.setAttribute("annotationfinder", getAnnotationFinder(context));
 		context.setAttribute("pages", getPages(context));

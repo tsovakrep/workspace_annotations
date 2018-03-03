@@ -11,7 +11,7 @@ import annotationapi.util.ResponseEntity;
 @Mapping("/")
 public class DefaultController {
 	
-	@GetMapping
+	@GetMapping("callMethod")
 	public ResponseEntity<?> loadHomePage(HttpSession session) {
 		loadLanguage(session);
 		return new ResponseEntity<>("index4");

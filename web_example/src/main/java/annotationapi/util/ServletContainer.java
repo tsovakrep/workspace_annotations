@@ -6,7 +6,7 @@ import java.lang.reflect.Parameter;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class MethodContainer {
+public class ServletContainer {
 	
 	private String url;
 	private Method method;
@@ -15,7 +15,7 @@ public class MethodContainer {
 	private Map<String, Annotation> mapOfAnnotations;
 	private Class<?>[] parameterTypes;
 
-	public MethodContainer(String url, Method method, HttpMethod httpMethod) {
+	public ServletContainer(String url, Method method, HttpMethod httpMethod) {
 		this.url = url;
 		this.method = method;
 		this.httpMethod = httpMethod;
@@ -42,6 +42,10 @@ public class MethodContainer {
 
 	public Map<String, Annotation> mapAnnotationForMethodParameters() {
 		return mapOfAnnotations;
+	}
+
+	public HttpMethod getHttpMethod() {
+		return httpMethod;
 	}
 
 	private Map<String, Annotation> mapOfAnnotations() {
