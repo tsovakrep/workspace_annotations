@@ -11,7 +11,7 @@
 <title>Demo Ajax</title>
 </head>
 <body>
-	<h2>Hello Palakian</h2>
+	<h2>Hello Tsovak Palakian</h2>
 	<form action="go" method="get">
 		<input type="submit" value="get" />
 	</form>
