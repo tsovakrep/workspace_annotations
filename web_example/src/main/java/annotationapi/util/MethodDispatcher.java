@@ -28,15 +28,15 @@ public class MethodDispatcher {
 		uri = changeUri(uri, methodContainerMap);
 		
 //		System.out.println("uri: " + uri);
-//		System.out.println(methodContainerMap);
+		System.out.println(methodContainerMap);
 		ServletContainer scont = methodContainerMap.get(uri);
-
-		Object[] parameters = new Object[scont.getParameterTypes().length];
-		
-		
-		scont.getMethod().invoke(scont.getServletClass().newInstance(), session);
-		String lang = session.getAttribute("language").toString();
-		System.out.println(lang);
+		System.out.println("map annotation: " + scont.mapAnnotationForMethodParameters());
+//		Object[] parameters = new Object[scont.getParameterTypes().length];
+//		
+//		
+//		scont.getMethod().invoke(scont.getServletClass().newInstance(), session);
+//		String lang = session.getAttribute("language").toString();
+//		System.out.println(lang);
 //		System.out.println("mc: " + mc);
 //		System.out.println(mc.getUrl() + " : " + mc.getMethod().getName());
 
