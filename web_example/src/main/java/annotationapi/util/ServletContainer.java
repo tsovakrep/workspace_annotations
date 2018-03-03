@@ -9,19 +9,17 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ServletContainer {
 	
 	private String url;
-	private Class<?> servletClassName;
+	private Class<?> servletClass;
 	private Method method;
-	private Object[] methodParameterTypes;
 	private HttpMethod httpMethod;
 	private Map<String, Annotation> mapOfAnnotations;
 	private Class<?>[] parameterTypes;
 
-	public ServletContainer(String url, Class<?> servletClassName, Method method, HttpMethod httpMethod) {
+	public ServletContainer(String url, Class<?> servletClass, Method method, HttpMethod httpMethod) {
 		this.url = url;
-		this.servletClassName = servletClassName;
+		this.servletClass = servletClass;
 		this.method = method;
 		this.httpMethod = httpMethod;
-		this.methodParameterTypes = new Object[method.getParameterTypes().length];
 		this.parameterTypes = method.getParameterTypes();
 		this.mapOfAnnotations = mapOfAnnotations();
 	}
@@ -32,10 +30,6 @@ public class ServletContainer {
 
 	public Method getMethod() {
 		return method;
-	}
-
-	public Object[] getMethodParameterTypes() {
-		return methodParameterTypes;
 	}
 
 	public Class<?>[] getParameterTypes() {
@@ -49,9 +43,9 @@ public class ServletContainer {
 	public HttpMethod getHttpMethod() {
 		return httpMethod;
 	}
-	
-	public Class<?> getServletClassName() {
-		return servletClassName;
+
+	public Class<?> getServletClass() {
+		return servletClass;
 	}
 
 	private Map<String, Annotation> mapOfAnnotations() {

@@ -20,7 +20,7 @@ public class MethodDispatcher {
 
 		ServletContext sc = request.getServletContext();
 		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
-
+		HttpSession session = request.getSession();
 		Map<String, ServletContainer> methodContainerMap = af.getMethodContainer();
 
 		String uri = request.getRequestURI();
@@ -31,9 +31,10 @@ public class MethodDispatcher {
 //		System.out.println(methodContainerMap);
 		ServletContainer scont = methodContainerMap.get(uri);
 
-		HttpSession session = request.getSession();
+		Object[] parameters = new Object[scont.getParameterTypes().length];
 		
-		scont.getMethod().invoke(scont.getServletClassName().newInstance(), session);
+		
+		scont.getMethod().invoke(scont.getServletClass().newInstance(), session);
 		String lang = session.getAttribute("language").toString();
 		System.out.println(lang);
 //		System.out.println("mc: " + mc);
