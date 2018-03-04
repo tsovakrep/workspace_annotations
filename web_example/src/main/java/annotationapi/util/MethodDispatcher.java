@@ -1,5 +1,6 @@
 package annotationapi.util;
 
+import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
@@ -9,7 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.util.EntityUtils;
 
 import annotationapi.annotation.PathVariable;
 import annotationapi.annotation.ReqBody;
@@ -25,17 +30,17 @@ public class MethodDispatcher {
 			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException {
 
 		ServletContext sc = request.getServletContext();
-		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
-		HttpSession session = request.getSession();
-		Map<String, ServletContainer> methodContainerMap = af.getMethodContainer();
-
-		String uri = request.getRequestURI();
-		
-		uri = changeUri(uri, methodContainerMap);
+//		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
+//		HttpSession session = request.getSession();
+//		Map<String, ServletContainer> methodContainerMap = af.getMethodContainer();
+//
+//		String uri = request.getRequestURI();
+//		
+//		uri = changeUri(uri, methodContainerMap);
 		
 //		System.out.println("uri: " + uri);
-		System.out.println(methodContainerMap);
-		ServletContainer scont = methodContainerMap.get(uri);
+//		System.out.println(methodContainerMap);
+//		ServletContainer scont = methodContainerMap.get(uri);
 //		Object[] parameters = new Object[scont.getParameterTypes().length];
 //		
 //		getParametersForInvokeMethod(scont);
@@ -45,6 +50,31 @@ public class MethodDispatcher {
 //		System.out.println("mc: " + mc);
 //		System.out.println(mc.getUrl() + " : " + mc.getMethod().getName());
 
+		
+		
+		
+		
+		
+		HttpClient httpClient = (HttpClient) sc.getAttribute("httpClient");
+		
+		HttpGet req = new HttpGet("");
+
+		try {
+			HttpResponse res = httpClient.execute(req);
+			HttpEntity entity = res.getEntity();
+
+			// Read the contents of an entity and return it as a String.
+			String content = EntityUtils.toString(entity);
+			System.out.println(content);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
 		System.out.println("request.getRequestURI(): " + request.getRequestURI());
 	}
 	
