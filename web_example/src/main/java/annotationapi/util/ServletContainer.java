@@ -36,7 +36,7 @@ public class ServletContainer {
 		return parameterTypes;
 	}
 
-	public Map<String, Annotation> mapAnnotationForMethodParameters() {
+	public Map<String, Annotation> getMapAnnotForMethodParams() {
 		return mapOfAnnotations;
 	}
 

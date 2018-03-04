@@ -1,5 +1,6 @@
 package annotationapi.util;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
@@ -30,10 +31,9 @@ public class MethodDispatcher {
 //		System.out.println("uri: " + uri);
 		System.out.println(methodContainerMap);
 		ServletContainer scont = methodContainerMap.get(uri);
-		System.out.println("map annotation: " + scont.mapAnnotationForMethodParameters());
 //		Object[] parameters = new Object[scont.getParameterTypes().length];
 //		
-//		
+		getParametersForInvokeMethod(scont);
 //		scont.getMethod().invoke(scont.getServletClass().newInstance(), session);
 //		String lang = session.getAttribute("language").toString();
 //		System.out.println(lang);
@@ -41,6 +41,21 @@ public class MethodDispatcher {
 //		System.out.println(mc.getUrl() + " : " + mc.getMethod().getName());
 
 		System.out.println("request.getRequestURI(): " + request.getRequestURI());
+	}
+	
+	private Object[] getParametersForInvokeMethod(ServletContainer scont) {
+		int i = 0;
+		Map<String, Annotation> map = scont.getMapAnnotForMethodParams();
+		Class<?>[] paramType = scont.getParameterTypes();
+		for (int j = 0; j < paramType.length; j++) {
+			System.out.println(paramType[j]);
+		}
+		return null;
+	}
+	
+	private Object getParameter(Map.Entry<String, Annotation> keyAndValue) {
+//		if (keyAndValue.getKey().endsWith(suffix)) {}
+		return null;
 	}
 
 	private String changeUri(String uri, Map<String, ServletContainer> methodContainerMap) {
