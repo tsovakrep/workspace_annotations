@@ -18,10 +18,10 @@ public class DefaultController {
 	
 	@GetMapping("callMethod")
 	public ResponseEntity<?> loadHomePage(
-			@ReqParam(value = "userName", defaultValue = "Tsovak") Void value, 
-			@ReqParam(value = "userName", defaultValue = "Tsovak") Date value2,
+			@ReqParam(value = "userName", defaultValue = "Tsovak") String value, 
+			@ReqParam(value = "userName", defaultValue = "Tsovak") String value2,
 			@PathVariable("name") String name, 
-			@ReqBody Integer body,
+			@ReqBody String body,
 			HttpSession session) {
 		
 		loadLanguage(session);

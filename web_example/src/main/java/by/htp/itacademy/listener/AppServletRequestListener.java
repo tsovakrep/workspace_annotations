@@ -22,11 +22,12 @@ public class AppServletRequestListener implements ServletRequestListener {
 
 	@Override
 	public void requestInitialized(ServletRequestEvent sre) {
-//		ServletContext servletContext = sre.getServletContext();
-//		HttpClient httpClient = (HttpClient) servletContext.getAttribute("httpClient");
-//		
-//		HttpGet request = new HttpGet("");
-//
+		ServletContext servletContext = sre.getServletContext();
+		HttpClient httpClient = (HttpClient) servletContext.getAttribute("httpClient");
+		System.out.println(httpClient);
+		
+		HttpGet request = new HttpGet("");
+
 //		try {
 //			HttpResponse response = httpClient.execute(request);
 //			HttpEntity entity = response.getEntity();

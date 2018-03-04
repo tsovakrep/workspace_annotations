@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.client.HttpClient;
+
+import annotationapi.annotation.PathVariable;
+import annotationapi.annotation.ReqBody;
+import annotationapi.annotation.ReqParam;
 import by.htp.itacademy.controller.DefaultController;
 
 public class MethodDispatcher {
@@ -33,7 +38,7 @@ public class MethodDispatcher {
 		ServletContainer scont = methodContainerMap.get(uri);
 //		Object[] parameters = new Object[scont.getParameterTypes().length];
 //		
-		getParametersForInvokeMethod(scont);
+//		getParametersForInvokeMethod(scont);
 //		scont.getMethod().invoke(scont.getServletClass().newInstance(), session);
 //		String lang = session.getAttribute("language").toString();
 //		System.out.println(lang);
@@ -43,14 +48,25 @@ public class MethodDispatcher {
 		System.out.println("request.getRequestURI(): " + request.getRequestURI());
 	}
 	
-	private Object[] getParametersForInvokeMethod(ServletContainer scont) {
+	private Object[] getParametersForInvokeMethod(ServletContainer scont, HttpServletRequest request) {
 		int i = 0;
 		Map<String, Annotation> map = scont.getMapAnnotForMethodParams();
 		Class<?>[] paramType = scont.getParameterTypes();
+		Object[] parameters = new Object[paramType.length];
 		for (int j = 0; j < paramType.length; j++) {
-			System.out.println(paramType[j]);
+			String arg = String.valueOf("arg" + j);
+			if (map.containsKey(String.valueOf(arg))) {
+				if (ReqParam.class.getTypeName().equals(map.get(arg).getClass().getTypeName())) {
+					ReqParam reqParam = (ReqParam) map.get(arg);
+					parameters[j] = reqParam.value();
+				} else if (PathVariable.class.getTypeName().equals(map.get(arg).getClass().getTypeName())) {
+					parameters[j] = pathVariableValue;
+				} else if (ReqBody.class.getTypeName().equals(map.get(arg).getClass().getTypeName())) {
+					//parameters[j] = request.
+				}
+			}
 		}
-		return null;
+		return parameters;
 	}
 	
 	private Object getParameter(Map.Entry<String, Annotation> keyAndValue) {
