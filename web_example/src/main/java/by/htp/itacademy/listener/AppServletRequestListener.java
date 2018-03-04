@@ -24,20 +24,19 @@ public class AppServletRequestListener implements ServletRequestListener {
 	public void requestInitialized(ServletRequestEvent sre) {
 		ServletContext servletContext = sre.getServletContext();
 		HttpClient httpClient = (HttpClient) servletContext.getAttribute("httpClient");
-		System.out.println(httpClient);
 		
 		HttpGet request = new HttpGet("");
 
-//		try {
-//			HttpResponse response = httpClient.execute(request);
-//			HttpEntity entity = response.getEntity();
-//
-//			// Read the contents of an entity and return it as a String.
-//			String content = EntityUtils.toString(entity);
-//			System.out.println(content);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			HttpResponse response = httpClient.execute(request);
+			HttpEntity entity = response.getEntity();
+
+			// Read the contents of an entity and return it as a String.
+			String content = EntityUtils.toString(entity);
+			System.out.println(content);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		
 		

@@ -31,7 +31,7 @@ public class AppServletContextListener implements ServletContextListener {
 		ServletContext context = sce.getServletContext();
 		context.setAttribute("annotationfinder", getAnnotationFinder(context));
 		context.setAttribute("pages", getPages(context));
-		context.setAttribute("httpclient", getHttpClient());
+		context.setAttribute("httpClient", getHttpClient());
 		
 		System.out.println("context initilized");
 	}
