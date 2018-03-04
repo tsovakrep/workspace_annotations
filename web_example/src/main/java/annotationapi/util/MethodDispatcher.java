@@ -50,31 +50,6 @@ public class MethodDispatcher {
 //		System.out.println("mc: " + mc);
 //		System.out.println(mc.getUrl() + " : " + mc.getMethod().getName());
 
-		
-		
-		
-		
-		
-		HttpClient httpClient = (HttpClient) sc.getAttribute("httpClient");
-		
-		HttpGet req = new HttpGet("");
-
-		try {
-			HttpResponse res = httpClient.execute(req);
-			HttpEntity entity = res.getEntity();
-
-			// Read the contents of an entity and return it as a String.
-			String content = EntityUtils.toString(entity);
-			System.out.println(content);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		
-		
-		
-		
-		
 		System.out.println("request.getRequestURI(): " + request.getRequestURI());
 	}
 	

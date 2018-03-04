@@ -1,7 +1,5 @@
 package by.htp.itacademy.controller;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpSession;
 
 import annotationapi.annotation.Controller;
