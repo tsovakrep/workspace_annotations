@@ -15,6 +15,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.util.EntityUtils;
 
 @WebListener
@@ -22,21 +23,7 @@ public class AppServletRequestListener implements ServletRequestListener {
 
 	@Override
 	public void requestInitialized(ServletRequestEvent sre) {
-		ServletContext servletContext = sre.getServletContext();
-		HttpClient httpClient = (HttpClient) servletContext.getAttribute("httpClient");
-		
-		HttpGet request = new HttpGet();
 
-		try {
-			HttpResponse response = httpClient.execute(request);
-			HttpEntity entity = response.getEntity();
-
-			// Read the contents of an entity and return it as a String.
-			String content = EntityUtils.toString(entity);
-			System.out.println(content);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
 		
 		
