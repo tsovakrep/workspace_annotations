@@ -28,6 +28,7 @@ public class DefaultController {
 		System.out.println(value2);
 		System.out.println(name);
 		System.out.println(user);
+		System.out.println(session.getAttribute("language"));
 		
 		loadLanguage(session);
 		return new ResponseEntity<>("index4");

@@ -22,7 +22,6 @@ import chaincasttype.FacadeCast;
 
 public class MethodDispatcher {
 	
-	private boolean isPathVariable = false;
 	private String pathVariableValue;
 	
 	private static final Gson gson = new Gson();
@@ -32,7 +31,6 @@ public class MethodDispatcher {
 
 		ServletContext sc = request.getServletContext();
 		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
-		HttpSession session = request.getSession();
 		Map<String, ServletContainer> methodContainerMap = af.getMethodContainer();
 
 		String uri = request.getRequestURI();
@@ -46,14 +44,10 @@ public class MethodDispatcher {
 		try {
 			parameters = getParametersForInvokeMethod(scont, request);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		scont.getMethod().invoke(scont.getServletClass().newInstance(), parameters);
-
-//		String lang = session.getAttribute("language").toString();
-//		System.out.println(lang);
 	}
 	
 	private Object[] getParametersForInvokeMethod(ServletContainer scont, HttpServletRequest request) 
@@ -76,7 +70,7 @@ public class MethodDispatcher {
 					String jsonString = gson.toJson(new User("Tsovak Palakian", 29));//getJsonString(request);
 					methodParameters[j] = gson.fromJson(jsonString, params[j].getType());
 				}
-			} else if (HttpSession.class.getName().equals(params[j].getName())) {
+			} else if (HttpSession.class.getName().equals(params[j].getType().getName())) {
 				methodParameters[j] = request.getSession();
 			}
 		}
@@ -94,7 +88,6 @@ public class MethodDispatcher {
 			
 			String mehtSub = meth.getKey().substring(0, index);
 			if (uri.contains(mehtSub)) {
-				isPathVariable = true;
 				pathVariableValue = uri.substring(index);
 				System.out.println("pathVariableValue: " + pathVariableValue);
 				return meth.getKey();
