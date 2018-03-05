@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import annotationapi.annotation.PathVariable;
 import annotationapi.annotation.ReqBody;
@@ -39,15 +40,22 @@ public class MethodDispatcher {
 		System.out.println("uri: " + uri);
 		System.out.println(methodContainerMap);
 		ServletContainer scont = methodContainerMap.get(uri);
-		Object[] parameters = getParametersForInvokeMethod(scont, request);
+		Object[] parameters = null;
+		try {
+			parameters = getParametersForInvokeMethod(scont, request);
+		} catch (JsonSyntaxException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		scont.getMethod().invoke(scont.getServletClass().newInstance(), parameters);
 
-//		String lang = session.getAttribute("language").toString();
-//		System.out.println(lang);
+		String lang = session.getAttribute("language").toString();
+		System.out.println(lang);
 	}
 	
-	private Object[] getParametersForInvokeMethod(ServletContainer scont, HttpServletRequest request) {
+	private Object[] getParametersForInvokeMethod(ServletContainer scont, HttpServletRequest request) 
+			throws JsonSyntaxException, ClassNotFoundException {
 		Map<String, Annotation> map = scont.getMapAnnotForMethodParams();
 		Class<?>[] paramType = scont.getParameterTypes();
 		Object[] methodParameters = new Object[paramType.length];
@@ -61,8 +69,7 @@ public class MethodDispatcher {
 					methodParameters[j] = pathVariableValue;
 				} else if (ReqBody.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {
 					String jsonStr = getJsonString(request);
-					System.out.println("paramType[j].getClass(): " + paramType[j].getClass());
-					methodParameters[j] = null;//gson.fromJson(jsonStr, paramType[j].getClass());
+					methodParameters[j] = gson.fromJson(jsonStr, Class.forName(paramType[j].getTypeName()));
 				}
 			} else if (HttpSession.class.getName().equals(paramType[j].getName())) {
 				methodParameters[j] = request.getSession();

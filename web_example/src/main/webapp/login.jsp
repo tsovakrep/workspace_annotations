@@ -10,7 +10,7 @@
 <title>Demo</title>
 </head>
 <body>
-	<form action="simple/welcome/Tsovak" method="post">
+	<form action="welcome/Tsovak" method="post">
 		Name:<input type="text" name="userName" /><br /> 
 		<input type="submit" value="post" />
 	</form>

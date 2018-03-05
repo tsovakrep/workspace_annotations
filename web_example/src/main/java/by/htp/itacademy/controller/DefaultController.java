@@ -16,7 +16,7 @@ import annotationapi.util.User;
 @Mapping("/")
 public class DefaultController {
 	
-	@PostMapping("callMethod")
+	@PostMapping("welcome/{user}")
 	public ResponseEntity<?> loadHomePage(
 			@ReqParam(value = "userName", defaultValue = "Tsovak") String value, 
 			@ReqParam(value = "userName", defaultValue = "Tsovak") String value2,
