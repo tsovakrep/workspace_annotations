@@ -3,7 +3,6 @@ package by.htp.itacademy.controller;
 import javax.servlet.http.HttpSession;
 
 import annotationapi.annotation.Controller;
-import annotationapi.annotation.GetMapping;
 import annotationapi.annotation.Mapping;
 import annotationapi.annotation.PathVariable;
 import annotationapi.annotation.PostMapping;
