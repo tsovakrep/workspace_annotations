@@ -52,8 +52,8 @@ public class MethodDispatcher {
 		
 		scont.getMethod().invoke(scont.getServletClass().newInstance(), parameters);
 
-		String lang = session.getAttribute("language").toString();
-		System.out.println(lang);
+//		String lang = session.getAttribute("language").toString();
+//		System.out.println(lang);
 	}
 	
 	private Object[] getParametersForInvokeMethod(ServletContainer scont, HttpServletRequest request) 
@@ -66,9 +66,10 @@ public class MethodDispatcher {
 			if (map.containsKey(String.valueOf(arg))) {
 				if (ReqParam.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {
 					ReqParam reqParam = (ReqParam) map.get(arg);
-					//System.out.println("request.getParameter(reqParam.value()): " + request.getParameter(reqParam.value()));
-					methodParameters[j] = reqParam.value();
-					//methodParameters[j] = FacadeCast.getCastChain().getValue(params[j].getType(), );
+					String requestParameterValue = request.getParameter(reqParam.value());
+					if (requestParameterValue != null) {
+						methodParameters[j] = FacadeCast.getCastChain().getValue(params[j].getType(), request.getParameter(reqParam.value()));
+					}
 				} else if (PathVariable.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {
 					methodParameters[j] = pathVariableValue;
 				} else if (ReqBody.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {
