@@ -22,7 +22,7 @@ import chaincasttype.FacadeCast;
 
 public class MethodDispatcher {
 	
-	private static final Gson gson = new Gson();
+	private String pathVariableValue;
 
 	public void callMethod(HttpServletRequest request, HttpServletResponse response) 
 			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException {
@@ -32,11 +32,8 @@ public class MethodDispatcher {
 		Map<String, ServletContainer> methodContainerMap = af.getMethodContainer();
 
 		String uri = request.getRequestURI();
-		
 		uri = changeUri(uri, methodContainerMap);
 		
-		System.out.println("uri: " + uri);
-		System.out.println(methodContainerMap);
 		ServletContainer scont = methodContainerMap.get(uri);
 		Object[] parameters = null;
 		try {
@@ -65,6 +62,7 @@ public class MethodDispatcher {
 				} else if (PathVariable.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {
 					methodParameters[j] = pathVariableValue;
 				} else if (ReqBody.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {
+					Gson gson = new Gson();
 					String jsonString = gson.toJson(new User("Tsovak Palakian", 29));//getJsonString(request);
 					methodParameters[j] = gson.fromJson(jsonString, params[j].getType());
 				}
@@ -86,17 +84,13 @@ public class MethodDispatcher {
 			
 			String mehtSub = meth.getKey().substring(0, index);
 			if (uri.contains(mehtSub)) {
-				pathVariableValue(uri, index);
+				pathVariableValue = uri.substring(index);
 				return meth.getKey();
 			}
 		}
 		return uri;
 	}
-	
-	private String pathVariableValue(String uri, int index) {
-		return uri.substring(index);
-	}
-	
+		
 	private String getJsonString(HttpServletRequest request) {
 		InputStream body = null;
 		StringBuilder buf = new StringBuilder(512);
