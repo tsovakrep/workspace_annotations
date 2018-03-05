@@ -22,8 +22,6 @@ import chaincasttype.FacadeCast;
 
 public class MethodDispatcher {
 	
-	private String pathVariableValue;
-	
 	private static final Gson gson = new Gson();
 
 	public void callMethod(HttpServletRequest request, HttpServletResponse response) 
@@ -88,12 +86,15 @@ public class MethodDispatcher {
 			
 			String mehtSub = meth.getKey().substring(0, index);
 			if (uri.contains(mehtSub)) {
-				pathVariableValue = uri.substring(index);
-				System.out.println("pathVariableValue: " + pathVariableValue);
+				pathVariableValue(uri, index);
 				return meth.getKey();
 			}
 		}
 		return uri;
+	}
+	
+	private String pathVariableValue(String uri, int index) {
+		return uri.substring(index);
 	}
 	
 	private String getJsonString(HttpServletRequest request) {

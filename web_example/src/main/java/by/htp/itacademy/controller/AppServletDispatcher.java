@@ -20,6 +20,8 @@ import annotationapi.util.*;
 
 @SuppressWarnings("serial")
 public class AppServletDispatcher extends HttpServlet {
+	
+	private static final MethodDispatcher METHOD_DISPATCHER = new MethodDispatcher();
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -27,7 +29,7 @@ public class AppServletDispatcher extends HttpServlet {
 			throws ServletException, IOException {
 		
 		try {
-			new MethodDispatcher().callMethod(request, response);
+			METHOD_DISPATCHER.callMethod(request, response);
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| InstantiationException e) {
 			// TODO Auto-generated catch block
@@ -50,7 +52,7 @@ public class AppServletDispatcher extends HttpServlet {
 			throws ServletException, IOException {	
 
 		try {
-			new MethodDispatcher().callMethod(request, response);
+			METHOD_DISPATCHER.callMethod(request, response);
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| InstantiationException e) {
 			// TODO Auto-generated catch block
