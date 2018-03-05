@@ -21,8 +21,7 @@ public class DefaultController {
 			@PathVariable("name") String name, 
 			@ReqBody String body,
 			HttpSession session) {
-		session.setAttribute("love", "I love you Irina");
-		
+				
 		System.out.println(value);
 		System.out.println(value2);
 		System.out.println(name);
