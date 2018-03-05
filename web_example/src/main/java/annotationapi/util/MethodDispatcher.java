@@ -1,6 +1,7 @@
 package annotationapi.util;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
@@ -16,6 +17,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.util.EntityUtils;
 
+import com.google.gson.Gson;
+
 import annotationapi.annotation.PathVariable;
 import annotationapi.annotation.ReqBody;
 import annotationapi.annotation.ReqParam;
@@ -25,6 +28,8 @@ public class MethodDispatcher {
 	
 	private boolean isPathVariable = false;
 	private String pathVariableValue;
+	
+	private static final Gson gson = new Gson();
 
 	public void callMethod(HttpServletRequest request, HttpServletResponse response) 
 			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException {
@@ -67,7 +72,8 @@ public class MethodDispatcher {
 				} else if (PathVariable.class.getTypeName().equals(map.get(arg).getClass().getTypeName())) {
 					parameters[j] = pathVariableValue;
 				} else if (ReqBody.class.getTypeName().equals(map.get(arg).getClass().getTypeName())) {
-					//parameters[j] = request.
+					String 
+					parameters[j] = 
 				} else if (HttpSession.class.getName().equals(map.get(arg).getClass().getName())) {
 					parameters[j] = request.getSession();
 				}
@@ -99,5 +105,21 @@ public class MethodDispatcher {
 			}
 		}
 		return uri;
+	}
+	
+	private String getJsonString(HttpServletRequest request) throws IOException {
+		InputStream body = null;
+		StringBuilder buf = new StringBuilder(512);
+		try {
+			body = request.getInputStream();
+			
+			int b;
+			while ((b = body.read()) != -1) {
+				buf.append((char) b);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return buf.toString();
 	}
 }
