@@ -54,7 +54,7 @@ public class MethodDispatcher {
 		for (int j = 0; j < paramType.length; j++) {
 			String arg = String.valueOf("arg" + j);
 			if (map.containsKey(String.valueOf(arg))) {
-				System.out.println("map.get(arg): " + map.get(arg));
+				System.out.println("map.get(arg): " + map.get(arg).getClass().getCanonicalName());
 				if (ReqParam.class.getTypeName().equals(map.get(arg).getClass().getTypeName())) {
 					ReqParam reqParam = (ReqParam) map.get(arg);
 					methodParameters[j] = reqParam.value();
@@ -67,7 +67,7 @@ public class MethodDispatcher {
 			} else if (HttpSession.class.getName().equals(paramType[j].getName())) {
 				methodParameters[j] = request.getSession();
 			}
-			
+			//System.out.println("methodParameters[j]: " + methodParameters[j]);
 		}
 		return methodParameters;
 	}
