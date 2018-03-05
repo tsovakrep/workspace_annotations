@@ -17,6 +17,7 @@ import com.google.gson.JsonSyntaxException;
 import annotationapi.annotation.PathVariable;
 import annotationapi.annotation.ReqBody;
 import annotationapi.annotation.ReqParam;
+import chaincasttype.FacadeCast;
 
 public class MethodDispatcher {
 	
@@ -43,7 +44,7 @@ public class MethodDispatcher {
 		Object[] parameters = null;
 		try {
 			parameters = getParametersForInvokeMethod(scont, request);
-		} catch (JsonSyntaxException | ClassNotFoundException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -55,7 +56,7 @@ public class MethodDispatcher {
 	}
 	
 	private Object[] getParametersForInvokeMethod(ServletContainer scont, HttpServletRequest request) 
-			throws JsonSyntaxException, ClassNotFoundException {
+			throws Exception {
 		Map<String, Annotation> map = scont.getMapAnnotForMethodParams();
 		Class<?>[] paramType = scont.getParameterTypes();
 		Object[] methodParameters = new Object[paramType.length];
@@ -64,7 +65,7 @@ public class MethodDispatcher {
 			if (map.containsKey(String.valueOf(arg))) {
 				if (ReqParam.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {
 					ReqParam reqParam = (ReqParam) map.get(arg);
-					methodParameters[j] = reqParam.value();
+					methodParameters[j] = FacadeCast.getCastChain().getValue(Class.forName(paramType[j].getTypeName()), request.getParameter(reqParam.value()));//;
 				} else if (PathVariable.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {
 					methodParameters[j] = pathVariableValue;
 				} else if (ReqBody.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {

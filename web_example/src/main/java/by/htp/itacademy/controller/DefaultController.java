@@ -19,7 +19,7 @@ public class DefaultController {
 	@PostMapping("welcome/{user}")
 	public ResponseEntity<?> loadHomePage(
 			@ReqParam(value = "userName", defaultValue = "Tsovak") String value, 
-			@ReqParam(value = "userName", defaultValue = "Tsovak") String value2,
+			@ReqParam(value = "userName1", defaultValue = "Tsovak") String value2,
 			@PathVariable("name") String name, 
 			@ReqBody User user,
 			HttpSession session) {
