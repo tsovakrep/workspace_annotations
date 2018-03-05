@@ -21,13 +21,13 @@ public class DefaultController {
 			@ReqParam(value = "userName", defaultValue = "Tsovak") String value, 
 			@ReqParam(value = "userName", defaultValue = "Tsovak") String value2,
 			@PathVariable("name") String name, 
-			@ReqBody User body,
+			@ReqBody User user,
 			HttpSession session) {
 				
 		System.out.println(value);
 		System.out.println(value2);
 		System.out.println(name);
-		System.out.println(body);
+		System.out.println(user);
 		
 		loadLanguage(session);
 		return new ResponseEntity<>("index4");

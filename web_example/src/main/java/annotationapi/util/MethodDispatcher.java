@@ -68,8 +68,8 @@ public class MethodDispatcher {
 				} else if (PathVariable.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {
 					methodParameters[j] = pathVariableValue;
 				} else if (ReqBody.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {
-					String jsonStr = getJsonString(request);
-					methodParameters[j] = gson.fromJson(jsonStr, Class.forName(paramType[j].getTypeName()));
+					String jsonString = getJsonString(request);
+					//methodParameters[j] = gson.fromJson(jsonString, Class.forName(paramType[j].getTypeName()));
 				}
 			} else if (HttpSession.class.getName().equals(paramType[j].getName())) {
 				methodParameters[j] = request.getSession();
