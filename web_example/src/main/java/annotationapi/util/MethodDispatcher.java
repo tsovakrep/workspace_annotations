@@ -66,11 +66,12 @@ public class MethodDispatcher {
 			if (map.containsKey(String.valueOf(arg))) {
 				if (ReqParam.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {
 					ReqParam reqParam = (ReqParam) map.get(arg);
-					methodParameters[j] = FacadeCast.getCastChain().getValue(params[j].getType(), request.getParameter(reqParam.value()));//;
+					//System.out.println("request.getParameter(reqParam.value()): " + request.getParameter(reqParam.value()));
+					methodParameters[j] = reqParam.value();
+					//methodParameters[j] = FacadeCast.getCastChain().getValue(params[j].getType(), );
 				} else if (PathVariable.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {
 					methodParameters[j] = pathVariableValue;
 				} else if (ReqBody.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {
-					
 					String jsonString = gson.toJson(new User("Tsovak Palakian", 29));//getJsonString(request);
 					methodParameters[j] = gson.fromJson(jsonString, params[j].getType());
 				}
