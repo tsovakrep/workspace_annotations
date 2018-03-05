@@ -70,7 +70,8 @@ public class MethodDispatcher {
 				} else if (PathVariable.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {
 					methodParameters[j] = pathVariableValue;
 				} else if (ReqBody.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {
-					String jsonString = getJsonString(request);
+					
+					String jsonString = gson.toJson(new User("Tsovak Palakian", 29));//getJsonString(request);
 					methodParameters[j] = gson.fromJson(jsonString, params[j].getType());
 				}
 			} else if (HttpSession.class.getName().equals(params[j].getName())) {
