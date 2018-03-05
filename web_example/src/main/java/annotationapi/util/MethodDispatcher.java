@@ -41,35 +41,35 @@ public class MethodDispatcher {
 		ServletContainer scont = methodContainerMap.get(uri);
 		Object[] parameters = getParametersForInvokeMethod(scont, request);
 		
-//		scont.getMethod().invoke(scont.getServletClass().newInstance(), parameters);
+		scont.getMethod().invoke(scont.getServletClass().newInstance(), parameters);
 
-//		String lang = session.getAttribute("language").toString();
-//		System.out.println(lang);
+		String lang = session.getAttribute("language").toString();
+		System.out.println(lang);
 	}
 	
 	private Object[] getParametersForInvokeMethod(ServletContainer scont, HttpServletRequest request) {
 		Map<String, Annotation> map = scont.getMapAnnotForMethodParams();
 		Class<?>[] paramType = scont.getParameterTypes();
-		Object[] parameters = new Object[paramType.length];
+		Object[] methodParameters = new Object[paramType.length];
 		for (int j = 0; j < paramType.length; j++) {
-			System.out.println("paramType[j]: " + paramType[j].getName() + "\n");
 			String arg = String.valueOf("arg" + j);
 			if (map.containsKey(String.valueOf(arg))) {
 				System.out.println("map.get(arg): " + map.get(arg));
 				if (ReqParam.class.getTypeName().equals(map.get(arg).getClass().getTypeName())) {
 					ReqParam reqParam = (ReqParam) map.get(arg);
-					parameters[j] = reqParam.value();
+					methodParameters[j] = reqParam.value();
 				} else if (PathVariable.class.getTypeName().equals(map.get(arg).getClass().getTypeName())) {
-					parameters[j] = pathVariableValue;
+					methodParameters[j] = pathVariableValue;
 				} else if (ReqBody.class.getTypeName().equals(map.get(arg).getClass().getTypeName())) {
 					String jsonStr = getJsonString(request);
-					parameters[j] = gson.fromJson(jsonStr, map.get(arg).getClass());
-				} else if (HttpSession.class.getName().equals(map.get(arg).getClass().getName())) {
-					parameters[j] = request.getSession();
+					methodParameters[j] = gson.fromJson(jsonStr, map.get(arg).getClass());
 				}
+			} else if (HttpSession.class.getName().equals(paramType[j].getName())) {
+				methodParameters[j] = request.getSession();
 			}
+			
 		}
-		return parameters;
+		return methodParameters;
 	}
 	
 	private String changeUri(String uri, Map<String, ServletContainer> methodContainerMap) {
