@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Parameter;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -58,21 +59,21 @@ public class MethodDispatcher {
 	private Object[] getParametersForInvokeMethod(ServletContainer scont, HttpServletRequest request) 
 			throws Exception {
 		Map<String, Annotation> map = scont.getMapAnnotForMethodParams();
-		Class<?>[] paramType = scont.getParameterTypes();
-		Object[] methodParameters = new Object[paramType.length];
-		for (int j = 0; j < paramType.length; j++) {
+		Parameter[] params = scont.getParameters();
+		Object[] methodParameters = new Object[params.length];
+		for (int j = 0; j < params.length; j++) {
 			String arg = String.valueOf("arg" + j);
 			if (map.containsKey(String.valueOf(arg))) {
 				if (ReqParam.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {
 					ReqParam reqParam = (ReqParam) map.get(arg);
-					methodParameters[j] = FacadeCast.getCastChain().getValue(Class.forName(paramType[j].getTypeName()), request.getParameter(reqParam.value()));//;
+					methodParameters[j] = FacadeCast.getCastChain().getValue(params[j].getType(), request.getParameter(reqParam.value()));//;
 				} else if (PathVariable.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {
 					methodParameters[j] = pathVariableValue;
 				} else if (ReqBody.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {
 					String jsonString = getJsonString(request);
-					//methodParameters[j] = gson.fromJson(jsonString, Class.forName(paramType[j].getTypeName()));
+					methodParameters[j] = gson.fromJson(jsonString, params[j].getType());
 				}
-			} else if (HttpSession.class.getName().equals(paramType[j].getName())) {
+			} else if (HttpSession.class.getName().equals(params[j].getName())) {
 				methodParameters[j] = request.getSession();
 			}
 		}

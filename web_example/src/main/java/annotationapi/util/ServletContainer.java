@@ -13,14 +13,14 @@ public class ServletContainer {
 	private Method method;
 	private HttpMethod httpMethod;
 	private Map<String, Annotation> mapOfAnnotations;
-	private Class<?>[] parameterTypes;
+	private Parameter[] parameters;
 
 	public ServletContainer(String url, Class<?> servletClass, Method method, HttpMethod httpMethod) {
 		this.url = url;
 		this.servletClass = servletClass;
 		this.method = method;
 		this.httpMethod = httpMethod;
-		this.parameterTypes = method.getParameterTypes();
+		this.parameters = method.getParameters();
 		this.mapOfAnnotations = mapOfAnnotations();
 	}
 	
@@ -32,8 +32,8 @@ public class ServletContainer {
 		return method;
 	}
 
-	public Class<?>[] getParameterTypes() {
-		return parameterTypes;
+	public Parameter[] getParameters() {
+		return parameters;
 	}
 
 	public Map<String, Annotation> getMapAnnotForMethodParams() {
