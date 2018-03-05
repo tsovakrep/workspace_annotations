@@ -11,18 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.util.EntityUtils;
-
 import com.google.gson.Gson;
 
 import annotationapi.annotation.PathVariable;
 import annotationapi.annotation.ReqBody;
 import annotationapi.annotation.ReqParam;
-import by.htp.itacademy.controller.DefaultController;
 
 public class MethodDispatcher {
 	
@@ -35,31 +28,26 @@ public class MethodDispatcher {
 			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException {
 
 		ServletContext sc = request.getServletContext();
-//		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
-//		HttpSession session = request.getSession();
-//		Map<String, ServletContainer> methodContainerMap = af.getMethodContainer();
-//
-//		String uri = request.getRequestURI();
-//		
-//		uri = changeUri(uri, methodContainerMap);
-		
-//		System.out.println("uri: " + uri);
-//		System.out.println(methodContainerMap);
-//		ServletContainer scont = methodContainerMap.get(uri);
-//		Object[] parameters = new Object[scont.getParameterTypes().length];
-//		
-//		getParametersForInvokeMethod(scont);
-//		scont.getMethod().invoke(scont.getServletClass().newInstance(), session);
-//		String lang = session.getAttribute("language").toString();
-//		System.out.println(lang);
-//		System.out.println("mc: " + mc);
-//		System.out.println(mc.getUrl() + " : " + mc.getMethod().getName());
+		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
+		HttpSession session = request.getSession();
+		Map<String, ServletContainer> methodContainerMap = af.getMethodContainer();
 
-		System.out.println("request.getRequestURI(): " + request.getRequestURI());
+		String uri = request.getRequestURI();
+		
+		uri = changeUri(uri, methodContainerMap);
+		
+		System.out.println("uri: " + uri);
+		System.out.println(methodContainerMap);
+		ServletContainer scont = methodContainerMap.get(uri);
+		Object[] parameters = getParametersForInvokeMethod(scont, request);
+		
+		scont.getMethod().invoke(scont.getServletClass().newInstance(), parameters);
+
+		String lang = session.getAttribute("language").toString();
+		System.out.println(lang);
 	}
 	
 	private Object[] getParametersForInvokeMethod(ServletContainer scont, HttpServletRequest request) {
-		int i = 0;
 		Map<String, Annotation> map = scont.getMapAnnotForMethodParams();
 		Class<?>[] paramType = scont.getParameterTypes();
 		Object[] parameters = new Object[paramType.length];
@@ -72,8 +60,8 @@ public class MethodDispatcher {
 				} else if (PathVariable.class.getTypeName().equals(map.get(arg).getClass().getTypeName())) {
 					parameters[j] = pathVariableValue;
 				} else if (ReqBody.class.getTypeName().equals(map.get(arg).getClass().getTypeName())) {
-					String 
-					parameters[j] = 
+					String jsonStr = getJsonString(request);
+					parameters[j] = gson.fromJson(jsonStr, map.get(arg).getClass());
 				} else if (HttpSession.class.getName().equals(map.get(arg).getClass().getName())) {
 					parameters[j] = request.getSession();
 				}
@@ -82,11 +70,6 @@ public class MethodDispatcher {
 		return parameters;
 	}
 	
-	private Object getParameter(Map.Entry<String, Annotation> keyAndValue) {
-//		if (keyAndValue.getKey().endsWith(suffix)) {}
-		return null;
-	}
-
 	private String changeUri(String uri, Map<String, ServletContainer> methodContainerMap) {
 		
 		for (Map.Entry<String, ServletContainer> meth : methodContainerMap.entrySet()) {
@@ -107,7 +90,7 @@ public class MethodDispatcher {
 		return uri;
 	}
 	
-	private String getJsonString(HttpServletRequest request) throws IOException {
+	private String getJsonString(HttpServletRequest request) {
 		InputStream body = null;
 		StringBuilder buf = new StringBuilder(512);
 		try {

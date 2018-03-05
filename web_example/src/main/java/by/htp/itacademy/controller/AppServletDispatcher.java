@@ -26,21 +26,6 @@ public class AppServletDispatcher extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-//		InputStream body = request.getInputStream();
-//
-//		int b;
-//		StringBuilder buf = new StringBuilder(512);
-//		while ((b = body.read()) != -1) {
-//			buf.append((char) b);
-//		}
-//		
-//		System.out.println(buf);
-		
-		User user = new User();
-		ObjectMapper om = new ObjectMapper();
-		String strOb = om.writeValueAsString(user);
-		System.out.println(strOb);
-		
 		try {
 			new MethodDispatcher().callMethod(request, response);
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
@@ -62,18 +47,7 @@ public class AppServletDispatcher extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-//		InputStream body = request.getInputStream();
-//
-//		int b;
-//		StringBuilder buf = new StringBuilder(512);
-//		while ((b = body.read()) != -1) {
-//			buf.append((char) b);
-//		}
-//		
-//		System.out.println(buf);
-		
+			throws ServletException, IOException {	
 
 		try {
 			new MethodDispatcher().callMethod(request, response);
