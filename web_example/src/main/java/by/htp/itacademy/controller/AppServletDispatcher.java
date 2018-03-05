@@ -48,12 +48,13 @@ public class AppServletDispatcher extends HttpServlet {
 	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		callMethod(request, response);
 	}
 
 	@Override
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		callMethod(request, response);
 	}
 	
 	private void callMethod(HttpServletRequest request, HttpServletResponse response) {

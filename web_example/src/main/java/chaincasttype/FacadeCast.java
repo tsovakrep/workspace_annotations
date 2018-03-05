@@ -17,8 +17,6 @@ public class FacadeCast {
 	private static final CastChain INTEGER_CAST = new IntegerCast();
 	private static final CastChain DOUBLE_CAST = new DoubleCast();
 	private static final CastChain BYTE_CAST = new ByteCast();
-	private static final CastChain CONTROLLER_CAST = new ControllerCast();
-	
 	
 	private static final List<CastChain> CAST_CHAINS = new ArrayList<>();
 	static {
@@ -26,7 +24,6 @@ public class FacadeCast {
 		CAST_CHAINS.add(INTEGER_CAST);
 		CAST_CHAINS.add(DOUBLE_CAST);
 		CAST_CHAINS.add(BYTE_CAST);
-		CAST_CHAINS.add(CONTROLLER_CAST);
 	}
 	public static CastChain getCastChain() throws Exception {
 		

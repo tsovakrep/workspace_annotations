@@ -22,14 +22,15 @@ public class DefaultController {
 			@PathVariable("name") String name, 
 			@ReqBody User user,
 			HttpSession session) {
-				
-		System.out.println(value);
-		System.out.println(value2);
-		System.out.println(name);
-		System.out.println(user);
-		System.out.println(session.getAttribute("language"));
 		
-		loadLanguage(session);
+		loadLanguage(session);	
+//		System.out.println(value);
+//		System.out.println(value2);
+//		System.out.println(name);
+//		System.out.println(user);
+//		System.out.println(session.getAttribute("language"));
+		
+		
 		return new ResponseEntity<>("index4");
 	}
 	
