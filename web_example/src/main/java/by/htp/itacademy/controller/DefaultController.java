@@ -6,20 +6,22 @@ import annotationapi.annotation.Controller;
 import annotationapi.annotation.GetMapping;
 import annotationapi.annotation.Mapping;
 import annotationapi.annotation.PathVariable;
+import annotationapi.annotation.PostMapping;
 import annotationapi.annotation.ReqBody;
 import annotationapi.annotation.ReqParam;
 import annotationapi.util.ResponseEntity;
+import annotationapi.util.User;
 
 @Controller
 @Mapping("/")
 public class DefaultController {
 	
-	@GetMapping("callMethod")
+	@PostMapping("callMethod")
 	public ResponseEntity<?> loadHomePage(
 			@ReqParam(value = "userName", defaultValue = "Tsovak") String value, 
 			@ReqParam(value = "userName", defaultValue = "Tsovak") String value2,
 			@PathVariable("name") String name, 
-			@ReqBody String body,
+			@ReqBody User body,
 			HttpSession session) {
 				
 		System.out.println(value);

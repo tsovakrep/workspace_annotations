@@ -43,8 +43,8 @@ public class MethodDispatcher {
 		
 		scont.getMethod().invoke(scont.getServletClass().newInstance(), parameters);
 
-		String lang = session.getAttribute("language").toString();
-		System.out.println(lang);
+//		String lang = session.getAttribute("language").toString();
+//		System.out.println(lang);
 	}
 	
 	private Object[] getParametersForInvokeMethod(ServletContainer scont, HttpServletRequest request) {
@@ -61,7 +61,8 @@ public class MethodDispatcher {
 					methodParameters[j] = pathVariableValue;
 				} else if (ReqBody.class.getTypeName().equals(map.get(arg).annotationType().getTypeName())) {
 					String jsonStr = getJsonString(request);
-					methodParameters[j] = gson.fromJson(jsonStr, paramType[j].getClass());
+					System.out.println("paramType[j].getClass(): " + paramType[j].getClass());
+					methodParameters[j] = null;//gson.fromJson(jsonStr, paramType[j].getClass());
 				}
 			} else if (HttpSession.class.getName().equals(paramType[j].getName())) {
 				methodParameters[j] = request.getSession();
