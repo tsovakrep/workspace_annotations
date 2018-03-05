@@ -68,6 +68,8 @@ public class MethodDispatcher {
 					parameters[j] = pathVariableValue;
 				} else if (ReqBody.class.getTypeName().equals(map.get(arg).getClass().getTypeName())) {
 					//parameters[j] = request.
+				} else if (HttpSession.class.getName().equals(map.get(arg).getClass().getName())) {
+					parameters[j] = request.getSession();
 				}
 			}
 		}
