@@ -6,12 +6,10 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Parameter;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,7 +19,6 @@ import com.google.gson.Gson;
 import annotationapi.annotation.PathVariable;
 import annotationapi.annotation.ReqBody;
 import annotationapi.annotation.ReqParam;
-import by.htp.itacademy.controller.AppServletDispatcher;
 import chaincasttype.FacadeCast;
 
 public class MethodDispatcher {
