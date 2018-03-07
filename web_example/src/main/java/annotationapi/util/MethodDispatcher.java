@@ -35,8 +35,8 @@ public class MethodDispatcher {
 		ServletContext sc = request.getServletContext();
 		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
 		
-		ServletRegistration.Dynamic dynamic = sc.addServlet("dispatcher", AppServletDispatcher.class);
-		dynamic.addMapping("welcome/Tsovak");
+		ServletRegistration dynamic = sc.getServletRegistration("dispatcher");
+		dynamic.addMapping("/welcome/Tsovak");
 		
 		Map<String, ServletContainer> methodContainerMap = af.getMethodContainer();
 		String uri = request.getRequestURI();
