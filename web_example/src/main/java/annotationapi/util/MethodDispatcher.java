@@ -32,34 +32,7 @@ public class MethodDispatcher {
 			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException,
 			ServletException, IOException {
 
-		ServletContext sc = request.getServletContext();
-		Set<String> pages = (Set<String>) sc.getAttribute("pages");
-		ServletRegistration jsp = sc.getServletRegistration("jsp");
-		for (String string : pages) {
-			jsp.addMapping(string);
-		}
-
-//		ServletRegistration servlet1 = sc.getServletRegistration("dispatcher");
-//		servlet1.addMapping("/welcome/Tsovak");
-
-		for (Map.Entry<String, ? extends ServletRegistration> servlet : sc.getServletRegistrations().entrySet()) {
-			ServletRegistration servletReg = servlet.getValue();
-			// if (servletReg.getClassName().startsWith("by.htp")) {
-			System.out.println();
-			if (AppServletDispatcher.class.getName().equals(servlet.getValue().getClassName())) {
-				servletReg.addMapping("/go/ts");
-				servletReg.addMapping("/welcome");
-				servletReg.addMapping("/welcome/tsovak");
-				servletReg.addMapping("/welcome/palakian");
-				servletReg.addMapping("/callMethod/ts");
-			}
-			// }
-			System.out.println(servlet.getKey() + " : " + servletReg.getClassName());
-			for (String url : servletReg.getMappings()) {
-				System.out.println("url mapping" + " : " + url);
-			}
-		}
-		
+		ServletContext sc = request.getServletContext();	
 		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
 
 		Map<String, ServletContainer> methodContainerMap = af.getMethodContainer();
