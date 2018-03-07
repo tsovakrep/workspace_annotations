@@ -6,10 +6,12 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Parameter;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,6 +21,7 @@ import com.google.gson.Gson;
 import annotationapi.annotation.PathVariable;
 import annotationapi.annotation.ReqBody;
 import annotationapi.annotation.ReqParam;
+import by.htp.itacademy.controller.AppServletDispatcher;
 import chaincasttype.FacadeCast;
 
 public class MethodDispatcher {
@@ -29,7 +32,34 @@ public class MethodDispatcher {
 			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException,
 			ServletException, IOException {
 
-		ServletContext sc = request.getServletContext();	
+		ServletContext sc = request.getServletContext();
+//		Set<String> pages = (Set<String>) sc.getAttribute("pages");
+//		ServletRegistration jsp = sc.getServletRegistration("jsp");
+//		for (String string : pages) {
+//			jsp.addMapping(string);
+//		}
+//
+//		ServletRegistration servlet1 = sc.getServletRegistration("dispatcher");
+//		servlet1.addMapping("/welcome/Tsovak");
+
+		for (Map.Entry<String, ? extends ServletRegistration> servlet : sc.getServletRegistrations().entrySet()) {
+			ServletRegistration servletReg = servlet.getValue();
+			// if (servletReg.getClassName().startsWith("by.htp")) {
+			System.out.println();
+//			if (AppServletDispatcher.class.getName().equals(servlet.getValue().getClassName())) {
+//				servletReg.addMapping("/go/ts");
+//				servletReg.addMapping("/welcome");
+//				servletReg.addMapping("/welcome/tsovak");
+//				servletReg.addMapping("/welcome/palakian");
+//				servletReg.addMapping("/callMethod/ts");
+//			}
+			// }
+			System.out.println(servlet.getKey() + " : " + servletReg.getClassName());
+			for (String url : servletReg.getMappings()) {
+				System.out.println("url mapping" + " : " + url);
+			}
+		}
+		
 		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
 
 		Map<String, ServletContainer> methodContainerMap = af.getMethodContainer();
