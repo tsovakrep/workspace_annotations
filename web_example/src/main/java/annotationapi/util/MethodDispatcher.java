@@ -33,11 +33,7 @@ public class MethodDispatcher {
 			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException,
 			ServletException, IOException {
 		ServletContext sc = request.getServletContext();
-		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
-		
-		ServletRegistration dynamic = sc.getServletRegistration("dispatcher");
-		dynamic.addMapping("/callMethod/ts");
-		
+		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");	
 		
 		Map<String, ServletContainer> methodContainerMap = af.getMethodContainer();
 		String uri = request.getRequestURI();

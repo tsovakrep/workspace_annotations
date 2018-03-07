@@ -1,13 +1,11 @@
 package by.htp.itacademy.listener;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.servlet.ServletRegistration;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -15,7 +13,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import annotationapi.annotation.Controller;
 import annotationapi.util.AnnotationFinder;
 import annotationapi.util.FileFinder;
-import by.htp.itacademy.controller.AppServletDispatcher;
 
 
 public class AppServletContextListener implements ServletContextListener {
@@ -32,24 +29,6 @@ public class AppServletContextListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent sce) {
 			
 		ServletContext context = sce.getServletContext();
-		
-		for (Map.Entry<String, ? extends ServletRegistration> servlet : context.getServletRegistrations().entrySet()) {
-			ServletRegistration servletReg = servlet.getValue();
-			if (servletReg.getClassName().startsWith("by.htp")) {
-				System.out.println(servlet.getKey() + " : " + servletReg.getClassName());
-				for (String url : servletReg.getMappings()) {
-					System.out.println("url mapping" + " : " + url);
-				}
-				if (AppServletDispatcher.class.getName().equals(servlet.getValue().getClassName())) {
-					servletReg.addMapping("/");
-					servletReg.addMapping("/go/ts");
-					servletReg.addMapping("/welcome");
-					servletReg.addMapping("/welcome/tsovak");
-					servletReg.addMapping("/welcome/palakian");
-				}
-			}
-		}
-		
 		context.setAttribute("annotationfinder", getAnnotationFinder(context));
 		context.setAttribute("pages", getPages(context));
 		
