@@ -5,6 +5,7 @@
 	version="3.1">
 	<display-name>Archetype Created Web Application</display-name>
 	
+	<!-- 
 	<servlet>
 	<servlet-name>dispatcher</servlet-name>
 	<servlet-class>by.htp.itacademy.controller.AppServletDispatcher</servlet-class> 
@@ -14,6 +15,8 @@
 	<servlet-name>dispatcher</servlet-name>
 	<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	-->
 	
 	<listener>
 	<listener-class>by.htp.itacademy.listener.AppServletContextListener</listener-class>
