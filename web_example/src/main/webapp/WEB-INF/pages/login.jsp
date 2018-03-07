@@ -42,7 +42,7 @@ ajax();
 		<input type="submit" value="post" />
 	</form>
 	
-	<form action="" method="get">
+	<form action="welcome/tsovakl" method="get">
 		<input type="submit" value="delete" />
 	</form>
 	
