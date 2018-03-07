@@ -56,7 +56,7 @@ public class AnnotationFinder {
 		annotClass(clazz);
 	}
 
-	public void fillingMethodContainer(Class<?> clazz) {
+	public void fillMethodContainer(Class<?> clazz) {
 		getMethodContainer(clazz);
 	}
 
@@ -132,6 +132,7 @@ public class AnnotationFinder {
 			}
 			String uri = mappingValue.concat(getMappingValue);
 			ServletContainer mc = new ServletContainer(uri, clazz, method, HttpMethod.GET);
+			uri = uri.concat(HttpMethod.GET.name());
 			METHOD_CONTAINER.put(uri, mc);
 		}
 	}
@@ -145,6 +146,7 @@ public class AnnotationFinder {
 			}
 			String uri = mappingValue.concat(postMappingValue);
 			ServletContainer mc = new ServletContainer(uri, clazz, method, HttpMethod.POST);
+			uri = uri.concat(HttpMethod.POST.name());
 			METHOD_CONTAINER.put(uri, mc);
 		}
 	}
@@ -158,6 +160,7 @@ public class AnnotationFinder {
 			}
 			String uri = mappingValue.concat(putMappingValue);
 			ServletContainer mc = new ServletContainer(uri, clazz, method, HttpMethod.PUT);
+			uri = uri.concat(HttpMethod.PUT.name());
 			METHOD_CONTAINER.put(uri, mc);
 		}
 	}
@@ -171,6 +174,7 @@ public class AnnotationFinder {
 			}
 			String uri = mappingValue.concat(deleteMappingValue);
 			ServletContainer mc = new ServletContainer(uri, clazz, method, HttpMethod.DELETE);
+			uri = uri.concat(HttpMethod.DELETE.name());
 			METHOD_CONTAINER.put(uri, mc);
 		}
 	}

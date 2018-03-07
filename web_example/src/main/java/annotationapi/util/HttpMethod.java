@@ -7,7 +7,7 @@ public enum HttpMethod {
 
 	GET, POST, PUT, DELETE;
 
-	private static final Map<String, HttpMethod> mappings = new HashMap<String, HttpMethod>(8);
+	private static final Map<String, HttpMethod> mappings = new HashMap<String, HttpMethod>(4);
 
 	static {
 		for (HttpMethod httpMethod : values()) {

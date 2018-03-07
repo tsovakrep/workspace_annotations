@@ -1,13 +1,19 @@
 package annotationapi.util;
 
+import lombok.Getter;
+
 public class ResponseEntity<T> {
 	
-	private T body;
-	private String page;
-	private HttpStatus status;
+	@Getter private T body;
+	@Getter private String page;
+	@Getter private HttpStatus status;
 
-	
-	public ResponseEntity(String page) {
+	public ResponseEntity() {
+		
+	}
+
+	public ResponseEntity(String page, HttpStatus status) {
+		this(status);
 		this.page = page;
 	}
 
@@ -24,17 +30,4 @@ public class ResponseEntity<T> {
 		this(body, status);
 		this.page = page;
 	}
-
-	public T getBody() {
-		return body;
-	}
-
-	public String getPage() {
-		return page;
-	}
-
-	public HttpStatus getStatus() {
-		return status;
-	}
-	
 }

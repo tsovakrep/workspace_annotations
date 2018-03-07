@@ -8,8 +8,7 @@
 	<servlet>
 	<servlet-name>dispatcher</servlet-name>
 	<servlet-class>by.htp.itacademy.controller.AppServletDispatcher</servlet-class> 
-	<!--<servlet-class>by.htp.itacademy.controller.app.BaseServlet</servlet-class>-->
-	<load-on-startup>2</load-on-startup>
+	<load-on-startup>0</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 	<servlet-name>dispatcher</servlet-name>
@@ -19,14 +18,5 @@
 	<listener>
 	<listener-class>by.htp.itacademy.listener.AppServletContextListener</listener-class>
 	</listener>
-
-	<welcome-file-list>
-		<welcome-file>login.jsp</welcome-file>
-	</welcome-file-list>
-	<jsp-config>
-		<jsp-property-group>
-			<url-pattern>*.jsp</url-pattern>
-			<page-encoding>UTF-8</page-encoding>
-		</jsp-property-group>
-	</jsp-config>
+	
 </web-app>

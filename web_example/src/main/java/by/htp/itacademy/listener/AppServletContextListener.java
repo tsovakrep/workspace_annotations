@@ -31,7 +31,6 @@ public class AppServletContextListener implements ServletContextListener {
 		ServletContext context = sce.getServletContext();
 		context.setAttribute("annotationfinder", getAnnotationFinder(context));
 		context.setAttribute("pages", getPages(context));
-		context.setAttribute("httpClient", getHttpClient());
 		
 		System.out.println("context initilized");
 	}
@@ -52,16 +51,12 @@ public class AppServletContextListener implements ServletContextListener {
 			try {
 				Class<?> clazz = Class.forName(file.replaceAll(RESOURRCE_PATH_CLASSES, "").replaceAll(".class", "").replaceAll("/", "."));
 				af.searchAnnotation(clazz);			
-				af.fillingMethodContainer(clazz);
+				af.fillMethodContainer(clazz);
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
 		}
 		
 		return af;
-	}
-	
-	private HttpClient getHttpClient() {
-		return HttpClientBuilder.create().build();
 	}
 }
