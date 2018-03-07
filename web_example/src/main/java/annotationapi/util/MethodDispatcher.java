@@ -28,21 +28,18 @@ public class MethodDispatcher {
 	private String pathVariableValue;
 
 	public void callMethodDispatcher(HttpServletRequest request, HttpServletResponse response)
-			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, 
-			InstantiationException,	ServletException, IOException {
-		
+			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException,
+			ServletException, IOException {
+
 		ServletContext sc = request.getServletContext();
-		
+
 		ServletRegistration servlet1 = sc.getServletRegistration("dispatcher");
 		servlet1.addMapping("/welcome/Tsovak");
-		
+
 		for (Map.Entry<String, ? extends ServletRegistration> servlet : sc.getServletRegistrations().entrySet()) {
-		ServletRegistration servletReg = servlet.getValue();
-		if (servletReg.getClassName().startsWith("by.htp")) {
-			System.out.println(servlet.getKey() + " : " + servletReg.getClassName());
-			for (String url : servletReg.getMappings()) {
-				System.out.println("url mapping" + " : " + url);
-			}
+			ServletRegistration servletReg = servlet.getValue();
+			// if (servletReg.getClassName().startsWith("by.htp")) {
+			System.out.println();
 			if (AppServletDispatcher.class.getName().equals(servlet.getValue().getClassName())) {
 				servletReg.addMapping("/");
 				servletReg.addMapping("/go/ts");
@@ -50,14 +47,18 @@ public class MethodDispatcher {
 				servletReg.addMapping("/welcome/tsovak");
 				servletReg.addMapping("/welcome/palakian");
 			}
+			// }
+			System.out.println(servlet.getKey() + " : " + servletReg.getClassName());
+			for (String url : servletReg.getMappings()) {
+				System.out.println("url mapping" + " : " + url);
+			}
 		}
-	}
-		
-		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");	
-		
+
+		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
+
 		Map<String, ServletContainer> methodContainerMap = af.getMethodContainer();
 		String uri = changeUri(request, methodContainerMap);
-		
+
 		ServletContainer scont = methodContainerMap.get(uri);
 		if (scont != null) {
 			Object[] parameters = null;
@@ -73,8 +74,7 @@ public class MethodDispatcher {
 			if (resEntity != null) {
 				if (resEntity.getPage() != null) {
 					RequestDispatcher rd = request.getRequestDispatcher(resEntity.getPage());
-					response.sendRedirect(resEntity.getPage());
-//					rd.forward(request, response);
+					rd.forward(request, response);
 				}
 			}
 		}
@@ -113,7 +113,7 @@ public class MethodDispatcher {
 
 	private String changeUri(HttpServletRequest request, Map<String, ServletContainer> methodContainerMap) {
 		String uri = request.getRequestURI();
-		
+
 		if (uri.endsWith("/")) {
 			int slashIndex = uri.lastIndexOf("/");
 			uri = uri.substring(0, slashIndex);
