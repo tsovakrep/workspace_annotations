@@ -5,24 +5,20 @@ import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Parameter;
-import java.util.Enumeration;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 
 import annotationapi.annotation.PathVariable;
 import annotationapi.annotation.ReqBody;
 import annotationapi.annotation.ReqParam;
-import by.htp.itacademy.controller.AppServletDispatcher;
 import chaincasttype.FacadeCast;
 
 public class MethodDispatcher {
@@ -30,14 +26,15 @@ public class MethodDispatcher {
 	private String pathVariableValue;
 
 	public void callMethodDispatcher(HttpServletRequest request, HttpServletResponse response)
-			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException,
-			ServletException, IOException {
+			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, 
+			InstantiationException,	ServletException, IOException {
+		
 		ServletContext sc = request.getServletContext();
 		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");	
 		
 		Map<String, ServletContainer> methodContainerMap = af.getMethodContainer();
-		String uri = request.getRequestURI();
-		uri = changeUri(uri, request, methodContainerMap);
+		String uri = changeUri(request, methodContainerMap);
+		
 		ServletContainer scont = methodContainerMap.get(uri);
 		if (scont != null) {
 			Object[] parameters = null;
@@ -90,7 +87,9 @@ public class MethodDispatcher {
 		return methodParameters;
 	}
 
-	private String changeUri(String uri, HttpServletRequest request, Map<String, ServletContainer> methodContainerMap) {
+	private String changeUri(HttpServletRequest request, Map<String, ServletContainer> methodContainerMap) {
+		String uri = request.getRequestURI();
+		
 		if (uri.endsWith("/")) {
 			int slashIndex = uri.lastIndexOf("/");
 			uri = uri.substring(0, slashIndex);

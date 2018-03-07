@@ -7,9 +7,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-
 import annotationapi.annotation.Controller;
 import annotationapi.util.AnnotationFinder;
 import annotationapi.util.FileFinder;

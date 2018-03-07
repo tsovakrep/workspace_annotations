@@ -14,10 +14,6 @@
 	<servlet-name>dispatcher</servlet-name>
 	<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-	<servlet-name>dispatcher</servlet-name>
-	<url-pattern>/callMethod/ts</url-pattern>
-	</servlet-mapping>
 	
 	<listener>
 	<listener-class>by.htp.itacademy.listener.AppServletContextListener</listener-class>

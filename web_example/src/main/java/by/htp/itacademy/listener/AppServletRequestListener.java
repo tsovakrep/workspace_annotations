@@ -1,25 +1,8 @@
 package by.htp.itacademy.listener;
 
-import java.io.IOException;
-import java.util.Map;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletRegistration;
-import javax.servlet.ServletRequest;
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
 import javax.servlet.annotation.WebListener;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.util.EntityUtils;
-
-import by.htp.itacademy.controller.AppServletDispatcher;
 
 @WebListener
 public class AppServletRequestListener implements ServletRequestListener {
