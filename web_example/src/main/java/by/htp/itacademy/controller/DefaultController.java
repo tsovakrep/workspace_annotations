@@ -32,6 +32,12 @@ public class DefaultController {
 		System.out.println("was called GET method");
 		return new ResponseEntity<>("WEB-INF/pages/index.jsp", HttpStatus.OK);
 	}
+	
+	@PutMapping("index/show")
+	public ResponseEntity<?> fsaddf(HttpSession session) {
+		System.out.println("was called GET method");
+		return new ResponseEntity<>("WEB-INF/pages/template/index3.jsp", HttpStatus.OK);
+	}
 
 	@PutMapping
 	public void dffasdfw() {
@@ -42,7 +48,7 @@ public class DefaultController {
 	public void dfffasdf() {
 		System.out.println("was called DELETE method");
 	}
-
+	
 	@PostMapping("callMethod")
 	public ResponseEntity<?> fsafdf(HttpSession session) {
 		System.out.println("was called POST method");

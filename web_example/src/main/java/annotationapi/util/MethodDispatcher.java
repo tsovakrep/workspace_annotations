@@ -41,11 +41,11 @@ public class MethodDispatcher {
 			// if (servletReg.getClassName().startsWith("by.htp")) {
 			System.out.println();
 			if (AppServletDispatcher.class.getName().equals(servlet.getValue().getClassName())) {
-				servletReg.addMapping("/");
 				servletReg.addMapping("/go/ts");
 				servletReg.addMapping("/welcome");
 				servletReg.addMapping("/welcome/tsovak");
 				servletReg.addMapping("/welcome/palakian");
+				servletReg.addMapping("/callMethod/ts");
 			}
 			// }
 			System.out.println(servlet.getKey() + " : " + servletReg.getClassName());
