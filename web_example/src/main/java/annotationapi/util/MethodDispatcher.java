@@ -73,7 +73,8 @@ public class MethodDispatcher {
 			if (resEntity != null) {
 				if (resEntity.getPage() != null) {
 					RequestDispatcher rd = request.getRequestDispatcher(resEntity.getPage());
-					rd.forward(request, response);
+					response.sendRedirect(resEntity.getPage());
+//					rd.forward(request, response);
 				}
 			}
 		}
