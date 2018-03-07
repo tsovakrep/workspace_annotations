@@ -7,6 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Parameter;
 import java.util.Map;
 
+import javax.print.attribute.ResolutionSyntax;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -29,7 +30,7 @@ public class MethodDispatcher {
 			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException,
 			ServletException, IOException {
 
-		ServletContext sc = request.getServletContext();		
+		ServletContext sc = request.getServletContext();
 		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
 
 		Map<String, ServletContainer> methodContainerMap = af.getMethodContainer();
@@ -51,9 +52,6 @@ public class MethodDispatcher {
 				if (resEntity.getPage() != null) {
 					RequestDispatcher rd = request.getRequestDispatcher(resEntity.getPage());
 					rd.forward(request, response);
-					if (request.getMethod().equals("POST")) {
-						response.sendRedirect("WEB-INF/pages/template/index3.jsp");
-					}
 				}
 			}
 		} else {
