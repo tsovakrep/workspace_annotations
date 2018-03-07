@@ -33,32 +33,31 @@ public class MethodDispatcher {
 
 		ServletContext sc = request.getServletContext();
 
-		ServletRegistration servlet1 = sc.getServletRegistration("dispatcher");
-		servlet1.addMapping("/welcome/Tsovak");
+//		ServletRegistration servlet1 = sc.getServletRegistration("dispatcher");
+//		servlet1.addMapping("/welcome/Tsovak");
 
-		for (Map.Entry<String, ? extends ServletRegistration> servlet : sc.getServletRegistrations().entrySet()) {
-			ServletRegistration servletReg = servlet.getValue();
-			// if (servletReg.getClassName().startsWith("by.htp")) {
-			System.out.println();
-			if (AppServletDispatcher.class.getName().equals(servlet.getValue().getClassName())) {
-				servletReg.addMapping("/go/ts");
-				servletReg.addMapping("/welcome");
-				servletReg.addMapping("/welcome/tsovak");
-				servletReg.addMapping("/welcome/palakian");
-				servletReg.addMapping("/callMethod/ts");
-			}
-			// }
-			System.out.println(servlet.getKey() + " : " + servletReg.getClassName());
-			for (String url : servletReg.getMappings()) {
-				System.out.println("url mapping" + " : " + url);
-			}
-		}
-
+//		for (Map.Entry<String, ? extends ServletRegistration> servlet : sc.getServletRegistrations().entrySet()) {
+//			ServletRegistration servletReg = servlet.getValue();
+//			// if (servletReg.getClassName().startsWith("by.htp")) {
+//			System.out.println();
+//			if (AppServletDispatcher.class.getName().equals(servlet.getValue().getClassName())) {
+//				servletReg.addMapping("/go/ts");
+//				servletReg.addMapping("/welcome");
+//				servletReg.addMapping("/welcome/tsovak");
+//				servletReg.addMapping("/welcome/palakian");
+//				servletReg.addMapping("/callMethod/ts");
+//			}
+//			// }
+//			System.out.println(servlet.getKey() + " : " + servletReg.getClassName());
+//			for (String url : servletReg.getMappings()) {
+//				System.out.println("url mapping" + " : " + url);
+//			}
+//		}
 		AnnotationFinder af = (AnnotationFinder) sc.getAttribute("annotationfinder");
 
 		Map<String, ServletContainer> methodContainerMap = af.getMethodContainer();
 		String uri = changeUri(request, methodContainerMap);
-
+		System.out.println("uri: " + uri);
 		ServletContainer scont = methodContainerMap.get(uri);
 		if (scont != null) {
 			Object[] parameters = null;
@@ -77,6 +76,8 @@ public class MethodDispatcher {
 					rd.forward(request, response);
 				}
 			}
+		} else {
+			System.out.println("Servlet container is null");
 		}
 	}
 

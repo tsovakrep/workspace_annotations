@@ -33,9 +33,9 @@ public class DefaultController {
 		return new ResponseEntity<>("WEB-INF/pages/index.jsp", HttpStatus.OK);
 	}
 	
-	@PutMapping("index/show")
+	@PostMapping("index/show")
 	public ResponseEntity<?> fsaddf(HttpSession session) {
-		System.out.println("was called GET method");
+		System.out.println("was called  index/show  method");
 		return new ResponseEntity<>("WEB-INF/pages/template/index3.jsp", HttpStatus.OK);
 	}
 
