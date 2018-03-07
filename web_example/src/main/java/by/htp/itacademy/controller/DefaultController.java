@@ -27,7 +27,7 @@ public class DefaultController {
 		return new ResponseEntity<>("WEB-INF/pages/login.jsp", HttpStatus.OK);
 	}
 
-	@GetMapping("callMethod")
+	@GetMapping("callMethod/ts")
 	public ResponseEntity<?> fsadf(HttpSession session) {
 		System.out.println("was called GET method");
 		return new ResponseEntity<>("WEB-INF/pages/index.jsp", HttpStatus.OK);

@@ -51,7 +51,7 @@ ajax();
 		<input type="submit" value="post callMethod" />
 	</form>
 
-	<form action="callMethod" method="get">
+	<form action="callMethod/ts" method="get">
 		<input type="submit" value="callMethod" />
 	</form>
 
