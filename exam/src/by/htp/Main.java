@@ -11,15 +11,15 @@ import java.util.List;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		File mai = new File(Main.class.getName());
-		String absolutePath = mai.getAbsolutePath();
-		int lastIn = absolutePath.lastIndexOf('\\');
-		String path = absolutePath.substring(0, lastIn);
-		File startDir = new File("E:\\eclipse\\workspace\\victor\\hotel");
-
-		for (File file : new FileFinder(startDir, "class").getFileContainer()) {
-			System.out.println("file path: " + file.getAbsolutePath());
-		}
+//		File mai = new File(Main.class.getName());
+//		String absolutePath = mai.getAbsolutePath();
+//		int lastIn = absolutePath.lastIndexOf('\\');
+//		String path = absolutePath.substring(0, lastIn);
+//		File startDir = new File("E:\\eclipse\\workspace\\victor\\hotel");
+//
+//		for (File file : new FileFinder(startDir, "class").getFileContainer()) {
+//			System.out.println("file path: " + file.getAbsolutePath());
+//		}
 		
 //		for (;;) {
 //			ClassLoader cl = new MainLoader();
@@ -28,5 +28,7 @@ public class Main {
 //			System.out.println(obj);
 //			new BufferedReader(new InputStreamReader(System.in)).readLine();
 //		}
+		Tsovak t = (Tsovak) Thread.currentThread().getContextClassLoader().loadClass("by.htp.Tsovak").newInstance();
+		t.main(args);
 	}
 }
