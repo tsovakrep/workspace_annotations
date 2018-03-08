@@ -43,7 +43,6 @@ public class ActionHelper {
 		}
 	}
 
-	// ������������Action
 	private static void printAllAction(List<Class<?>> actionClassList) {
 		StringBuilder builder = new StringBuilder();
 		if (CollectionUtils.isNotEmpty(actionClassList)) {
