@@ -2,10 +2,6 @@ package framework.mvc.bean;
 
 import java.util.Map;
 
-/**
- * @author tf
- * @create 2017-07-01 16:52
- **/
 public class Params {
 
     private Map<String, Object> paramMap;

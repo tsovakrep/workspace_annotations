@@ -68,7 +68,6 @@ public class ActionHelper {
 
 	private static void putActionMap(RequestMethod[] requestMethods, String requestUrl, Class<?> actionClass,
 			Method actionMethod, Map<Requester, Handler> actionMap) {
-		// ������requestUrl������������������������
 		if (requestUrl.matches(".+\\{\\w+\\}.*")) {
 			requestUrl.replaceAll("\\{\\w+\\}", "(\\\\\\w+)");
 		}

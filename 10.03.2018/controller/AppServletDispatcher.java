@@ -16,7 +16,7 @@ public class AppServletDispatcher extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		System.out.println("path: " + request.getServletPath()+request.getPathInfo());
 		callMethod(request, response);
 	}
 

@@ -1,9 +1,5 @@
 package framework.mvc.bean;
 
-/**
- * @author tf
- * @create 2017-07-01 17:30
- **/
 public class Result {
     private Integer code;
     private String errorMsg;

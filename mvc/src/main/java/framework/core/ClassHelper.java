@@ -2,6 +2,7 @@ package framework.core;
 
 import framework.mvc.util.InstanceFactory;
 
+import java.lang.annotation.Annotation;
 import java.util.List;
 
 public class ClassHelper {
@@ -17,7 +18,7 @@ public class ClassHelper {
         return classScanner.getClassListBySuper(BASE_PACKAGE, superClass);
     }
 
-    public static List<Class<?>> getClassListByAnnotation(Class annotationClass) {
+    public static List<Class<?>> getClassListByAnnotation(Class<? extends Annotation> annotationClass) {
         return classScanner.getClassListByAnnotation(BASE_PACKAGE, annotationClass);
     }
 }

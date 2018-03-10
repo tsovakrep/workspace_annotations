@@ -45,7 +45,7 @@ public class InstanceFactory {
 
     private static <T> T getInstance(String cacheKey, Class<T> defaultImplClass) {
         if (cacheMap.containsKey(cacheKey)) {
-            return (T)cacheMap.get(cacheKey);
+            return (T) cacheMap.get(cacheKey);
         }
 
         String implementClassName = ConfigHelper.getString(cacheKey);

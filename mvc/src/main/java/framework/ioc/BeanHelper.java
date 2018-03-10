@@ -1,7 +1,6 @@
 package framework.ioc;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import framework.core.ClassHelper;

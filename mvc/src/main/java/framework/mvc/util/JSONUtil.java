@@ -4,10 +4,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
 
-/**
- * @author tf
- * @create 2017-07-03 16:32
- **/
 public class JSONUtil {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 

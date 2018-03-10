@@ -2,36 +2,41 @@ package by.htp.itacademy.controller;
 
 import javax.servlet.http.HttpSession;
 
-import by.htp.itacademy.framework.webcore.annotation.Controller;
-import by.htp.itacademy.framework.webcore.annotation.DeleteMapping;
-import by.htp.itacademy.framework.webcore.annotation.GetMapping;
-import by.htp.itacademy.framework.webcore.annotation.Mapping;
-import by.htp.itacademy.framework.webcore.annotation.PathVariable;
-import by.htp.itacademy.framework.webcore.annotation.PostMapping;
-import by.htp.itacademy.framework.webcore.annotation.PutMapping;
-import by.htp.itacademy.framework.webcore.annotation.ReqBody;
-import by.htp.itacademy.framework.webcore.annotation.ReqParam;
-import by.htp.itacademy.framework.webcore.util.HttpStatus;
+import annotationapi.annotation.Controller;
+import annotationapi.annotation.DeleteMapping;
+import annotationapi.annotation.GetMapping;
+import annotationapi.annotation.Mapping;
+import annotationapi.annotation.PathVariable;
+import annotationapi.annotation.PostMapping;
+import annotationapi.annotation.PutMapping;
+import annotationapi.annotation.ReqBody;
+import annotationapi.annotation.ReqParam;
+import annotationapi.util.HttpStatus;
+import annotationapi.util.ResponseEntity;
+import annotationapi.util.User;
 
 @Controller
 @Mapping("/")
 public class DefaultController {
 
 	@GetMapping
-	public void load(HttpSession session) {
+	public ResponseEntity<?> load(HttpSession session) {
 		System.out.println("was called GET method");
 		loadLanguage(session);
 		System.out.println(session.getAttribute("language"));
+		return new ResponseEntity<>("WEB-INF/pages/login.jsp", HttpStatus.OK);
 	}
 
 	@GetMapping("callMethod/ts")
-	public void fsadf(HttpSession session) {
+	public ResponseEntity<?> fsadf(HttpSession session) {
 		System.out.println("was called GET method");
+		return new ResponseEntity<>("WEB-INF/pages/index.jsp", HttpStatus.OK);
 	}
 	
 	@PostMapping("index/show")
-	public void fsaddf(HttpSession session) {
+	public ResponseEntity<?> fsaddf(HttpSession session) {
 		System.out.println("was called  index/show  method");
+		return new ResponseEntity<>("WEB-INF/pages/template/index3.jsp", HttpStatus.OK);
 	}
 
 	@PutMapping
@@ -45,12 +50,13 @@ public class DefaultController {
 	}
 	
 	@PostMapping("callMethod")
-	public void fsafdf(HttpSession session) {
+	public ResponseEntity<?> fsafdf(HttpSession session) {
 		System.out.println("was called POST method");
+		return new ResponseEntity<>("WEB-INF/pages/index.jsp", HttpStatus.OK);
 	}
 
 	@PostMapping("welcome/{user}")
-	public void loadHomePage(@ReqParam(value = "userName", defaultValue = "Tsovak1") String value,
+	public ResponseEntity<?> loadHomePage(@ReqParam(value = "userName", defaultValue = "Tsovak1") String value,
 			@ReqParam(value = "userName1", defaultValue = "Tsovak2") String value2, @PathVariable("name") String name,
 			@ReqBody User user, HttpSession session) {
 
@@ -60,6 +66,7 @@ public class DefaultController {
 		// System.out.println(name);
 		// System.out.println(user);
 
+		return new ResponseEntity<>("WEB-INF/pages/index.jsp", HttpStatus.OK);
 	}
 
 	private void loadLanguage(HttpSession session) {

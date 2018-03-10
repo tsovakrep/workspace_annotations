@@ -7,17 +7,17 @@
 	
 	<servlet>
 	<servlet-name>dispatcher</servlet-name>
-	<servlet-class>by.htp.itacademy.controller.AppServletDispatcher</servlet-class> 
+	<servlet-class>by.htp.itacademy.framework.webcore.DispatcherServlet</servlet-class> 
 	<load-on-startup>0</load-on-startup>
 	</servlet>
+	
 	<servlet-mapping>
 	<servlet-name>dispatcher</servlet-name>
 	<url-pattern>/</url-pattern>
-	<url-pattern>/welcome/</url-pattern>
 	</servlet-mapping>
 	
 	<listener>
-	<listener-class>by.htp.itacademy.listener.AppServletContextListener</listener-class>
+	<listener-class>by.htp.itacademy.framework.webcore.ContainerListener</listener-class>
 	</listener>
 	
 </web-app>

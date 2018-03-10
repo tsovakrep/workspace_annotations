@@ -1,31 +1,33 @@
-package framework.mvc.impl;
+package by.htp.itacademy.framework.webcore.impl;
 
-import org.apache.commons.collections.MapUtils;
-import framework.FrameworkConstant;
-import framework.mvc.ViewResolver;
-import framework.mvc.bean.Result;
-import framework.mvc.bean.View;
-import framework.mvc.util.JSONUtil;
-import framework.mvc.util.WebUtil;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
 
-public class DefaultViewResolver implements ViewResolver {
-   
+import by.htp.itacademy.framework.util.FrameworkConstant;
+import by.htp.itacademy.framework.util.ObjectUtils;
+import by.htp.itacademy.framework.webcore.ViewResolver;
+import by.htp.itacademy.framework.webcore.bean.Result;
+import by.htp.itacademy.framework.webcore.bean.View;
+import by.htp.itacademy.framework.webcore.util.JSONUtil;
+import by.htp.itacademy.framework.webcore.util.WebUtil;
+
+
+public class ViewResolverImpl implements ViewResolver {
+
 	@Override
-    public void resolveView(HttpServletRequest request, HttpServletResponse response, Object invorkResult) {
-        if (invorkResult != null) {
-            if (invorkResult instanceof View) {
+	public void resolveView(HttpServletRequest request, HttpServletResponse response, Object invorkResult) {
+		if (invorkResult != null) {
+            if (invorkResult.getClass().getTypeName().equals(View.class.getName())) {
                 View view = (View) invorkResult;
                 String viewPath = view.getPath();
                 if (view.isRedirect()) {
                     WebUtil.sendRedirect(request, response, viewPath);
                 } else {
-                    String forwardPath = FrameworkConstant.JSP_PATH + viewPath;
+                    String forwardPath = FrameworkConstant.PATH_PAGES + viewPath;
                     Map<String, Object> viewData = view.getData();
-                    if (MapUtils.isNotEmpty(viewData)) {
+                    if (ObjectUtils.isNotEmptyMap(viewData)) {
                         for (Map.Entry<String, Object> entry : viewData.entrySet()) {
                             request.setAttribute(entry.getKey(), entry.getValue());
                         }
@@ -37,5 +39,5 @@ public class DefaultViewResolver implements ViewResolver {
                 WebUtil.writeJSON(request, response, JSONUtil.toJSON(result));
             }
         }
-    }
+	}
 }
