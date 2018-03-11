@@ -28,7 +28,11 @@ public class Main {
 //			System.out.println(obj);
 //			new BufferedReader(new InputStreamReader(System.in)).readLine();
 //		}
-		Tsovak t = (Tsovak) Thread.currentThread().getContextClassLoader().loadClass("by.htp.Tsovak").newInstance();
-		t.main(args);
+		File mai = new File(Main.class.getName());
+		System.out.println(mai.getPath());
+		System.out.println(mai.getAbsolutePath());
+		System.out.println(mai.getName());
+		System.out.println(mai.getParentFile());
+//		System.out.println(mai.get);
 	}
 }

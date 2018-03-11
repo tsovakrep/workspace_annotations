@@ -2,16 +2,16 @@ package by.htp.itacademy.controller;
 
 import javax.servlet.http.HttpSession;
 
-import by.htp.itacademy.framework.webcore.annotation.Controller;
-import by.htp.itacademy.framework.webcore.annotation.DeleteMapping;
-import by.htp.itacademy.framework.webcore.annotation.GetMapping;
-import by.htp.itacademy.framework.webcore.annotation.Mapping;
-import by.htp.itacademy.framework.webcore.annotation.PathVariable;
-import by.htp.itacademy.framework.webcore.annotation.PostMapping;
-import by.htp.itacademy.framework.webcore.annotation.PutMapping;
-import by.htp.itacademy.framework.webcore.annotation.ReqBody;
-import by.htp.itacademy.framework.webcore.annotation.ReqParam;
-import by.htp.itacademy.framework.webcore.util.HttpStatus;
+import framework.webcore.annotation.Controller;
+import framework.webcore.annotation.DeleteMapping;
+import framework.webcore.annotation.GetMapping;
+import framework.webcore.annotation.Mapping;
+import framework.webcore.annotation.PathVariable;
+import framework.webcore.annotation.PostMapping;
+import framework.webcore.annotation.PutMapping;
+import framework.webcore.annotation.ReqBody;
+import framework.webcore.annotation.ReqParam;
+import framework.webcore.util.HttpStatus;
 
 @Controller
 @Mapping("/")
