@@ -15,11 +15,26 @@ import lombok.Getter;
 @Data
 public class ParamsHelper {
 
+	private Method actionMethod;
 	@Getter private List<Class<?>> parameterTypes;
 	@Getter private List<Parameter> parameters;
 	@Getter private Map<Parameter, List<Annotation>> parameterAnnotations;
 	
 	public ParamsHelper(Method actionMethod) {
+		this.actionMethod = actionMethod;
+		init();
+	}
+	
+	public boolean isAnnotation(Class<? extends Annotation> annotationClass) {
+		for (Parameter parameter : this.parameters) {
+			for (Annotation annotation : this.getParameterAnnotations().get(parameter)) {
+				return annotation.annotationType().equals(annotationClass);
+			}
+		}
+		return false;
+	}
+	
+	private void init() {
 		this.parameters = new ArrayList<>();
 		Arrays.asList(actionMethod.getParameters());
 
@@ -31,14 +46,5 @@ public class ParamsHelper {
 		for (Parameter parameter : parameters) {
 			this.parameterAnnotations.put(parameter, Arrays.asList(parameter.getAnnotations()));
 		}
-	}
-	
-	public boolean isAnnotation(Class<? extends Annotation> annotationClass) {
-		for (Parameter parameter : this.parameters) {
-			for (Annotation annotation : this.getParameterAnnotations().get(parameter)) {
-				return annotation.annotationType().equals(annotationClass);
-			}
-		}
-		return false;
 	}
 }
