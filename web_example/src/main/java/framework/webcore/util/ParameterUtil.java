@@ -46,21 +46,22 @@ public class ParameterUtil {
 	private static void reqParamAnnotation(ParamsHelper paramsHelper, Parameter parameter, HttpServletRequest request,
 			List<Object> paramList) {
 		if (paramsHelper.containAnnotation(ReqParam.class)) {
-			System.out.println("is1: " + true);
-			ReqParam reqParam = (ReqParam) getAnnotation(paramsHelper, parameter, ReqParam.class);
-			String requestParameterValue = request.getParameter(reqParam.value());
-			try {
-				if (ObjectUtils.isNotEmptyString(requestParameterValue)) {
-					paramList.add(FacadeCast.getCastChain().getValue(parameter.getType(), requestParameterValue));
-					System.out.println("paramList11: " + paramList);
-				} else {
-					paramList.add(FacadeCast.getCastChain().getValue(parameter.getType(), reqParam.defaultValue()));
-					System.out.println("paramList11: " + paramList);
+			if (parameter.isAnnotationPresent(ReqParam.class)) {
+				ReqParam reqParam = (ReqParam) getAnnotation(paramsHelper, parameter, ReqParam.class);
+				String requestParameterValue = request.getParameter(reqParam.value());
+				
+				try {
+					if (ObjectUtils.isNotEmptyString(requestParameterValue)) {
+						paramList.add(FacadeCast.getCastChain().getValue(parameter.getType(), requestParameterValue));
+						System.out.println("paramList11: " + paramList);
+					} else {
+						paramList.add(FacadeCast.getCastChain().getValue(parameter.getType(), reqParam.defaultValue()));
+						System.out.println("paramList11: " + paramList);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
-
 		}
 	}
 
