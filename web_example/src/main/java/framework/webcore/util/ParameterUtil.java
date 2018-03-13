@@ -22,7 +22,9 @@ public class ParameterUtil {
 		List<Object> paramList = new ArrayList<Object>();
 
 		ParamsHelper paramsHelper = new ParamsHelper(actionMethod);
+		
 		List<Parameter> parameters = paramsHelper.getParameters();
+		Parameter[] c = actionMethod.getParameters();
 
 		int ordinal = 0;
 

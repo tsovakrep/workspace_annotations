@@ -36,10 +36,10 @@ public class ParamsHelper {
 	
 	private void init() {
 		this.parameters = new ArrayList<>();
-		Arrays.asList(actionMethod.getParameters());
+		this.parameters = Arrays.asList(actionMethod.getParameters());
 
 		this.parameterTypes = new ArrayList<>();
-		Arrays.asList(actionMethod.getParameterTypes());
+		this.parameterTypes = Arrays.asList(actionMethod.getParameterTypes());
 		
 		this.parameterAnnotations = new HashMap<>();
 		
