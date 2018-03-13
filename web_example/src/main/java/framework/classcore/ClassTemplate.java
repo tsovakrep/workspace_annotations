@@ -1,62 +1,33 @@
 package framework.classcore;
 
-import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.List;
 
 import framework.util.ClassUtil;
+import framework.util.FrameworkConstant;
+import framework.webcore.DataContext;
 
-public abstract class ClassTemplate {
-
-	protected final String packageName;
+public abstract class ClassTemplate extends Template {
 
 	public ClassTemplate(String packageName) {
-		super();
-		this.packageName = packageName;
+		super(packageName);
 	}
 
-	public List<Class<?>> getClassList() {
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> List<T> getFileList() {
 		List<Class<?>> classList = new ArrayList<>();
-		File path = new File(packageName);
-		
-		fileFinder(path, classList);
-		
-		return classList;
+		searchResourceFiles(DataContext.getServletContext(), FrameworkConstant.CLASSES_PACKAGE, classList);
+		return (List<T>) classList;
 	}
 
-	private void fileFinder(File path, List<Class<?>> classList) {
-		File[] filesList = path.listFiles();
-
-		for (File file : filesList) {
-			if (file.isDirectory()) {
-				File[] files = file.listFiles(new FilenameFilter() {
-					@Override
-					public boolean accept(File dir, String name) {
-						if (name.endsWith(".class"))
-							return true;
-						return false;
-					}
-				});
-				addClass(files, classList);
-
-				fileFinder(file, classList);
-			}
-		}
-	}
-	
-	private void addClass(File[] files, List<Class<?>> classList) {
-		for (File file : files) {
-			if (file.getName().equals("by.htp.itacademy.framework.webcore.ContainerListener"))
-				return;
-			doAddClass(classList, file.getName());
-		}
-	}
-
-	private void doAddClass(List<Class<?>> classList, String className) {
-		Class<?> clzz = ClassUtil.loadClass(className, false);
+	@SuppressWarnings("unchecked")
+	@Override
+	protected <T> void doAddFile(List<T> fileList, String fileName) {
+		fileName = fileName.replaceAll(FrameworkConstant.CLASSES_PACKAGE, "by.").replaceAll(".class", "").replaceAll("/", ".");
+		Class<?> clzz = ClassUtil.loadClass(fileName);
 		if (checkAddClass(clzz)) {
-			classList.add(clzz);
+			fileList.add((T) clzz);
 		}
 	}
 

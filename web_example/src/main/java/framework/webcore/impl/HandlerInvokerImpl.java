@@ -1,6 +1,5 @@
 package framework.webcore.impl;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import framework.webcore.BeanHelper;
 import framework.webcore.HandlerInvoker;
 import framework.webcore.bean.Handler;
-import framework.webcore.util.WebUtil;
+import framework.webcore.util.ParameterUtil;
 
 public class HandlerInvokerImpl implements HandlerInvoker {
 
@@ -21,18 +20,16 @@ public class HandlerInvokerImpl implements HandlerInvoker {
 
 		Class<?> actionClass = handler.getActionClass();
 		Method actionMethod = handler.getActionMethod();
-		Annotation[] annotations = actionMethod.getAnnotations();
 		Object actionInstance = BeanHelper.getBean(actionClass);
-		List<Object> paramList = createActionMethodParamsList(request, annotations, handler);
+		List<Object> paramList = createActionMethodParamsList(request, actionMethod, handler);
 		Object invokeResult = invokeActionMethod(actionMethod, actionInstance, paramList);
 		return invokeResult;
 	}
 
-	private List<Object> createActionMethodParamsList(HttpServletRequest request, Annotation[] annotations,
+	private List<Object> createActionMethodParamsList(HttpServletRequest request, Method actionMethod,
 			Handler handler) {
 		List<Object> paramList = new ArrayList<Object>();
-		Class<?>[] parameterTypes = handler.getActionMethod().getParameterTypes();
-		paramList.addAll(WebUtil.createPathParamList(request, parameterTypes, annotations, handler));
+		paramList.addAll(ParameterUtil.createPathParamList(request, actionMethod, handler));
 		// Map<String, Object> requestParamMap = WebUtil.getRequestParamMap(request);
 		// if (MapUtils.isNotEmpty(requestParamMap)) {
 		// paramList.add(new Params(requestParamMap));

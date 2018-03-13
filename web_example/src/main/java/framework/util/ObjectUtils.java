@@ -18,7 +18,7 @@ public class ObjectUtils {
     }
 	
 	public static boolean isNotEmptyString(String str) {
-        return isEmptyString(str);
+        return !isEmptyString(str);
     }
 	
 	public static boolean isEmptyArray(Object[] array) {

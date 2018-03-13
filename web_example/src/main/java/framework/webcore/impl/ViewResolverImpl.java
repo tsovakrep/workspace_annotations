@@ -35,7 +35,7 @@ public class ViewResolverImpl implements ViewResolver {
                 }
             } else {
                 Result result = (Result) invorkResult;
-                WebUtil.writeJSON(request, response, JSONUtil.toJSON(result));
+                JSONUtil.writeJSON(request, response, JSONUtil.toJSON(result));
             }
         }
 	}

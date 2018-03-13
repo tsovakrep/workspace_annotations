@@ -25,7 +25,6 @@ public class ActionHelper {
 	static {
 		try {
 			List<Class<?>> actionClassList = ClassHelper.getClassListByAnnotation(Controller.class);
-			System.out.println(actionClassList);
 			Map<Requester, Handler> commonActionMap = new HashMap<Requester, Handler>();
 			
 			if (ObjectUtils.isNotEmptyCollection(actionClassList)) {
@@ -83,11 +82,18 @@ public class ActionHelper {
 		}
 	}
 	
-	private static void putActionMap(HttpMethod requestMethods, String requestUrl, 
-			Class<?> actionClass, Method actionMethod, Map<Requester, Handler> commonActionMap) {
-		if (requestUrl.matches(".+\\{\\w+\\}.*")) {
-			requestUrl.replaceAll("\\{\\w+\\}", "(\\\\\\w+)");
-		}
+	private static void putActionMap(HttpMethod requestMethods, String requestUrl, Class<?> actionClass, Method actionMethod, Map<Requester, Handler> commonActionMap) {
+		
+//		System.out.println("requestMethods: " + requestMethods);
+//		System.out.println("requestUrl1: " + requestUrl);
+//		System.out.println("actionClass: " + actionClass);
+//		System.out.println("actionMethod: " + actionMethod);
+//		System.out.println("---------------------------------------------");
+//		if (requestUrl.matches(".+\\{\\w+}.*")) {
+//			requestUrl = requestUrl.replaceAll("\\{\\w+\\}", "(\\\\w+\\)");
+//		}
+//		System.out.println("requestUrl2: " + requestUrl);
+//		System.out.println("---------------------------------------------");
 		commonActionMap.put(new Requester(requestUrl, requestMethods), new Handler(actionClass, actionMethod));
 	}
 	

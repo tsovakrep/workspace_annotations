@@ -31,12 +31,12 @@ public class DispatcherServlet extends HttpServlet {
 		String requestPath = WebUtil.getRequestUrl(request);
 		
 		if (requestPath.equals("/")) {
-			WebUtil.redirectRequest(FrameworkConstant.HOME_PAGE, request, response);
+			WebUtil.forwardRequest(request, response, FrameworkConstant.HOME_PAGE);
 		}
 
-		if (requestPath.endsWith("/")) {
-			requestPath = requestPath.substring(0, requestPath.length() - 1);
-		}
+//		if (requestPath.endsWith("/")) {
+//			requestPath = requestPath.substring(0, requestPath.length() - 1);
+//		}
 
 		Handler handler = handlerMapping.getHandler(requestPath, reqMethod);
 		if (handler == null) {

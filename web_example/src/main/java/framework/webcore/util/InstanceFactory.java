@@ -4,7 +4,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import framework.classcore.ClassScanner;
+import framework.classcore.PageScanner;
 import framework.classcore.impl.ClassScannerImpl;
+import framework.classcore.impl.PageScannerImpl;
 import framework.util.ObjectUtils;
 import framework.webcore.HandlerInvoker;
 import framework.webcore.HandlerMapping;
@@ -24,6 +26,7 @@ public class InstanceFactory {
 	private static final String HANDLER_INVOKER = "handler_invoker";
 	private static final String HANDLER_MAPPING = "handler_mapping";
 	private static final String VIEW_RESOLVER = "view_resolver";
+	private static final String PAGE_SCANNER = "page_scanner";
 
 	public static ClassScanner getClassScanner() {
         return getInstance(CLASS_SCANNER, ClassScannerImpl.class);
@@ -39,6 +42,10 @@ public class InstanceFactory {
 
     public static ViewResolver getViewResolver() {
         return getInstance(VIEW_RESOLVER, ViewResolverImpl.class);
+    }
+    
+    public static PageScanner getPageScanner() {
+    	return getInstance(PAGE_SCANNER, PageScannerImpl.class);
     }
 
 	@SuppressWarnings("unchecked")

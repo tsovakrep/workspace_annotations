@@ -18,7 +18,7 @@ public class ClassScannerImpl implements ClassScanner {
                 String clzName = clz.getName();
                 return clzName.startsWith(packageName);
             }
-        }.getClassList();
+        }.getFileList();
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class ClassScannerImpl implements ClassScanner {
             protected boolean checkAddClass(Class<?> clz) {
                 return superClass.isAssignableFrom(clz);
             }
-        }.getClassList();
+        }.getFileList();
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class ClassScannerImpl implements ClassScanner {
             protected boolean checkAddClass(Class<?> clz) {
                 return clz.isAnnotationPresent(annotationClass);
             }
-        }.getClassList();
+        }.getFileList();
 	}
 	
 }

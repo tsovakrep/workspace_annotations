@@ -1,11 +1,14 @@
 package framework.webcore;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.ServletRegistration;
 import javax.servlet.annotation.WebListener;
 
+import framework.classcore.PageHelper;
 import framework.util.FrameworkConstant;
 import framework.util.HelperLoader;
 import framework.util.ObjectUtils;
@@ -16,11 +19,12 @@ public class ContainerListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
 		ServletContext servletContext = servletContextEvent.getServletContext();
+		DataContext.getInstance(servletContext);
 
 		HelperLoader.init();
 
 		addServletMapping(servletContext);
-		
+
 		System.out.println("context initilized");
 	}
 
@@ -30,15 +34,18 @@ public class ContainerListener implements ServletContextListener {
 	}
 
 	private void addServletMapping(ServletContext servletContext) {
+		List<String> pages = PageHelper.getBasePackagePageList();
+		registerJspServlet(servletContext, pages);
 		registerDefaultServlet(servletContext);
-		registerJspServlet(servletContext);
+		
 	}
 
-	private void registerJspServlet(ServletContext servletContext) {
+	private void registerJspServlet(ServletContext servletContext, List<String> pages) {
 		ServletRegistration jspServlet = servletContext.getServletRegistration("jsp");
-		String jspPath = FrameworkConstant.PATH_PAGES;
-		if (ObjectUtils.isNotEmptyString(jspPath)) {
-			jspServlet.addMapping(jspPath);
+		for (String page : pages) {
+			if (ObjectUtils.isNotEmptyString(page)) {
+				jspServlet.addMapping(page);
+			}
 		}
 	}
 

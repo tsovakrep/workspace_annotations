@@ -2,10 +2,14 @@ package framework.webcore.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+
+import framework.util.FrameworkConstant;
 
 public class JSONUtil {
 
@@ -26,6 +30,19 @@ public class JSONUtil {
 		}
 		return buf.toString();
 	}
+	
+	public static void writeJSON(HttpServletRequest request, HttpServletResponse response, String result) {
+        try {
+            response.setCharacterEncoding(FrameworkConstant.ENCODING);
+            response.setContentType("application/json");
+            PrintWriter printWriter = response.getWriter();
+            printWriter.write(result);
+            printWriter.flush();
+            printWriter.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 	public static String toJSON(Object obj) {
 

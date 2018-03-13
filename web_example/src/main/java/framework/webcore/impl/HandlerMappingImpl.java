@@ -24,8 +24,14 @@ public class HandlerMappingImpl implements HandlerMapping {
 
 				String requestUrl = requester.getRequestUrls();
 				HttpMethod reqMethod = requester.getRequestMethod();
-
+				
+//				System.out.println("requestUrl1: " + requestUrl);
+				requestUrl = requestUrl.replaceAll("\\{\\w+\\}", "(\\\\w+\\)");
+//				System.out.println("requestUrl2: " + requestUrl);
+				
 				Matcher matcher = Pattern.compile(requestUrl).matcher(requestPath);
+//				System.out.println("matcher: " + matcher.matches());
+				
 				if (matcher.matches() && isMatchRequestMethod(reqMethod, requestMethod)) {
 					handler = entry.getValue();
 					if (handler != null) {
@@ -37,7 +43,7 @@ public class HandlerMappingImpl implements HandlerMapping {
 		}
 		return handler;
 	}
-
+	
 	private boolean isMatchRequestMethod(HttpMethod reqMethod, String requestMethod) {
 		boolean isMatch = false;
 		if (reqMethod.name().equalsIgnoreCase(requestMethod)) {
@@ -45,16 +51,16 @@ public class HandlerMappingImpl implements HandlerMapping {
 		}
 		return isMatch;
 	}
-	
+
 	@SuppressWarnings("unused")
 	private static String replaceAll(String str, String regex, String replacement) {
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(str);
-        StringBuffer sb = new StringBuffer();
-        while (m.find()) {
-            m.appendReplacement(sb, replacement);
-        }
-        m.appendTail(sb);
-        return sb.toString();
-    }
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(str);
+		StringBuffer sb = new StringBuffer();
+		while (m.find()) {
+			m.appendReplacement(sb, replacement);
+		}
+		m.appendTail(sb);
+		return sb.toString();
+	}
 }

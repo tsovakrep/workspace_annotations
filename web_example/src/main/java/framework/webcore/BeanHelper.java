@@ -38,7 +38,8 @@ public class BeanHelper {
         return beanMap;
     }
 
-    public static <T> T getBean(Class<T> cls) {
+    @SuppressWarnings("unchecked")
+	public static <T> T getBean(Class<T> cls) {
         if (!beanMap.containsKey(cls)) {
             throw new RuntimeException("The class not contains annotation Controller.");
         }

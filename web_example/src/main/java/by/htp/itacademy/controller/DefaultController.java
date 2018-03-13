@@ -49,9 +49,10 @@ public class DefaultController {
 		System.out.println("was called POST method");
 	}
 
-	@PostMapping("welcome/{user}")
+	@PostMapping("welcome/{name}")
 	public void loadHomePage(@ReqParam(value = "userName", defaultValue = "Tsovak1") String value,
-			@ReqParam(value = "userName1", defaultValue = "Tsovak2") String value2, @PathVariable("name") String name,
+			@ReqParam(value = "userName1", defaultValue = "Tsovak2") String value2, 
+			@PathVariable("name") String name,
 			@ReqBody User user, HttpSession session) {
 
 		// loadLanguage(session);
