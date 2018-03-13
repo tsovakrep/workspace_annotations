@@ -5,15 +5,15 @@ import java.util.regex.Pattern;
 
 public class Main {
 	public static void main(String[] args) {
-		String requestUrl = "/user/getUserInfo/{uid}/{aid}/{adf}";
-		// System.out.println(requestPath.matches(".+\\{\\w+}.*"));
+		String requestUrl = "/user/getUserInfo/{uid}/aid/{adf}";
+//		System.out.println(requestPath.matches(".+\\{\\w+}.*"));
 		requestUrl = requestUrl.replaceAll("\\{\\w+\\}", "(\\\\w+\\)");
-		// System.out.println(requestPath);
+		System.out.println(requestUrl);
 
-		// requestPath = replaceAll(requestPath, "\\{\\w+\\}", "(\\\\w+)");
-		// System.out.println(requestPath);
+//		requestPath = replaceAll(requestPath, "\\{\\w+\\}", "(\\\\w+)");
+//		System.out.println(requestPath);
 
-		String requestPath = "/user/getUserInfo/333/xxxx/adf";
+		String requestPath = "/user/getUserInfo/333/aid/adf";
 		Matcher matcher = Pattern.compile(requestUrl).matcher(requestPath);
 		System.out.println(matcher.matches());
 
@@ -22,5 +22,14 @@ public class Main {
 			String group = matcher.group(i);
 			System.out.println(group);
 		}
+
+//		String group1 = matcher.group(1);
+//		System.out.println(group1);
+//
+//		String group2 = matcher.group(2);
+//		System.out.println(group2);
+//
+//		String group3 = matcher.group(3);
+//		System.out.println(group3);
 	}
 }
