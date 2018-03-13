@@ -16,33 +16,34 @@ import lombok.Getter;
 public class ParamsHelper {
 
 	private Method actionMethod;
-	@Getter private List<Class<?>> parameterTypes;
-	@Getter private List<Parameter> parameters;
-	@Getter private Map<Parameter, List<Annotation>> parameterAnnotations;
-	
+	@Getter
+	private List<Class<?>> parameterTypes;
+	@Getter
+	private List<Parameter> parameters;
+	@Getter
+	private Map<Parameter, List<Annotation>> parameterAnnotations;
+
 	public ParamsHelper(Method actionMethod) {
 		this.actionMethod = actionMethod;
 		init();
 	}
-	
-	public boolean containAnnotation(Class<? extends Annotation> annotationClass) {
-		for (Parameter parameter : this.parameters) {
-			for (Annotation annotation : this.getParameterAnnotations().get(parameter)) {
-				return annotation.annotationType().equals(annotationClass);
-			}
+
+	public boolean containAnnotation(Parameter parameter, Class<? extends Annotation> annotationClass) {
+		for (Annotation annotation : this.getParameterAnnotations().get(parameter)) {
+			return annotation.annotationType().equals(annotationClass);
 		}
 		return false;
 	}
-	
+
 	private void init() {
 		this.parameters = new ArrayList<>();
 		this.parameters = Arrays.asList(actionMethod.getParameters());
 
 		this.parameterTypes = new ArrayList<>();
 		this.parameterTypes = Arrays.asList(actionMethod.getParameterTypes());
-		
+
 		this.parameterAnnotations = new HashMap<>();
-		
+
 		for (Parameter parameter : parameters) {
 			this.parameterAnnotations.put(parameter, Arrays.asList(parameter.getAnnotations()));
 		}
