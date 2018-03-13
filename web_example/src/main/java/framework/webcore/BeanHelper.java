@@ -17,6 +17,7 @@ public class BeanHelper {
 	static {
 		try {
 			List<Class<?>> basePackageClassList = ClassHelper.getBasePackageClassList();
+			System.out.println("basePackageClassList: " + basePackageClassList);
 			List<Class<?>> beanClassList = new ArrayList<Class<?>>();
 
 			if (ObjectUtils.isNotEmptyCollection(basePackageClassList)) {
@@ -25,6 +26,7 @@ public class BeanHelper {
 					if (cls.isAnnotationPresent(Controller.class)) {
 						beanClassList.add(cls);
 						Object instance = cls.newInstance();
+						System.out.println(instance.getClass().getName());
 						beanMap.put(cls, instance);
 					}
 				}
