@@ -41,8 +41,6 @@ public class ParameterUtil {
 
 	private static void reqParamAnnotation(ParamsHelper paramsHelper, Parameter parameter, HttpServletRequest request,
 			List<Object> paramList) {
-		boolean cont = paramsHelper.containAnnotation(ReqParam.class);
-		System.out.println("ReqParam: " + cont);
 		if (paramsHelper.containAnnotation(ReqParam.class)) {
 			ReqParam reqParam = (ReqParam) getAnnotation(paramsHelper, parameter, ReqParam.class);
 			String requestParameterValue = request.getParameter(reqParam.value());
@@ -79,7 +77,6 @@ public class ParameterUtil {
 	}
 	
 	private static void httpSession(Parameter parameter, HttpServletRequest request, List<Object> paramList) {
-		System.out.println("I am...");
 		if (HttpSession.class.getName().equals(parameter.getType().getName())) {
 			paramList.add(request.getSession());
 		}
