@@ -55,11 +55,11 @@ public class DefaultController {
 			@PathVariable("name") String name,
 			@ReqBody User user, HttpSession session) {
 
-		// loadLanguage(session);
-		// System.out.println(value);
-		// System.out.println(value2);
-		// System.out.println(name);
-		// System.out.println(user);
+		loadLanguage(session);
+		System.out.println(value);
+		System.out.println(value2);
+		System.out.println(name);
+		System.out.println(user);
 
 	}
 
