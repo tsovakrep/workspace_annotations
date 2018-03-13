@@ -17,7 +17,6 @@ public class BeanHelper {
 	static {
 		try {
 			List<Class<?>> basePackageClassList = ClassHelper.getBasePackageClassList();
-			System.out.println("basePackageClassList: " + basePackageClassList);
 			List<Class<?>> beanClassList = new ArrayList<Class<?>>();
 
 			if (ObjectUtils.isNotEmptyCollection(basePackageClassList)) {

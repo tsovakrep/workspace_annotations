@@ -16,7 +16,7 @@ public class ClassScannerImpl implements ClassScanner {
             @Override
             protected boolean checkAddClass(Class<?> clz) {
                 String clzName = clz.getName();
-                return clzName.startsWith(packageName);
+                return clzName.startsWith("by.htp.itacademy");
             }
         }.getFileList();
 	}

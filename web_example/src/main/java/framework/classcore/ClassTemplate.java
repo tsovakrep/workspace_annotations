@@ -18,7 +18,6 @@ public abstract class ClassTemplate extends Template {
 	public <T> List<T> getFileList() {
 		List<Class<?>> classList = new ArrayList<>();
 		searchResourceFiles(DataContext.getServletContext(), FrameworkConstant.CLASSES_PACKAGE, classList);
-		System.out.println("classList: " + classList);
 		return (List<T>) classList;
 	}
 
