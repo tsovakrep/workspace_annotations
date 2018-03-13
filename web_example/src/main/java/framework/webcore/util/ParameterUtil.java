@@ -42,6 +42,7 @@ public class ParameterUtil {
 
 	private static void reqParamAnnotation(ParamsHelper paramsHelper, Parameter parameter, HttpServletRequest request,
 			List<Object> paramList) {
+		System.out.println(paramsHelper.containAnnotation(ReqParam.class));
 		if (paramsHelper.containAnnotation(ReqParam.class)) {
 			if (parameter.isAnnotationPresent(ReqParam.class)) {
 				ReqParam reqParam = (ReqParam) getAnnotation(paramsHelper, parameter, ReqParam.class);
@@ -62,6 +63,7 @@ public class ParameterUtil {
 
 	private static void pathVariableAnnotation(ParamsHelper paramsHelper, int ordinal, Handler handler, 
 			Parameter parameter, List<Object> paramList) {
+		System.out.println(paramsHelper.containAnnotation(PathVariable.class));
 		if (paramsHelper.containAnnotation(PathVariable.class)) {
 			if (parameter.isAnnotationPresent(PathVariable.class)) {
 				String pathVariableValue = handler.getRequestMatcher().group(ordinal);
@@ -75,6 +77,7 @@ public class ParameterUtil {
 
 	private static void reqBodyAnnotation(ParamsHelper paramsHelper, Parameter parameter, HttpServletRequest request,
 			List<Object> paramList) {
+		System.out.println(paramsHelper.containAnnotation(ReqBody.class));
 		if (paramsHelper.containAnnotation(ReqBody.class)) {
 			if (parameter.isAnnotationPresent(ReqBody.class)) {
 				String jsonString = JSONUtil.getJsonString(request);
