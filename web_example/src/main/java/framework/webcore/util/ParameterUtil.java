@@ -31,9 +31,13 @@ public class ParameterUtil {
 		for (int j = 0; j < parameters.size(); j++) {
 
 			reqParamAnnotation(paramsHelper, parameters.get(j), request, paramList);
+			System.out.println("paramList1: " + paramList);
 			pathVariableAnnotation(paramsHelper, ordinal, handler, paramList);
+			System.out.println("paramList2: " + paramList);
 			reqBodyAnnotation(paramsHelper, parameters.get(j), request, paramList);
+			System.out.println("paramList3: " + paramList);
 			httpSession(parameters.get(j), request, paramList);
+			System.out.println("paramList4: " + paramList);
 		}
 		
 		return paramList;
@@ -42,6 +46,7 @@ public class ParameterUtil {
 	private static void reqParamAnnotation(ParamsHelper paramsHelper, Parameter parameter, HttpServletRequest request,
 			List<Object> paramList) {
 		if (paramsHelper.containAnnotation(ReqParam.class)) {
+			System.out.println("is1: " + true);
 			ReqParam reqParam = (ReqParam) getAnnotation(paramsHelper, parameter, ReqParam.class);
 			String requestParameterValue = request.getParameter(reqParam.value());
 			try {
@@ -60,6 +65,7 @@ public class ParameterUtil {
 	private static void pathVariableAnnotation(ParamsHelper paramsHelper, int ordinal, Handler handler,
 			List<Object> paramList) {
 		if (paramsHelper.containAnnotation(PathVariable.class)) {
+			System.out.println("is2: " + true);
 			String pathVariableValue = handler.getRequestMatcher().group(ordinal);
 			if (ObjectUtils.isNotEmptyString(pathVariableValue)) {
 				paramList.add(pathVariableValue);
@@ -71,6 +77,7 @@ public class ParameterUtil {
 	private static void reqBodyAnnotation(ParamsHelper paramsHelper, Parameter parameter, HttpServletRequest request,
 			List<Object> paramList) {
 		if (paramsHelper.containAnnotation(ReqBody.class)) {
+			System.out.println("is3: " + true);
 			String jsonString = JSONUtil.getJsonString(request);
 			paramList.add(JSONUtil.fromJSON(jsonString, parameter.getType()));
 		}
@@ -78,6 +85,7 @@ public class ParameterUtil {
 	
 	private static void httpSession(Parameter parameter, HttpServletRequest request, List<Object> paramList) {
 		if (HttpSession.class.getName().equals(parameter.getType().getName())) {
+			System.out.println("is4: " + true);
 			paramList.add(request.getSession());
 		}
 	}
