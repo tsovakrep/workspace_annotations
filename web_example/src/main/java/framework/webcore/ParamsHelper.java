@@ -25,7 +25,7 @@ public class ParamsHelper {
 		init();
 	}
 	
-	public boolean isAnnotation(Class<? extends Annotation> annotationClass) {
+	public boolean containAnnotation(Class<? extends Annotation> annotationClass) {
 		for (Parameter parameter : this.parameters) {
 			for (Annotation annotation : this.getParameterAnnotations().get(parameter)) {
 				return annotation.annotationType().equals(annotationClass);
