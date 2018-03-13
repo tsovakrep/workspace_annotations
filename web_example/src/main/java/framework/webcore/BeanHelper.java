@@ -25,7 +25,6 @@ public class BeanHelper {
 					if (cls.isAnnotationPresent(Controller.class)) {
 						beanClassList.add(cls);
 						Object instance = cls.newInstance();
-						System.out.println(instance.getClass().getName());
 						beanMap.put(cls, instance);
 					}
 				}
