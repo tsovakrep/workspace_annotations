@@ -50,10 +50,12 @@ public class ParameterUtil {
 			ReqParam reqParam = (ReqParam) getAnnotation(paramsHelper, parameter, ReqParam.class);
 			String requestParameterValue = request.getParameter(reqParam.value());
 			try {
-				if (requestParameterValue != null) {
+				if (ObjectUtils.isNotEmptyString(requestParameterValue)) {
 					paramList.add(FacadeCast.getCastChain().getValue(parameter.getType(), requestParameterValue));
+					System.out.println("paramList11: " + paramList);
 				} else {
 					paramList.add(FacadeCast.getCastChain().getValue(parameter.getType(), reqParam.defaultValue()));
+					System.out.println("paramList11: " + paramList);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -69,6 +71,7 @@ public class ParameterUtil {
 			String pathVariableValue = handler.getRequestMatcher().group(ordinal);
 			if (ObjectUtils.isNotEmptyString(pathVariableValue)) {
 				paramList.add(pathVariableValue);
+				System.out.println("paramList21: " + paramList);
 				ordinal++;
 			}
 		}
@@ -80,6 +83,7 @@ public class ParameterUtil {
 			System.out.println("is3: " + true);
 			String jsonString = JSONUtil.getJsonString(request);
 			paramList.add(JSONUtil.fromJSON(jsonString, parameter.getType()));
+			System.out.println("paramList31: " + paramList);
 		}
 	}
 	
@@ -87,6 +91,7 @@ public class ParameterUtil {
 		if (HttpSession.class.getName().equals(parameter.getType().getName())) {
 			System.out.println("is4: " + true);
 			paramList.add(request.getSession());
+			System.out.println("paramList41: " + paramList);
 		}
 	}
 	

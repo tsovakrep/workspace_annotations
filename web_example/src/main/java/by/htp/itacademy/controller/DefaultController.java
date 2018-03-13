@@ -50,7 +50,8 @@ public class DefaultController {
 	}
 
 	@PostMapping("welcome/{name}")
-	public void loadHomePage(@ReqParam(value = "userName", defaultValue = "Tsovak1") String value,
+	public void loadHomePage(
+			@ReqParam(value = "userName", defaultValue = "Tsovak1") String value,
 			@ReqParam(value = "userName1", defaultValue = "Tsovak2") String value2, 
 			@PathVariable("name") String name,
 			@ReqBody User user, HttpSession session) {
