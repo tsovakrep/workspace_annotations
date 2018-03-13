@@ -1,5 +1,6 @@
 package framework.webcore.util;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
@@ -43,8 +44,7 @@ public class ParameterUtil {
 		boolean cont = paramsHelper.containAnnotation(ReqParam.class);
 		System.out.println("ReqParam: " + cont);
 		if (paramsHelper.containAnnotation(ReqParam.class)) {
-
-			ReqParam reqParam = (ReqParam) paramsHelper.getParameterAnnotations().get(parameter);
+			ReqParam reqParam = (ReqParam) getAnnotation(paramsHelper, parameter, ReqParam.class);
 			String requestParameterValue = request.getParameter(reqParam.value());
 			try {
 				if (requestParameterValue != null) {
@@ -61,8 +61,6 @@ public class ParameterUtil {
 
 	private static void pathVariableAnnotation(ParamsHelper paramsHelper, int ordinal, Handler handler,
 			List<Object> paramList) {
-		boolean cont = paramsHelper.containAnnotation(PathVariable.class);
-		System.out.println(cont);
 		if (paramsHelper.containAnnotation(PathVariable.class)) {
 			String pathVariableValue = handler.getRequestMatcher().group(ordinal);
 			if (ObjectUtils.isNotEmptyString(pathVariableValue)) {
@@ -74,8 +72,6 @@ public class ParameterUtil {
 
 	private static void reqBodyAnnotation(ParamsHelper paramsHelper, Parameter parameter, HttpServletRequest request,
 			List<Object> paramList) {
-		boolean cont = paramsHelper.containAnnotation(ReqBody.class);
-		System.out.println(cont);
 		if (paramsHelper.containAnnotation(ReqBody.class)) {
 			String jsonString = JSONUtil.getJsonString(request);
 			paramList.add(JSONUtil.fromJSON(jsonString, parameter.getType()));
@@ -87,5 +83,15 @@ public class ParameterUtil {
 		if (HttpSession.class.getName().equals(parameter.getType().getName())) {
 			paramList.add(request.getSession());
 		}
+	}
+	
+	private static Annotation getAnnotation(ParamsHelper paramsHelper, Parameter parameter, Class<? extends Annotation> annotClass) {
+		List<Annotation> annotations = paramsHelper.getParameterAnnotations().get(parameter);
+		for (Annotation annot : annotations) {
+			if (annotClass.getTypeName().equals(annot.annotationType().getName())) {
+				return annot;
+			}
+		}
+		return null;
 	}
 }
