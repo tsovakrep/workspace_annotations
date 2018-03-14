@@ -38,7 +38,7 @@ public class DefaultController {
 	@PostMapping
 	public View dffasdfw() {
 		System.out.println("was called POST method");
-		return new View(FrameworkConstant.PATH_PAGES + "template/index3.jsp");
+		return new View("template/index3.jsp");
 	}
 
 	@DeleteMapping
