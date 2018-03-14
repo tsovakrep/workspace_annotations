@@ -31,7 +31,8 @@ public class DispatcherServlet extends HttpServlet {
 		String requestPath = WebUtil.getRequestUrl(request);
 		
 		if (requestPath.equals("/")) {
-			WebUtil.forwardRequest(request, response, FrameworkConstant.HOME_PAGE);
+//			WebUtil.forwardRequest(request, response, FrameworkConstant.HOME_PAGE);
+			WebUtil.redirectRequest(FrameworkConstant.HOME_PAGE, request, response);
 		}
 
 		Handler handler = handlerMapping.getHandler(requestPath, reqMethod);
