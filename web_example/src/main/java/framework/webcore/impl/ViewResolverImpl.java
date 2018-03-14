@@ -16,10 +16,10 @@ import framework.webcore.util.WebUtil;
 public class ViewResolverImpl implements ViewResolver {
 
 	@Override
-	public void resolveView(HttpServletRequest request, HttpServletResponse response, Object invorkResult) {
-		if (invorkResult != null) {
-            if (invorkResult.getClass().getTypeName().equals(View.class.getName())) {
-                View view = (View) invorkResult;
+	public void resolveView(HttpServletRequest request, HttpServletResponse response, Object invokResult) {
+		if (invokResult != null) {
+            if (invokResult.getClass().getTypeName().equals(View.class.getName())) {
+                View view = (View) invokResult;
                 String viewPath = view.getPath();
                 if (view.isRedirect()) {
                     WebUtil.sendRedirect(request, response, viewPath);
@@ -34,7 +34,7 @@ public class ViewResolverImpl implements ViewResolver {
                     WebUtil.forwardRequest(request, response, forwardPath);
                 }
             } else {
-                Result result = (Result) invorkResult;
+                Result result = (Result) invokResult;
                 JSONUtil.writeJSON(request, response, JSONUtil.toJSON(result));
             }
         }
