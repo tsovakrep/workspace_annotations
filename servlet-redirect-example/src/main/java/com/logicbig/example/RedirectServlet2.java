@@ -20,6 +20,6 @@ public class RedirectServlet2 extends HttpServlet {
         System.out.println("----- Request for /test3 ---------");
         System.out.println(req.getParameter("name"));
         resp.setStatus(307);
-        resp.setHeader("Location", "http://localhost:8080/example/test4");
+        resp.setHeader("Location", "http://localhost:8080/servlet-redirect-example/test4");
     }
 }

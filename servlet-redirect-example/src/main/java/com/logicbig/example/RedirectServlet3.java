@@ -19,7 +19,7 @@ public class RedirectServlet3 extends HttpServlet {
 
         System.out.println("----- Request for /test5 ---------");
         resp.setStatus(308);
-        resp.setHeader("Location", "http://localhost:8080/example/test6");
+        resp.setHeader("Location", "http://localhost:8080/servlet-redirect-example/test6");
     }
 
     @Override
@@ -31,6 +31,6 @@ public class RedirectServlet3 extends HttpServlet {
         System.out.println("----- Post request for /test5 ---------");
         System.out.println(req.getParameter("name"));
         resp.setStatus(308);
-        resp.setHeader("Location", "http://localhost:8080/example/test6");
+        resp.setHeader("Location", "http://localhost:8080/servlet-redirect-example/test6");
     }
 }
