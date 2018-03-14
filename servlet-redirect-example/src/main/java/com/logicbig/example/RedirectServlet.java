@@ -31,6 +31,6 @@ public class RedirectServlet extends HttpServlet {
         System.out.println("Post param name: " + req.getParameter("name"));
         //resp.setStatus(302);
        // resp.setHeader("Location", "http://localhost:8080/example/test2");
-        resp.sendRedirect("http://localhost:8080/example/test2");
+        resp.sendRedirect("http://localhost:8080/servlet-redirect-example/test2");
     }
 }

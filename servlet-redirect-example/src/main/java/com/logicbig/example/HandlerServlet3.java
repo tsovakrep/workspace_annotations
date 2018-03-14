@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 import java.time.LocalTime;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/servlet-redirect-example/test6")
+@WebServlet(urlPatterns = "/test6")
 public class HandlerServlet3 extends HttpServlet {
 
     @Override
