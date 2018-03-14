@@ -60,7 +60,7 @@ ajax();
 	</form>
 	
 	<form action="callMethod/pl" method="get">
-		<input type="submit" value="callMethod" />
+		<input type="submit" value="pl callMethod" />
 	</form>
 
 
