@@ -34,7 +34,6 @@ public class WebUtil {
     
     public static void redirectRequest(String pagePath, HttpServletRequest request, HttpServletResponse response) {
         try {
-        	System.out.println("request.getContextPath(): " + request.getContextPath());
             response.sendRedirect(request.getContextPath() + pagePath);
         } catch (IOException e) {
             throw new RuntimeException(e);

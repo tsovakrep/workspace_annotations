@@ -56,6 +56,10 @@ ajax();
 	</form>
 
 	<form action="callMethod/ts" method="get">
+		<input type="submit" value="ts callMethod" />
+	</form>
+	
+	<form action="callMethod/pl" method="get">
 		<input type="submit" value="callMethod" />
 	</form>
 

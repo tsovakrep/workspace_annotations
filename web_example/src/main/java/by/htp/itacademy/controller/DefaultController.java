@@ -26,8 +26,15 @@ public class DefaultController {
 	}
 
 	@GetMapping("callMethod/ts")
-	public void fsadf(HttpSession session) {
+	public View fsadf(HttpSession session) {
 		System.out.println("was called GET method");
+		return new View("template/index3.jsp");
+	}
+	
+	@GetMapping("callMethod/pl")
+	public View fasadf(HttpSession session) {
+		System.out.println("was called GET method");
+		return new View(FrameworkConstant.PATH_PAGES + "template/index3.jsp");
 	}
 	
 	@PostMapping("index/show")
@@ -52,7 +59,7 @@ public class DefaultController {
 	}
 
 	@PostMapping("welcome/{name}")
-	public void loadHomePage(
+	public View loadHomePage(
 			@ReqParam(value = "userName", defaultValue = "Tsovak1") String value,
 			@ReqParam(value = "userName1", defaultValue = "Tsovak2") String value2, 
 			@PathVariable("name") String name,
@@ -63,7 +70,7 @@ public class DefaultController {
 		System.out.println(value2);
 		System.out.println(name);
 		System.out.println(user);
-
+		return new View("template/index3.jsp");
 	}
 
 	private void loadLanguage(HttpSession session) {
