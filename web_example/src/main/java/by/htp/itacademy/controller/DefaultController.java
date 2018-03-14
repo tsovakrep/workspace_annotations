@@ -9,7 +9,6 @@ import framework.webcore.annotation.GetMapping;
 import framework.webcore.annotation.Mapping;
 import framework.webcore.annotation.PathVariable;
 import framework.webcore.annotation.PostMapping;
-import framework.webcore.annotation.PutMapping;
 import framework.webcore.annotation.ReqBody;
 import framework.webcore.annotation.ReqParam;
 import framework.webcore.bean.View;
