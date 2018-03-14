@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/test3")
+@WebServlet(urlPatterns = "/servlet-redirect-example/test3")
 public class RedirectServlet2 extends HttpServlet {
 
     @Override

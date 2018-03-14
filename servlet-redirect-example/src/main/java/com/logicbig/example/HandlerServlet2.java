@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/test4")
+@WebServlet(urlPatterns = "/servlet-redirect-example/test4")
 public class HandlerServlet2 extends HttpServlet {
 
     @Override
