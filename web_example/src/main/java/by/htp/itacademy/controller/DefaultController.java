@@ -2,6 +2,7 @@ package by.htp.itacademy.controller;
 
 import javax.servlet.http.HttpSession;
 
+import framework.util.FrameworkConstant;
 import framework.webcore.annotation.Controller;
 import framework.webcore.annotation.DeleteMapping;
 import framework.webcore.annotation.GetMapping;
@@ -11,6 +12,7 @@ import framework.webcore.annotation.PostMapping;
 import framework.webcore.annotation.PutMapping;
 import framework.webcore.annotation.ReqBody;
 import framework.webcore.annotation.ReqParam;
+import framework.webcore.bean.View;
 
 @Controller
 @Mapping("/")
@@ -33,9 +35,10 @@ public class DefaultController {
 		System.out.println("was called  index/show  method");
 	}
 
-	@PutMapping
-	public void dffasdfw() {
-		System.out.println("was called PUT method");
+	@PostMapping
+	public View dffasdfw() {
+		System.out.println("was called POST method");
+		return new View(FrameworkConstant.PATH_PAGES + "template/index3.jsp");
 	}
 
 	@DeleteMapping

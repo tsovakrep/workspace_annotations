@@ -39,11 +39,15 @@ ajax();
 -->
 	<form action="welcome/Tsovak" method="post">
 		Name: <input type="text" name="userName" /><br />
-		<input type="submit" value="post" />
+		<input type="submit" value="post welcome" />
 	</form>
 	
 	<form action="" method="get">
 		<input type="submit" value="delete" />
+	</form>
+	
+	<form action="" method="post">
+		<input type="submit" value="post" />
 	</form>
 	
 	<form action="callMethod" method="post">

@@ -11,6 +11,6 @@
 <title>Demo Ajax</title>
 </head>
 <body>
-	<h2>Hello Palakian</h2>
+	<h2>Hello Palakian. You are regular fellow!</h2>
 </body>
 </html>
