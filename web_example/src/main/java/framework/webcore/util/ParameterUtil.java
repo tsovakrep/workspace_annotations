@@ -25,8 +25,8 @@ public class ParameterUtil {
 		ParamsHelper paramsHelper = new ParamsHelper(actionMethod);
 		List<Parameter> parameters = paramsHelper.getParameters();
 		System.out.println();
-		
-		int ordinal = 0;
+
+		int ordinal = 1;
 
 		for (int j = 0; j < parameters.size(); j++) {
 
@@ -34,9 +34,9 @@ public class ParameterUtil {
 			pathVariableAnnotation(paramsHelper, ordinal, handler, parameters.get(j), paramList);
 			reqBodyAnnotation(paramsHelper, parameters.get(j), request, paramList);
 			httpSession(parameters.get(j), request, paramList);
-			System.out.println("paramList11: " + paramList);
+//			System.out.println("paramList11: " + paramList);
 		}
-		
+
 		return paramList;
 	}
 
@@ -47,7 +47,7 @@ public class ParameterUtil {
 			if (parameter.isAnnotationPresent(ReqParam.class)) {
 				ReqParam reqParam = (ReqParam) getAnnotation(paramsHelper, parameter, ReqParam.class);
 				String requestParameterValue = request.getParameter(reqParam.value());
-				
+
 				try {
 					if (ObjectUtils.isNotEmptyString(requestParameterValue)) {
 						paramList.add(FacadeCast.getCastChain().getValue(parameter.getType(), requestParameterValue));
@@ -61,7 +61,7 @@ public class ParameterUtil {
 		}
 	}
 
-	private static void pathVariableAnnotation(ParamsHelper paramsHelper, int ordinal, Handler handler, 
+	private static void pathVariableAnnotation(ParamsHelper paramsHelper, int ordinal, Handler handler,
 			Parameter parameter, List<Object> paramList) {
 		System.out.println(paramsHelper.containAnnotation(parameter, PathVariable.class));
 		if (paramsHelper.containAnnotation(parameter, PathVariable.class)) {
@@ -85,7 +85,7 @@ public class ParameterUtil {
 			}
 		}
 	}
-	
+
 	private static void httpSession(Parameter parameter, HttpServletRequest request, List<Object> paramList) {
 		if (HttpSession.class.getName().equals(parameter.getType().getName())) {
 			paramList.add(request.getSession());
@@ -94,8 +94,9 @@ public class ParameterUtil {
 			System.out.println(false);
 		}
 	}
-	
-	private static Annotation getAnnotation(ParamsHelper paramsHelper, Parameter parameter, Class<? extends Annotation> annotClass) {
+
+	private static Annotation getAnnotation(ParamsHelper paramsHelper, Parameter parameter,
+			Class<? extends Annotation> annotClass) {
 		List<Annotation> annotations = paramsHelper.getParameterAnnotations().get(parameter);
 		for (Annotation annot : annotations) {
 			if (annotClass.getTypeName().equals(annot.annotationType().getName())) {
