@@ -34,7 +34,6 @@ public class ParameterUtil {
 			pathVariableAnnotation(paramsHelper, ordinal, handler, parameters.get(j), paramList);
 			reqBodyAnnotation(paramsHelper, parameters.get(j), request, paramList);
 			httpSession(parameters.get(j), request, paramList);
-//			System.out.println("paramList11: " + paramList);
 		}
 
 		return paramList;
@@ -42,7 +41,6 @@ public class ParameterUtil {
 
 	private static void reqParamAnnotation(ParamsHelper paramsHelper, Parameter parameter, HttpServletRequest request,
 			List<Object> paramList) {
-		System.out.println(paramsHelper.containAnnotation(parameter, ReqParam.class));
 		if (paramsHelper.containAnnotation(parameter, ReqParam.class)) {
 			if (parameter.isAnnotationPresent(ReqParam.class)) {
 				ReqParam reqParam = (ReqParam) getAnnotation(paramsHelper, parameter, ReqParam.class);
@@ -63,7 +61,6 @@ public class ParameterUtil {
 
 	private static void pathVariableAnnotation(ParamsHelper paramsHelper, int ordinal, Handler handler,
 			Parameter parameter, List<Object> paramList) {
-		System.out.println(paramsHelper.containAnnotation(parameter, PathVariable.class));
 		if (paramsHelper.containAnnotation(parameter, PathVariable.class)) {
 			if (parameter.isAnnotationPresent(PathVariable.class)) {
 				String pathVariableValue = handler.getRequestMatcher().group(ordinal);
@@ -77,7 +74,6 @@ public class ParameterUtil {
 
 	private static void reqBodyAnnotation(ParamsHelper paramsHelper, Parameter parameter, HttpServletRequest request,
 			List<Object> paramList) {
-		System.out.println(paramsHelper.containAnnotation(parameter, ReqBody.class));
 		if (paramsHelper.containAnnotation(parameter, ReqBody.class)) {
 			if (parameter.isAnnotationPresent(ReqBody.class)) {
 				String jsonString = JSONUtil.getJsonString(request);
@@ -89,9 +85,6 @@ public class ParameterUtil {
 	private static void httpSession(Parameter parameter, HttpServletRequest request, List<Object> paramList) {
 		if (HttpSession.class.getName().equals(parameter.getType().getName())) {
 			paramList.add(request.getSession());
-			System.out.println(true);
-		} else {
-			System.out.println(false);
 		}
 	}
 

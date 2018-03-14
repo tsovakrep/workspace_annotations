@@ -34,10 +34,6 @@ public class DispatcherServlet extends HttpServlet {
 			WebUtil.forwardRequest(request, response, FrameworkConstant.HOME_PAGE);
 		}
 
-//		if (requestPath.endsWith("/")) {
-//			requestPath = requestPath.substring(0, requestPath.length() - 1);
-//		}
-
 		Handler handler = handlerMapping.getHandler(requestPath, reqMethod);
 		if (handler == null) {
 			WebUtil.sendError(response, HttpServletResponse.SC_NOT_FOUND, "url is wrong");

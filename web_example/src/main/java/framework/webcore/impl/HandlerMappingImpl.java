@@ -26,12 +26,8 @@ public class HandlerMappingImpl implements HandlerMapping {
 				HttpMethod reqMethod = requester.getRequestMethod();
 				
 				requestUrl = requestUrl.replaceAll("\\{\\w+\\}", "(\\\\w+\\)");
-//				System.out.println("requestUrl: " + requestUrl);
-//				System.out.println("requestPath: " + requestPath);
 				
 				Matcher matcher = Pattern.compile(requestUrl).matcher(requestPath);
-//				System.out.println("matcher: " + matcher.matches());
-				
 				if (matcher.matches() && isMatchRequestMethod(reqMethod, requestMethod)) {
 					handler = entry.getValue();
 					if (handler != null) {

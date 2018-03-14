@@ -30,10 +30,6 @@ public class HandlerInvokerImpl implements HandlerInvoker {
 			Handler handler) {
 		List<Object> paramList = new ArrayList<Object>();
 		paramList.addAll(ParameterUtil.createPathParamList(request, actionMethod, handler));
-		// Map<String, Object> requestParamMap = WebUtil.getRequestParamMap(request);
-		// if (MapUtils.isNotEmpty(requestParamMap)) {
-		// paramList.add(new Params(requestParamMap));
-		// }
 		return paramList;
 	}
 
