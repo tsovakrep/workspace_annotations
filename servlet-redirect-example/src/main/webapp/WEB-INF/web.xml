@@ -5,19 +5,58 @@
 	version="3.1">
 	<display-name>Archetype Created Web Application</display-name>
 	
+	<!-- 
+		
 	<servlet>
-	<servlet-name>dispatcher</servlet-name>
-	<servlet-class>framework.webcore.DispatcherServlet</servlet-class> 
-	<load-on-startup>0</load-on-startup>
+	<servlet-name>handler</servlet-name>
+	<servlet-class>com.logicbig.example.HandlerServlet</servlet-class> 
+	</servlet>
+	<servlet>
+	<servlet-name>handler2</servlet-name>
+	<servlet-class>com.logicbig.example.HandlerServlet2</servlet-class> 
+	</servlet>
+	<servlet>
+	<servlet-name>handler3</servlet-name>
+	<servlet-class>com.logicbig.example.HandlerServlet3</servlet-class> 
+	</servlet>
+	<servlet>
+	<servlet-name>redirect</servlet-name>
+	<servlet-class>com.logicbig.example.RedirectServlet</servlet-class> 
+	</servlet>
+	<servlet>
+	<servlet-name>redirect2</servlet-name>
+	<servlet-class>com.logicbig.example.RedirectServlet2</servlet-class> 
+	</servlet>
+	<servlet>
+	<servlet-name>redirect3</servlet-name>
+	<servlet-class>com.logicbig.example.RedirectServlet3</servlet-class> 
 	</servlet>
 	
 	<servlet-mapping>
-	<servlet-name>dispatcher</servlet-name>
+	<servlet-name>handler</servlet-name>
+	<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+	<servlet-name>handler2</servlet-name>
+	<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+	<servlet-name>handler3</servlet-name>
+	<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+	<servlet-name>redirect</servlet-name>
+	<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+	<servlet-name>redirect2</servlet-name>
+	<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+	<servlet-name>redirect3</servlet-name>
 	<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
-	<listener>
-	<listener-class>framework.webcore.ContainerListener</listener-class>
-	</listener>
+	-->
 	
 </web-app>

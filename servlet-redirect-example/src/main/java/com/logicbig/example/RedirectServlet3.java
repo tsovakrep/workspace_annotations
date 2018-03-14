@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/test5")
 public class RedirectServlet3 extends HttpServlet {
 
