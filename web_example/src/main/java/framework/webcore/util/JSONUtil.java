@@ -45,12 +45,10 @@ public class JSONUtil {
     }
 
 	public static String toJSON(Object obj) {
-
 		return gson.toJson(obj);
 	}
 
 	public static <T> T fromJSON(String json, Class<T> cls) {
-
 		return gson.fromJson(json, cls);
 	}
 }

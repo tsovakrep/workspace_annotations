@@ -11,7 +11,6 @@ import framework.webcore.annotation.PostMapping;
 import framework.webcore.annotation.PutMapping;
 import framework.webcore.annotation.ReqBody;
 import framework.webcore.annotation.ReqParam;
-import framework.webcore.util.HttpStatus;
 
 @Controller
 @Mapping("/")
