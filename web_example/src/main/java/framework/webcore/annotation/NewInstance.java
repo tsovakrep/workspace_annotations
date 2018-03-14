@@ -1,4 +1,4 @@
-package by.htp.itacademy.car.annotation;
+package framework.webcore.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

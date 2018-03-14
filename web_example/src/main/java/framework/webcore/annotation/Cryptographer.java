@@ -1,4 +1,4 @@
-package by.htp.itacademy.car.annotation;
+package framework.webcore.annotation;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.PARAMETER;
