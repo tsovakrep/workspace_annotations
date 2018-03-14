@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalTime;
 
+@SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/test6")
 public class HandlerServlet3 extends HttpServlet {
 
