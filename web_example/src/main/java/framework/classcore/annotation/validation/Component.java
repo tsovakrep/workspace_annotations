@@ -10,4 +10,4 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RUNTIME)
 @Target(TYPE)
-public @interface Validator {}
+public @interface Component {}
