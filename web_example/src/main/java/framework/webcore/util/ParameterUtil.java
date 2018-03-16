@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import framework.classcore.annotation.validation.Validation;
 import framework.util.ObjectUtils;
 import framework.util.chaincasttype.FacadeCast;
 import framework.webcore.annotation.controller.parameter.PathVariable;
@@ -81,7 +82,11 @@ public class ParameterUtil {
 		if (paramsHelper.containAnnotation(parameter, ReqBody.class)) {
 			if (parameter.isAnnotationPresent(ReqBody.class)) {
 				String jsonString = JSONUtil.getJsonString(request);
-				paramList.add(JSONUtil.fromJSON(jsonString, parameter.getType()));
+				Object entity = JSONUtil.fromJSON(jsonString, parameter.getType());
+				if (parameter.isAnnotationPresent(Validation.class)) {
+					
+				}
+				paramList.add(entity);
 			}
 		}
 	}
