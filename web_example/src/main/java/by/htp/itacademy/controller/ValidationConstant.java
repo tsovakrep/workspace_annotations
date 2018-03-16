@@ -3,6 +3,9 @@ package by.htp.itacademy.controller;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import framework.classcore.annotation.validation.Validator;
+
+@Validator
 public abstract class ValidationConstant {
 	
 	private static final Map<String, String> USER_REGEX_PARAMETERS = new ConcurrentHashMap<String, String>();
