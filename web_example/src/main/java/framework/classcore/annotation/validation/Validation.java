@@ -8,7 +8,6 @@ import java.lang.annotation.Target;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-
 @Documented
 @Target({FIELD, PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
