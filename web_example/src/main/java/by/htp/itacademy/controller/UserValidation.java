@@ -7,7 +7,7 @@ import framework.webcore.annotation.validation.Component;
 import framework.webcore.bean.Validation;
 
 @Component
-public class ValidationConstant extends Validation {
+public class UserValidation extends Validation {
 	
 	private static final Map<String, String> USER_REGEX_PARAMETERS = new ConcurrentHashMap<String, String>();
 
@@ -23,5 +23,17 @@ public class ValidationConstant extends Validation {
 	
 	static {
 		REGEX_PARAMETERS.put(User.class, USER_REGEX_PARAMETERS);
+	}
+
+	@Override
+	protected Class<?> setRegexKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Map<String, String> setRegexValue() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -11,4 +11,6 @@ public abstract class Validation {
 		return REGEX_PARAMETERS;
 	}
 	
+	protected abstract Class<?> setRegexKey();
+	protected abstract Map<String, String> setRegexValue();
 }
