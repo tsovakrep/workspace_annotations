@@ -1,4 +1,4 @@
-package framework.classcore.annotation.initialization;
+package framework.webcore.annotation.initialization;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -7,6 +7,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Documented
-@Target(value = ElementType.FIELD)
+@Target(value = ElementType.TYPE)
 @Retention(value = RetentionPolicy.RUNTIME)
-public @interface AutoInit {}
+public @interface Service {}

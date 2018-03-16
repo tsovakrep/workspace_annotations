@@ -1,4 +1,4 @@
-package framework.classcore.exception;
+package framework.webcore.exception;
 
 @SuppressWarnings("serial")
 public class IllegalParameterException extends Exception {

@@ -1,4 +1,4 @@
-package framework.util.helper;
+package framework.webcore.helper;
 
 import framework.util.ClassUtil;
 

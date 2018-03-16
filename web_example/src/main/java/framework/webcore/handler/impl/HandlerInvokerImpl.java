@@ -7,9 +7,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import framework.util.helper.BeanHelper;
 import framework.webcore.bean.Handler;
 import framework.webcore.handler.HandlerInvoker;
+import framework.webcore.helper.BeanHelper;
 import framework.webcore.util.ParameterUtil;
 
 public class HandlerInvokerImpl implements HandlerInvoker {

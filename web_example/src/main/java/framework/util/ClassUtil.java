@@ -28,11 +28,4 @@ public class ClassUtil {
 		}
 		return cls;
 	}
-//
-//	public static void main(String[] args) throws ClassNotFoundException {
-//		Class<?> loadClass = ClassUtil.loadClass("framework.HelperLoader");
-//		System.out.println(loadClass.getName());
-//		Class<?> clzz = ClassUtil.class.getClassLoader().loadClass("framework.HelperLoader");
-//		System.out.println(clzz.getName());
-//	}
 }

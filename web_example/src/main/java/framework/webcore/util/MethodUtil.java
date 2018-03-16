@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import framework.classcore.exception.IllegalParameterException;
+import framework.webcore.exception.IllegalParameterException;
 
 public final class MethodUtil {
 

@@ -1,12 +1,12 @@
-package framework.util.helper;
+package framework.webcore.helper;
 
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 
-import framework.classcore.annotation.initialization.AutoInit;
 import framework.classcore.helper.ClassHelper;
 import framework.util.ObjectUtils;
+import framework.webcore.annotation.initialization.AutoInit;
 import framework.webcore.exception.InitializationException;
 
 public class FieldHelper {

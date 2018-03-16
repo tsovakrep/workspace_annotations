@@ -2,7 +2,6 @@ package by.htp.itacademy.controller;
 
 import javax.servlet.http.HttpSession;
 
-import framework.classcore.annotation.initialization.AutoInit;
 import framework.util.FrameworkConstant;
 import framework.webcore.annotation.controller.Controller;
 import framework.webcore.annotation.controller.Mapping;
@@ -12,6 +11,7 @@ import framework.webcore.annotation.controller.method.PostMapping;
 import framework.webcore.annotation.controller.parameter.PathVariable;
 import framework.webcore.annotation.controller.parameter.ReqBody;
 import framework.webcore.annotation.controller.parameter.ReqParam;
+import framework.webcore.annotation.initialization.AutoInit;
 import framework.webcore.bean.View;
 
 @Controller

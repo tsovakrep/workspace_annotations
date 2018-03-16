@@ -1,4 +1,4 @@
-package framework.classcore.annotation.encryption;
+package framework.webcore.annotation.coder;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.PARAMETER;
