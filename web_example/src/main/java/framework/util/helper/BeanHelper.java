@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import framework.classcore.annotation.initialization.Service;
-import framework.classcore.annotation.validation.Component;
 import framework.classcore.helper.ClassHelper;
 import framework.util.ObjectUtils;
 import framework.webcore.annotation.controller.Controller;
+import framework.webcore.annotation.validation.Component;
 import framework.webcore.exception.InitializationException;
 
 public class BeanHelper {

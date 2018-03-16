@@ -3,7 +3,7 @@ package by.htp.itacademy.controller;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import framework.classcore.annotation.validation.Component;
+import framework.webcore.annotation.validation.Component;
 
 @Component
 public abstract class ValidationConstant {

@@ -1,4 +1,4 @@
-package framework.classcore.util;
+package framework.webcore.util;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;

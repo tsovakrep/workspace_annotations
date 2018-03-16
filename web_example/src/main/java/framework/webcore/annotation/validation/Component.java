@@ -1,4 +1,4 @@
-package framework.classcore.annotation.validation;
+package framework.webcore.annotation.validation;
 
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;

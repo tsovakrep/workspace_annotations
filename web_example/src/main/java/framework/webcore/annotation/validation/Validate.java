@@ -1,4 +1,4 @@
-package framework.classcore.annotation.validation;
+package framework.webcore.annotation.validation;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.PARAMETER;

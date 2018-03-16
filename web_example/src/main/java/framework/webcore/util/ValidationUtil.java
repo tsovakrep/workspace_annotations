@@ -1,4 +1,4 @@
-package framework.classcore.util;
+package framework.webcore.util;
 
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -7,8 +7,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import framework.classcore.annotation.validation.Validate;
 import framework.classcore.exception.IllegalParameterException;
+import framework.webcore.annotation.validation.Validate;
 
 public class ValidationUtil {
 	
