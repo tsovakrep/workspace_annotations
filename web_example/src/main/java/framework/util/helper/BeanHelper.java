@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import framework.classcore.annotation.initialization.Service;
+import framework.classcore.annotation.validation.Component;
 import framework.classcore.helper.ClassHelper;
 import framework.util.ObjectUtils;
 import framework.webcore.annotation.controller.Controller;
@@ -24,7 +25,8 @@ public class BeanHelper {
 				for (int i = 0; i < basePackageClassList.size(); i++) {
 					Class<?> cls = basePackageClassList.get(i);
 					if (cls.isAnnotationPresent(Controller.class)
-							|| cls.isAnnotationPresent(Service.class)) {
+							|| cls.isAnnotationPresent(Service.class)
+							|| cls.isAnnotationPresent(Component.class)) {
 						
 						beanClassList.add(cls);
 						Object instance = cls.newInstance();
