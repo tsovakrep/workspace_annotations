@@ -22,18 +22,13 @@ public class UserValidation extends Validation {
 	}
 	
 	static {
+		
+	}
+
+	@Override
+	protected Map<Class<?>, Map<String, String>> setRegexParameters(Class<?> clazz,
+			Map<String, String> mapOfClassFieldAndRegex) {
 		REGEX_PARAMETERS.put(User.class, USER_REGEX_PARAMETERS);
-	}
-
-	@Override
-	protected Class<?> setRegexKey() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Map<String, String> setRegexValue() {
-		// TODO Auto-generated method stub
-		return null;
+		return REGEX_PARAMETERS;
 	}
 }
