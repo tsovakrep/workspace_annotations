@@ -5,14 +5,10 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import framework.classcore.annotation.validation.Validation;
-import framework.classcore.util.ValidationConstant;
-import framework.classcore.util.ValidationUtil;
 import framework.util.ObjectUtils;
 import framework.util.chaincasttype.FacadeCast;
 import framework.webcore.annotation.controller.parameter.PathVariable;
@@ -80,16 +76,12 @@ public class ParameterUtil {
 	}
 
 	private static void reqBodyAnnotation(Params paramsHelper, Parameter parameter, HttpServletRequest request,
-			List<Object> paramList, Map<String, String> regexParameters) 
-					throws IllegalArgumentException, IllegalAccessException, Exception {
+			List<Object> paramList) {
 		
 		if (paramsHelper.containAnnotation(parameter, ReqBody.class)) {
 			if (parameter.isAnnotationPresent(ReqBody.class)) {
 				String jsonString = JSONUtil.getJsonString(request);
 				Object entity = JSONUtil.fromJSON(jsonString, parameter.getType());
-				if (parameter.isAnnotationPresent(Validation.class)) {
-					ValidationUtil.validator(entity, regexParameters);
-				}
 				paramList.add(entity);
 			}
 		}
