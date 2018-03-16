@@ -15,6 +15,7 @@ import framework.util.chaincasttype.FacadeCast;
 import framework.webcore.annotation.controller.parameter.PathVariable;
 import framework.webcore.annotation.controller.parameter.ReqBody;
 import framework.webcore.annotation.controller.parameter.ReqParam;
+import framework.webcore.annotation.validation.Component;
 import framework.webcore.bean.Handler;
 import framework.webcore.bean.Params;
 import framework.webcore.exception.InitializationException;
@@ -109,18 +110,24 @@ public class ParameterUtil {
 		return null;
 	}
 	
-	private static Map<Class<?>, Map<String, String>> mapRegex() {
+	@SuppressWarnings("unchecked")
+	private static Map<String, String> mapRegex() {
+		Map<String, String> entityRegex = null;
 		try {
 			Map<Class<?>, Object> beanMap = BeanHelper.getBeanMap();
 			if (ObjectUtils.isNotEmptyMap(beanMap)) {
 				for (Map.Entry<Class<?>, Object> entry : beanMap.entrySet()) {
 					Class<?> clz = entry.getKey();
 					Object beanInstance = entry.getValue();
-					
+					if (clz.isAnnotationPresent(Component.class)) {
+						
+//						entityRegex = 
+					}
 				}
 			}
 		} catch (Exception e) {
 			throw new InitializationException("Component error's");
 		}
+		return null;
 	}
 }

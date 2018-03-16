@@ -4,9 +4,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import framework.webcore.annotation.validation.Component;
+import framework.webcore.bean.Validation;
 
 @Component
-public abstract class ValidationConstant {
+public class ValidationConstant extends Validation {
 	
 	private static final Map<String, String> USER_REGEX_PARAMETERS = new ConcurrentHashMap<String, String>();
 
@@ -19,8 +20,6 @@ public abstract class ValidationConstant {
 		USER_REGEX_PARAMETERS.put("passport", "[A-Z]{2}[0-9]{7}");
 		USER_REGEX_PARAMETERS.put("phoneNumber", "[\\+]{1}[0-9]{2,4}[0-9]+");
 	}
-	
-	public static final Map<Class<?>, Map<String, String>> REGEX_PARAMETERS = new ConcurrentHashMap<>();
 	
 	static {
 		REGEX_PARAMETERS.put(User.class, USER_REGEX_PARAMETERS);
