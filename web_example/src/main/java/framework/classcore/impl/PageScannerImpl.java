@@ -3,7 +3,7 @@ package framework.classcore.impl;
 import java.util.List;
 
 import framework.classcore.PageScanner;
-import framework.classcore.PageTemplate;
+import framework.classcore.template.PageTemplate;
 
 public class PageScannerImpl implements PageScanner {
 

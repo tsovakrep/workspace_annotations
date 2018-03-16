@@ -1,4 +1,4 @@
-package framework.classcore;
+package framework.classcore.template;
 
 import java.util.ArrayList;
 import java.util.List;

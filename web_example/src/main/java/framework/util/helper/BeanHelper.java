@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import framework.classcore.ClassHelper;
 import framework.classcore.annotation.initialization.Service;
+import framework.classcore.helper.ClassHelper;
 import framework.util.ObjectUtils;
 import framework.webcore.annotation.controller.Controller;
 import framework.webcore.exception.InitializationException;

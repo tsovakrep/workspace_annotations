@@ -1,4 +1,4 @@
-package framework.classcore;
+package framework.classcore.template;
 
 public abstract class SuperClassTemplate extends ClassTemplate {
 	protected final Class<?> superClass;

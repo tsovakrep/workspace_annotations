@@ -1,8 +1,9 @@
-package framework.classcore;
+package framework.classcore.helper;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
 
+import framework.classcore.ClassScanner;
 import framework.util.FrameworkConstant;
 import framework.webcore.util.InstanceFactory;
 

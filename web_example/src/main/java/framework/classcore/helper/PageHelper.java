@@ -1,7 +1,8 @@
-package framework.classcore;
+package framework.classcore.helper;
 
 import java.util.List;
 
+import framework.classcore.PageScanner;
 import framework.util.FrameworkConstant;
 import framework.webcore.util.InstanceFactory;
 

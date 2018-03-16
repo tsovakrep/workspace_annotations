@@ -1,4 +1,4 @@
-package framework.classcore;
+package framework.classcore.template;
 
 import java.lang.annotation.Annotation;
 

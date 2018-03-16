@@ -1,4 +1,4 @@
-package framework.classcore;
+package framework.classcore.template;
 
 import java.util.HashSet;
 import java.util.List;

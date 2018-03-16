@@ -3,10 +3,10 @@ package framework.classcore.impl;
 import java.lang.annotation.Annotation;
 import java.util.List;
 
-import framework.classcore.AnnotationClassTemplate;
 import framework.classcore.ClassScanner;
-import framework.classcore.ClassTemplate;
-import framework.classcore.SuperClassTemplate;
+import framework.classcore.template.AnnotationClassTemplate;
+import framework.classcore.template.ClassTemplate;
+import framework.classcore.template.SuperClassTemplate;
 
 public class ClassScannerImpl implements ClassScanner {
 

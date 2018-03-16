@@ -4,8 +4,8 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 
-import framework.classcore.ClassHelper;
 import framework.classcore.annotation.initialization.AutoInit;
+import framework.classcore.helper.ClassHelper;
 import framework.util.ObjectUtils;
 import framework.webcore.exception.InitializationException;
 

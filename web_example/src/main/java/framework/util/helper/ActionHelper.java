@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import framework.classcore.ClassHelper;
+import framework.classcore.helper.ClassHelper;
 import framework.util.ObjectUtils;
 import framework.webcore.annotation.controller.Controller;
 import framework.webcore.annotation.controller.Mapping;
