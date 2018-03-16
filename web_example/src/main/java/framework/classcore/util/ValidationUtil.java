@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import framework.classcore.annotation.validation.Validation;
+import framework.classcore.annotation.validation.Validate;
 import framework.classcore.exception.IllegalParameterException;
 
 public class ValidationUtil {
@@ -16,7 +16,7 @@ public class ValidationUtil {
 			throws IllegalArgumentException, IllegalAccessException, Exception {
 		
 		for (Field field : MethodUtil.getDeclaredFields(obj)) {
-			if (field.isAnnotationPresent(Validation.class)) {
+			if (field.isAnnotationPresent(Validate.class)) {
 				field.setAccessible(true);
 				checkObject(field.get(obj), regexParameters);
 			}

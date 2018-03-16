@@ -22,5 +22,4 @@ public abstract class ValidationConstant {
 	static {
 		REGEX_PARAMETERS.put(User.class, USER_REGEX_PARAMETERS);
 	}
-	
 }
