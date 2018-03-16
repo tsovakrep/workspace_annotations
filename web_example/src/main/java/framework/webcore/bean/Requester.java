@@ -1,6 +1,6 @@
 package framework.webcore.bean;
 
-import framework.webcore.util.HttpMethod;
+import framework.webcore.http.HttpMethod;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

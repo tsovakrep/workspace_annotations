@@ -1,6 +1,6 @@
 package framework.webcore.bean;
 
-import framework.webcore.util.HttpStatus;
+import framework.webcore.http.HttpStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

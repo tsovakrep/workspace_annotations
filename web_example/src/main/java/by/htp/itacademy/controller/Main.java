@@ -5,24 +5,24 @@ import java.util.regex.Pattern;
 
 public class Main {
 	public static void main(String[] args) {
-		String requestUrl = "/user/getUserInfo/{uid}/{aid}/{adf}";
+//		String requestUrl = "/user/getUserInfo/{uid}/{aid}/{adf}";
 //		System.out.println(requestPath.matches(".+\\{\\w+}.*"));
 //		requestUrl = requestUrl.replaceAll("\\{([a-z])\\w+\\}", "(\\\\w+\\)");
-		System.out.println(requestUrl);
-
+//		System.out.println(requestUrl);
+//
 //		requestPath = replaceAll(requestPath, "\\{\\w+\\}", "(\\\\w+)");
 //		System.out.println(requestPath);
-
-		String requestPath = "/user/getUserInfo/333/a5d/adf";
-		Matcher matcher = Pattern.compile(requestUrl).matcher(requestPath);
-		System.out.println(matcher.matches());
-
-		for (int i = 1; i <= matcher.groupCount(); i++) {
-			// System.out.println("matcher counter :" + matcher.groupCount());
-			String group = matcher.group(i);
-			System.out.println(group);
-		}
-
+//
+//		String requestPath = "/user/getUserInfo/333/a5d/adf";
+//		Matcher matcher = Pattern.compile(requestUrl).matcher(requestPath);
+//		System.out.println(matcher.matches());
+//
+//		for (int i = 1; i <= matcher.groupCount(); i++) {
+//			// System.out.println("matcher counter :" + matcher.groupCount());
+//			String group = matcher.group(i);
+//			System.out.println(group);
+//		}
+//
 //		String group1 = matcher.group(1);
 //		System.out.println(group1);
 //

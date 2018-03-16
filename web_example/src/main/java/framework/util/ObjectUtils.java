@@ -45,6 +45,27 @@ public class ObjectUtils {
 		return !isEmptyMap(map);
 	}
 	
+	public static boolean isNullClass(Class<?> clazz) {
+		return clazz == null;
+	}
+	
+	public static boolean isNotNullClass(Class<?> clazz) {
+		return !isNullClass(clazz);
+	}
+	
+	public static boolean isEqueals(Object obj, Class<?> clazz) {
+		return obj.getClass().getTypeName().equals(clazz.getName());
+	}
+	
+	public static boolean isNotEqueals(Object obj, Class<?> clazz) {
+		return !obj.getClass().getTypeName().equals(clazz.getName());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T> T cast(Object obj) {
+        return (T) obj;
+    }
+	
 	@SuppressWarnings("unchecked")
 	public static <T> T newInstance(String className) {
 		T t;

@@ -2,20 +2,21 @@ package by.htp.itacademy.controller;
 
 import javax.servlet.http.HttpSession;
 
+import framework.classcore.annotation.initialization.AutoInit;
 import framework.util.FrameworkConstant;
-import framework.webcore.annotation.Controller;
-import framework.webcore.annotation.DeleteMapping;
-import framework.webcore.annotation.GetMapping;
-import framework.webcore.annotation.Mapping;
-import framework.webcore.annotation.PathVariable;
-import framework.webcore.annotation.PostMapping;
-import framework.webcore.annotation.ReqBody;
-import framework.webcore.annotation.ReqParam;
+import framework.webcore.annotation.controller.Controller;
+import framework.webcore.annotation.controller.Mapping;
+import framework.webcore.annotation.controller.method.DeleteMapping;
+import framework.webcore.annotation.controller.method.GetMapping;
+import framework.webcore.annotation.controller.method.PostMapping;
+import framework.webcore.annotation.controller.parameter.PathVariable;
+import framework.webcore.annotation.controller.parameter.ReqBody;
+import framework.webcore.annotation.controller.parameter.ReqParam;
 import framework.webcore.bean.View;
 
 @Controller
 @Mapping("/")
-public class DefaultController {
+public class DefaultController extends AbstractLanguageController {
 
 	@GetMapping
 	public void load(HttpSession session) {

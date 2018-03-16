@@ -11,6 +11,7 @@ import framework.util.FrameworkConstant;
 import framework.webcore.bean.Handler;
 import framework.webcore.handler.HandlerInvoker;
 import framework.webcore.handler.HandlerMapping;
+import framework.webcore.responseentity.ResponseEntityResolver;
 import framework.webcore.util.InstanceFactory;
 import framework.webcore.util.WebUtil;
 import framework.webcore.view.ViewResolver;
@@ -24,12 +25,14 @@ public class DispatcherServlet extends HttpServlet {
 	private HandlerInvoker handlerInvoker = InstanceFactory.getHandlerInvoker();
 
 	private ViewResolver viewResolver = InstanceFactory.getViewResolver();
-
+	
+	private ResponseEntityResolver responseEntityResolver = InstanceFactory.getResponseEntityResolver();
+ 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding(FrameworkConstant.ENCODING);
-		
+				
 		String reqMethod = request.getMethod();
 		String requestPath = WebUtil.getRequestUrl(request);
 		

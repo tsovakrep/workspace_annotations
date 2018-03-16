@@ -14,12 +14,13 @@ import javax.servlet.http.HttpSession;
 
 import framework.util.FrameworkConstant;
 import framework.util.ObjectUtils;
-import framework.webcore.annotation.PathVariable;
-import framework.webcore.annotation.ReqBody;
-import framework.webcore.annotation.ReqParam;
+import framework.util.chaincasttype.FacadeCast;
+import framework.webcore.annotation.controller.parameter.PathVariable;
+import framework.webcore.annotation.controller.parameter.ReqBody;
+import framework.webcore.annotation.controller.parameter.ReqParam;
 import framework.webcore.bean.Handler;
 import framework.webcore.exception.InitializationException;
-import framework.webcore.util.chaincasttype.FacadeCast;
+import framework.webcore.http.HttpStatus;
 
 public class WebUtil {
 	
@@ -31,14 +32,6 @@ public class WebUtil {
         }
         return servletPath + pathInfo;
     }
-    
-    public static void redirectRequest(String pagePath, HttpServletRequest request, HttpServletResponse response) {
-        try {
-            response.sendRedirect(request.getContextPath() + pagePath);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public static void sendRedirect(HttpServletRequest request, HttpServletResponse response, String viewPath) {
         try {
@@ -46,6 +39,11 @@ public class WebUtil {
         } catch (IOException e) {
             throw new RuntimeException(viewPath, e);
         }
+    }
+    
+    public static void sendRedirectWithHttpStatus(HttpServletRequest request, HttpServletResponse response, String path, HttpStatus status) {
+        response.setStatus(status.value());
+		response.setHeader("Locale", request.getContextPath() + path);
     }
 
     public static void forwardRequest(HttpServletRequest request, HttpServletResponse response, String forwardPath) {

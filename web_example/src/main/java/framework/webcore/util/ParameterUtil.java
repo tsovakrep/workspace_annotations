@@ -10,19 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import framework.util.ObjectUtils;
-import framework.webcore.annotation.PathVariable;
-import framework.webcore.annotation.ReqBody;
-import framework.webcore.annotation.ReqParam;
+import framework.util.chaincasttype.FacadeCast;
+import framework.webcore.annotation.controller.parameter.PathVariable;
+import framework.webcore.annotation.controller.parameter.ReqBody;
+import framework.webcore.annotation.controller.parameter.ReqParam;
 import framework.webcore.bean.Handler;
-import framework.webcore.helper.ParamsHelper;
-import framework.webcore.util.chaincasttype.FacadeCast;
+import framework.webcore.bean.Params;
 
+/**
+ * @author Tsovak Palakian
+ *
+ */
 public class ParameterUtil {
 
 	public static List<Object> createPathParamList(HttpServletRequest request, Method actionMethod, Handler handler) {
 		List<Object> paramList = new ArrayList<Object>();
 
-		ParamsHelper paramsHelper = new ParamsHelper(actionMethod);
+		Params paramsHelper = new Params(actionMethod);
 		List<Parameter> parameters = paramsHelper.getParameters();
 		System.out.println();
 
@@ -39,7 +43,7 @@ public class ParameterUtil {
 		return paramList;
 	}
 
-	private static void reqParamAnnotation(ParamsHelper paramsHelper, Parameter parameter, HttpServletRequest request,
+	private static void reqParamAnnotation(Params paramsHelper, Parameter parameter, HttpServletRequest request,
 			List<Object> paramList) {
 		if (paramsHelper.containAnnotation(parameter, ReqParam.class)) {
 			if (parameter.isAnnotationPresent(ReqParam.class)) {
@@ -59,7 +63,7 @@ public class ParameterUtil {
 		}
 	}
 
-	private static void pathVariableAnnotation(ParamsHelper paramsHelper, int ordinal, Handler handler,
+	private static void pathVariableAnnotation(Params paramsHelper, int ordinal, Handler handler,
 			Parameter parameter, List<Object> paramList) {
 		if (paramsHelper.containAnnotation(parameter, PathVariable.class)) {
 			if (parameter.isAnnotationPresent(PathVariable.class)) {
@@ -72,7 +76,7 @@ public class ParameterUtil {
 		}
 	}
 
-	private static void reqBodyAnnotation(ParamsHelper paramsHelper, Parameter parameter, HttpServletRequest request,
+	private static void reqBodyAnnotation(Params paramsHelper, Parameter parameter, HttpServletRequest request,
 			List<Object> paramList) {
 		if (paramsHelper.containAnnotation(parameter, ReqBody.class)) {
 			if (parameter.isAnnotationPresent(ReqBody.class)) {
@@ -88,7 +92,7 @@ public class ParameterUtil {
 		}
 	}
 
-	private static Annotation getAnnotation(ParamsHelper paramsHelper, Parameter parameter,
+	private static Annotation getAnnotation(Params paramsHelper, Parameter parameter,
 			Class<? extends Annotation> annotClass) {
 		List<Annotation> annotations = paramsHelper.getParameterAnnotations().get(parameter);
 		for (Annotation annot : annotations) {
