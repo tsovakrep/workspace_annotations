@@ -46,17 +46,19 @@ public class ParameterUtil {
 			List<Object> paramList) {
 		if (paramsHelper.containAnnotation(parameter, ReqParam.class)) {
 			if (parameter.isAnnotationPresent(ReqParam.class)) {
-				ReqParam reqParam = (ReqParam) getAnnotation(paramsHelper, parameter, ReqParam.class);
-				String requestParameterValue = request.getParameter(reqParam.value());
-
-				try {
-					if (ObjectUtils.isNotEmptyString(requestParameterValue)) {
-						paramList.add(FacadeCast.getCastChain().getValue(parameter.getType(), requestParameterValue));
-					} else {
-						paramList.add(FacadeCast.getCastChain().getValue(parameter.getType(), reqParam.defaultValue()));
+				Annotation annot = getAnnotation(paramsHelper, parameter, ReqParam.class);
+				if (annot != null) {
+					ReqParam reqParam = (ReqParam) annot;
+					String requestParameterValue = request.getParameter(reqParam.value());
+					try {
+						if (ObjectUtils.isNotEmptyString(requestParameterValue)) {
+							paramList.add(FacadeCast.getCastChain().getValue(parameter.getType(), requestParameterValue));
+						} else {
+							paramList.add(FacadeCast.getCastChain().getValue(parameter.getType(), reqParam.defaultValue()));
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
-				} catch (Exception e) {
-					e.printStackTrace();
 				}
 			}
 		}
