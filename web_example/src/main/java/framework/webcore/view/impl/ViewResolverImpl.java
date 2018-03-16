@@ -1,4 +1,4 @@
-package framework.webcore.impl;
+package framework.webcore.view.impl;
 
 import java.util.Map;
 
@@ -7,11 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import framework.util.FrameworkConstant;
 import framework.util.ObjectUtils;
-import framework.webcore.ViewResolver;
 import framework.webcore.bean.Result;
 import framework.webcore.bean.View;
 import framework.webcore.util.JSONUtil;
 import framework.webcore.util.WebUtil;
+import framework.webcore.view.ViewResolver;
 
 public class ViewResolverImpl implements ViewResolver {
 

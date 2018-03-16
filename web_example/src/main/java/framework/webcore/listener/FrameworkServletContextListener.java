@@ -1,6 +1,5 @@
-package framework.webcore;
+package framework.webcore.listener;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -15,9 +14,10 @@ import framework.classcore.PageHelper;
 import framework.util.FrameworkConstant;
 import framework.util.HelperLoader;
 import framework.util.ObjectUtils;
+import framework.webcore.DataContext;
 
 @WebListener
-public class ContainerListener implements ServletContextListener {
+public class FrameworkServletContextListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {

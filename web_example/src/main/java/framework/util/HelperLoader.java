@@ -1,7 +1,7 @@
 package framework.util;
 
-import framework.webcore.ActionHelper;
-import framework.webcore.BeanHelper;
+import framework.webcore.helper.ActionHelper;
+import framework.webcore.helper.BeanHelper;
 
 public class HelperLoader {
 

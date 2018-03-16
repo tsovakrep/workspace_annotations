@@ -26,7 +26,7 @@ public class DefaultController {
 
 	@GetMapping("callMethod/ts")
 	public View fsadf(HttpSession session) {
-		System.out.println("was called GET method");
+		System.out.println("was called GET method ygy");
 		return new View("template/index3.jsp");
 	}
 	

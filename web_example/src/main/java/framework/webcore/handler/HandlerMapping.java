@@ -1,4 +1,4 @@
-package framework.webcore;
+package framework.webcore.handler;
 
 import framework.webcore.bean.Handler;
 

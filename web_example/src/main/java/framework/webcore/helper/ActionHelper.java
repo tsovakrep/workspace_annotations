@@ -1,4 +1,4 @@
-package framework.webcore;
+package framework.webcore.helper;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;

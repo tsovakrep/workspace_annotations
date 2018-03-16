@@ -1,4 +1,4 @@
-package framework.webcore;
+package framework.webcore.handler;
 
 import java.lang.reflect.InvocationTargetException;
 

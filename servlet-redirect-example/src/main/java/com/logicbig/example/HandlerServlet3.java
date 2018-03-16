@@ -16,7 +16,7 @@ public class HandlerServlet3 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        System.out.println("----- Request for /test6 ---------");
+        System.out.println("----- Get request for /test6 ---------");
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
         writer.write("<h4>Test 6 page</h4>");

@@ -1,10 +1,14 @@
 package com.logicbig.example;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.eclipse.jetty.client.api.Request;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalTime;
@@ -19,9 +23,11 @@ public class HandlerServlet extends HttpServlet {
             throws ServletException, IOException {
 
         System.out.println("----- Request for /test2 ---------");
-        resp.setContentType("text/html");
-        PrintWriter writer = resp.getWriter();
-        writer.write("<h4>Test 2 page</h4>");
+//        resp.setContentType("text/html");
+//        PrintWriter writer = resp.getWriter();
+//        writer.write("<h4>Test 2 page</h4>");
+        req.getRequestDispatcher("WEB-INF/myForm4.html").forward(req, resp);
+//        resp.sendRedirect("WEB-INF/myForm4.html");
 
     }
 

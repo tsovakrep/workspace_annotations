@@ -1,12 +1,14 @@
-package framework.webcore.util.chaincasttype;
+package framework.webcore.util.chaincasttype.impl;
 
-public class StringCast implements CastChain {
+import framework.webcore.util.chaincasttype.Cast;
 
-	private CastChain castChain;
+public class StringCast implements Cast {
+
+	private Cast castChain;
 	private static final String STRING = "java.lang.String";
 	
 	@Override
-	public void setNextChain(CastChain nextChain) {
+	public void setNextChain(Cast nextChain) {
 		this.castChain = nextChain;
 	}
 

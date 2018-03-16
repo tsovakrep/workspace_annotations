@@ -1,8 +1,8 @@
 package framework.webcore.util.chaincasttype;
 
-public interface CastChain {
+public interface Cast {
 	
-	void setNextChain(CastChain nextChain);
+	void setNextChain(Cast nextChain);
 	
 	Object getValue(Class<?> type, Object obj);
 	

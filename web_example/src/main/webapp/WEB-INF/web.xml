@@ -17,7 +17,7 @@
 	</servlet-mapping>
 	
 	<listener>
-	<listener-class>framework.webcore.ContainerListener</listener-class>
+	<listener-class>framework.webcore.listener.FrameworkServletContextListener</listener-class>
 	</listener>
 	
 </web-app>

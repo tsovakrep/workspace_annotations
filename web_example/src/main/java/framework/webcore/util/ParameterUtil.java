@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import framework.util.ObjectUtils;
-import framework.webcore.ParamsHelper;
 import framework.webcore.annotation.PathVariable;
 import framework.webcore.annotation.ReqBody;
 import framework.webcore.annotation.ReqParam;
 import framework.webcore.bean.Handler;
+import framework.webcore.helper.ParamsHelper;
 import framework.webcore.util.chaincasttype.FacadeCast;
 
 public class ParameterUtil {
