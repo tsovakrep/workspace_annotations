@@ -12,18 +12,18 @@ import framework.classcore.exception.IllegalParameterException;
 
 public class ValidationUtil {
 	
-	public static void searchAnnotation(Object obj) 
+	public static void validator(Object obj, Map<String, String> regexParameters) 
 			throws IllegalArgumentException, IllegalAccessException, Exception {
 		
 		for (Field field : MethodUtil.getDeclaredFields(obj)) {
 			if (field.isAnnotationPresent(Validation.class)) {
 				field.setAccessible(true);
-				validator(field.get(obj), ValidationConstant.USER_REGEX_PARAMETERS);
+				checkObject(field.get(obj), regexParameters);
 			}
 		}
 	}
 	
-	private static void validator(Object obj, Map<String, String> regexParameters)
+	private static void checkObject(Object obj, Map<String, String> regexParameters)
 			throws Exception {
 		
 		Map<String, Object> fieldNameAndValue = getValuesFromEntity(obj);
