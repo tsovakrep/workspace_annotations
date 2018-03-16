@@ -6,9 +6,9 @@ import java.lang.reflect.Method;
 
 import framework.classcore.exception.IllegalParameterException;
 
-public final class Methods {
+public final class MethodUtil {
 
-	private Methods() {
+	private MethodUtil() {
 	}
 
 	protected static Class<?>[] getParameterTypes(Object obj, byte count) 
