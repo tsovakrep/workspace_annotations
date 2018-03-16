@@ -1,11 +1,11 @@
-package framework.classcore.util;
+package by.htp.itacademy.controller;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public abstract class ValidationConstant {
 	
-	public static final Map<String, String> USER_REGEX_PARAMETERS = new ConcurrentHashMap<String, String>();
+	private static final Map<String, String> USER_REGEX_PARAMETERS = new ConcurrentHashMap<String, String>();
 
 	static {
 		USER_REGEX_PARAMETERS.put("login", "[A-z0-9]{3,20}");
@@ -16,4 +16,11 @@ public abstract class ValidationConstant {
 		USER_REGEX_PARAMETERS.put("passport", "[A-Z]{2}[0-9]{7}");
 		USER_REGEX_PARAMETERS.put("phoneNumber", "[\\+]{1}[0-9]{2,4}[0-9]+");
 	}
+	
+	public static final Map<Class<?>, Map<String, String>> REGEX_PARAMETERS = new ConcurrentHashMap<>();
+	
+	static {
+		REGEX_PARAMETERS.put(User.class, USER_REGEX_PARAMETERS);
+	}
+	
 }
