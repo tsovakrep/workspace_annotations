@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,8 @@ import framework.webcore.annotation.controller.parameter.ReqBody;
 import framework.webcore.annotation.controller.parameter.ReqParam;
 import framework.webcore.bean.Handler;
 import framework.webcore.bean.Params;
+import framework.webcore.exception.InitializationException;
+import framework.webcore.helper.BeanHelper;
 
 /**
  * @author Tsovak Palakian
@@ -104,5 +107,20 @@ public class ParameterUtil {
 			}
 		}
 		return null;
+	}
+	
+	private static Map<Class<?>, Map<String, String>> mapRegex() {
+		try {
+			Map<Class<?>, Object> beanMap = BeanHelper.getBeanMap();
+			if (ObjectUtils.isNotEmptyMap(beanMap)) {
+				for (Map.Entry<Class<?>, Object> entry : beanMap.entrySet()) {
+					Class<?> clz = entry.getKey();
+					Object beanInstance = entry.getValue();
+					
+				}
+			}
+		} catch (Exception e) {
+			throw new InitializationException("Component error's");
+		}
 	}
 }
