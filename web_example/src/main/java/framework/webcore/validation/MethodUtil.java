@@ -1,4 +1,4 @@
-package framework.webcore.util;
+package framework.webcore.validation;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;

@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import framework.webcore.annotation.validation.Component;
-import framework.webcore.bean.Validation;
+import framework.webcore.validation.Validation;
 
 @Component
 public class UserValidation extends Validation {
