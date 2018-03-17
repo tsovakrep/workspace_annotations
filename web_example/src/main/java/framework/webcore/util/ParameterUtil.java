@@ -15,12 +15,8 @@ import framework.util.chaincasttype.FacadeCast;
 import framework.webcore.annotation.controller.parameter.PathVariable;
 import framework.webcore.annotation.controller.parameter.ReqBody;
 import framework.webcore.annotation.controller.parameter.ReqParam;
-import framework.webcore.annotation.validation.Component;
 import framework.webcore.bean.Handler;
 import framework.webcore.bean.Params;
-import framework.webcore.bean.Validation;
-import framework.webcore.exception.InitializationException;
-import framework.webcore.helper.BeanHelper;
 
 /**
  * @author Tsovak Palakian
@@ -89,6 +85,14 @@ public class ParameterUtil {
 			if (parameter.isAnnotationPresent(ReqBody.class)) {
 				String jsonString = JSONUtil.getJsonString(request);
 				Object object = JSONUtil.fromJSON(jsonString, parameter.getType());
+				Map<String, String> objectRegex = ValidationUtil.mapRegex(object);
+				if (ObjectUtils.isNotEmptyMap(objectRegex)) {
+					try {
+						ValidationUtil.validator(object, objectRegex);
+					} catch (Exception e) {
+						
+					}
+				}
 				paramList.add(object);
 			}
 		}
@@ -109,30 +113,5 @@ public class ParameterUtil {
 			}
 		}
 		return null;
-	}
-	
-	private static Map<String, String> mapRegex(Object object) {
-		Map<String, String> objectRegex = null;
-		try {
-			Map<Class<?>, Object> beanMap = BeanHelper.getBeanMap();
-			if (ObjectUtils.isNotEmptyMap(beanMap)) {
-				for (Map.Entry<Class<?>, Object> entry : beanMap.entrySet()) {
-					Class<?> clz = entry.getKey();
-					Object beanInstance = entry.getValue();
-					if (clz.isAnnotationPresent(Component.class)) {
-						Validation validation = (Validation) beanInstance;
-						Map<Class<?>, Map<String, String>> regexParameters = validation.getRegexParameters();
-						for (Map.Entry<Class<?>, Map<String, String>> regexParameter : regexParameters.entrySet()) {
-							if (ObjectUtils.isEqueals(object, regexParameter.getKey())) {
-								objectRegex = regexParameter.getValue();
-							}
-						}
-					}
-				}
-			}
-		} catch (Exception e) {
-			throw new InitializationException("Component error's");
-		}
-		return objectRegex;
 	}
 }
