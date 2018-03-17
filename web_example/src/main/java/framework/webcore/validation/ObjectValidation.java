@@ -7,10 +7,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import framework.util.ObjectUtils;
+import framework.webcore.annotation.validation.Component;
 import framework.webcore.annotation.validation.Validate;
 import framework.webcore.exception.IllegalParameterException;
+import framework.webcore.exception.InitializationException;
+import framework.webcore.helper.BeanHelper;
 
-public class FieldValidation extends Validation {
+public class ObjectValidation {
 	
 	public static void validator(Object obj, Map<String, String> regexParameters) throws Exception {
 		
@@ -20,6 +24,31 @@ public class FieldValidation extends Validation {
 				checkObject(field.get(obj), regexParameters);
 			}
 		}
+	}
+	
+	public static Map<String, String> mapRegex(Object object) {
+		Map<String, String> objectRegex = null;
+		try {
+			Map<Class<?>, Object> beanMap = BeanHelper.getBeanMap();
+			if (ObjectUtils.isNotEmptyMap(beanMap)) {
+				for (Map.Entry<Class<?>, Object> entry : beanMap.entrySet()) {
+					Class<?> clz = entry.getKey();
+					Object beanInstance = entry.getValue();
+					if (clz.isAnnotationPresent(Component.class)) {
+						Validation validation = (Validation) beanInstance;
+						Map<Class<?>, Map<String, String>> regexParameters = validation.getRegexParameters();
+						for (Map.Entry<Class<?>, Map<String, String>> regexParameter : regexParameters.entrySet()) {
+							if (ObjectUtils.isEqueals(object, regexParameter.getKey())) {
+								objectRegex = regexParameter.getValue();
+							}
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			throw new InitializationException("Component error's");
+		}
+		return objectRegex;
 	}
 	
 	private static void checkObject(Object obj, Map<String, String> regexParameters)
@@ -60,19 +89,5 @@ public class FieldValidation extends Validation {
 			}
 		}
 		return fieldNameAndValue;
-	}
-	
-	@Override
-	public Map<String, String> mapRegex(Object object) {
-		return super.mapRegex(object);
-	}
-
-	@Override
-	protected Map<Class<?>, Map<String, String>> setRegexParameters(Class<?> clazz,
-			Map<String, String> mapOfClassFieldAndRegex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
+	}	
 }

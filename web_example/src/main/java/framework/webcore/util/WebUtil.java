@@ -1,25 +1,11 @@
 package framework.webcore.util;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import framework.util.FrameworkConstant;
 import framework.util.ObjectUtils;
-import framework.util.chaincasttype.FacadeCast;
-import framework.webcore.annotation.controller.parameter.PathVariable;
-import framework.webcore.annotation.controller.parameter.ReqBody;
-import framework.webcore.annotation.controller.parameter.ReqParam;
-import framework.webcore.bean.Handler;
-import framework.webcore.exception.InitializationException;
 import framework.webcore.http.HttpStatus;
 
 public class WebUtil {
