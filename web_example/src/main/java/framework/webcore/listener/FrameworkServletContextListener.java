@@ -1,8 +1,6 @@
 package framework.webcore.listener;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -27,13 +25,6 @@ public class FrameworkServletContextListener implements ServletContextListener {
 		HelperLoader.init();
 
 		addServletMapping(servletContext);
-		
-		Map<String, ? extends ServletRegistration> map = servletContext.getServletRegistrations();
-		for (Entry<String, ? extends ServletRegistration> sr : map.entrySet()) {
-			for (String c : sr.getValue().getMappings()) {
-				System.out.println(c);
-			}
-		}
 
 		System.out.println("context initilized");
 	}

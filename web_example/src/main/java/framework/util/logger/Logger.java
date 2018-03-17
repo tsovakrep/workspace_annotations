@@ -92,6 +92,7 @@ public class Logger {
 		return -1;
 	}
 	
+	@SuppressWarnings("unused")
 	private String currentClass() {
 		return this.getClass().getName();
 	}
