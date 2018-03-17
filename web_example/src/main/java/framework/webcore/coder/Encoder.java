@@ -10,7 +10,7 @@ public class Encoder extends CipherMachine {
 		return new String(dataEncryptArrayChar);
 	}
 	
-	public String encrypt(String data) {
+	public <T> T encrypt(T data) {
 		return getEncryptData(converterDataIntoAnArrayOfIntegers(data), 
 				converterKeyIntoAnArrayOfIntegers());
 	}
