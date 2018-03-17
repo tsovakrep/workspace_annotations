@@ -8,9 +8,9 @@ abstract class CipherMachine {
 
 	private static final String KEY = "fiDeliO";
 
-	protected int dataLength;
+	protected static int dataLength;
 
-	protected <T> int[] converterDataIntoAnArrayOfIntegers(T data) {
+	protected static <T> int[] converterDataIntoAnArrayOfIntegers(T data) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ObjectOutputStream oos;
 		try {
@@ -31,7 +31,7 @@ abstract class CipherMachine {
 		return dataArrayInt;
 	}
 
-	protected int[] converterKeyIntoAnArrayOfIntegers() {
+	protected static int[] converterKeyIntoAnArrayOfIntegers() {
 		char[] keyArray = KEY.toCharArray();
 		int lengthArrayKey = keyArray.length;
 
