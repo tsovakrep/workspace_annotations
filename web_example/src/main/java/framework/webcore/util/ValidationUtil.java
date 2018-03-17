@@ -12,8 +12,7 @@ import framework.webcore.exception.IllegalParameterException;
 
 public class ValidationUtil {
 	
-	public static void validator(Object obj, Map<String, String> regexParameters) 
-			throws IllegalArgumentException, IllegalAccessException, Exception {
+	public static void validator(Object obj, Map<String, String> regexParameters) throws Exception {
 		
 		for (Field field : MethodUtil.getDeclaredFields(obj)) {
 			if (field.isAnnotationPresent(Validate.class)) {

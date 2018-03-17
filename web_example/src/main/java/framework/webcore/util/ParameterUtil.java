@@ -18,6 +18,7 @@ import framework.webcore.annotation.controller.parameter.ReqParam;
 import framework.webcore.annotation.validation.Component;
 import framework.webcore.bean.Handler;
 import framework.webcore.bean.Params;
+import framework.webcore.bean.Validation;
 import framework.webcore.exception.InitializationException;
 import framework.webcore.helper.BeanHelper;
 
@@ -87,8 +88,8 @@ public class ParameterUtil {
 		if (paramsHelper.containAnnotation(parameter, ReqBody.class)) {
 			if (parameter.isAnnotationPresent(ReqBody.class)) {
 				String jsonString = JSONUtil.getJsonString(request);
-				Object entity = JSONUtil.fromJSON(jsonString, parameter.getType());
-				paramList.add(entity);
+				Object object = JSONUtil.fromJSON(jsonString, parameter.getType());
+				paramList.add(object);
 			}
 		}
 	}
@@ -110,9 +111,8 @@ public class ParameterUtil {
 		return null;
 	}
 	
-	@SuppressWarnings("unchecked")
-	private static Map<String, String> mapRegex() {
-		Map<String, String> entityRegex = null;
+	private static Map<String, String> mapRegex(Object object) {
+		Map<String, String> objectRegex = null;
 		try {
 			Map<Class<?>, Object> beanMap = BeanHelper.getBeanMap();
 			if (ObjectUtils.isNotEmptyMap(beanMap)) {
@@ -120,14 +120,19 @@ public class ParameterUtil {
 					Class<?> clz = entry.getKey();
 					Object beanInstance = entry.getValue();
 					if (clz.isAnnotationPresent(Component.class)) {
-						
-//						entityRegex = 
+						Validation validation = (Validation) beanInstance;
+						Map<Class<?>, Map<String, String>> regexParameters = validation.getRegexParameters();
+						for (Map.Entry<Class<?>, Map<String, String>> regexParameter : regexParameters.entrySet()) {
+							if (ObjectUtils.isEqueals(object, regexParameter.getKey())) {
+								objectRegex = regexParameter.getValue();
+							}
+						}
 					}
 				}
 			}
 		} catch (Exception e) {
 			throw new InitializationException("Component error's");
 		}
-		return null;
+		return objectRegex;
 	}
 }
