@@ -12,9 +12,9 @@
 </head>
 <body>
 
-<!-- 
+	<!--
 
-<script type="text/javascript">
+	<script type="text/javascript">
 function ajax() {
 	return new Promise((resolve, reject) => {
 		var url = 'http://localhost:8080/web_example/';
@@ -36,33 +36,40 @@ function ajax() {
 ajax();
 </script>
 
--->
+	-->
 	<form action="welcome/Tsovak" method="post">
-		Name: <input type="text" name="userName" /><br />
-		<input type="submit" value="post welcome" />
+		Name: <input type="text" name="userName" /><br /> <input
+			type="submit" value="post welcome" />
 	</form>
-	
+	<form action="index/show" method="post">
+		Name: <input type="text" name="userName" /><br /> <input
+			type="submit" value="post index/show" />
+	</form>
+	<form action="user" method="get">
+		<input type="submit" value="welcome user get" />
+	</form>
+	<form action="pages/index" method="get">
+		<input type="submit" value="pages" />
+	</form>
 	<form action="" method="get">
 		<input type="submit" value="delete" />
 	</form>
-	
+
 	<form action="" method="post">
 		<input type="submit" value="post" />
 	</form>
-	
+
 	<form action="callMethod" method="post">
-	Name: <input type="text" name="userName" /><br />
-		<input type="submit" value="post callMethod" />
+		Name: <input type="text" name="userName" /><br /> <input
+			type="submit" value="post callMethod" />
 	</form>
 
 	<form action="callMethod/ts" method="get">
 		<input type="submit" value="ts callMethod" />
 	</form>
-	
+
 	<form action="callMethod/pl" method="get">
 		<input type="submit" value="pl callMethod" />
 	</form>
-
-
 </body>
 </html>

@@ -17,9 +17,9 @@
 	<script type="text/javascript">
 		document.addEventListener("click", myFunction);
 	
-		//function myFunction() {
-			//document.getElementById("demo").innerHTML = "Hello Tsovak";
-		//}
+		function myFunction() {
+			document.getElementById("demo").innerHTML = "Hello Tsovak";
+		}
 	</script>
 	
 	<form action="index/show" method="post">

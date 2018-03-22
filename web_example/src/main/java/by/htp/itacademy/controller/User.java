@@ -15,7 +15,6 @@ public class User implements Serializable {
 
 	private Long id;
 	private String login;
-	private Integer hashCodePass;
 	private String password;
 	private String name;
 	private String surname;
@@ -32,12 +31,10 @@ public class User implements Serializable {
 
 	public User(String login, Integer hashLong) {
 		this.login = login;
-		this.hashCodePass = hashLong;
 	}
 
 	public User(String login, Integer hashPassUser, String name, String surname, String email, Boolean role) {
 		this.login = login;
-		this.hashCodePass = hashPassUser;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
@@ -46,11 +43,6 @@ public class User implements Serializable {
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    public User setHashCodePass(Integer hashCodePass) {
-        this.hashCodePass = hashCodePass;
-        return this;
     }
 
     public User setPassword(String password) {
@@ -77,12 +69,4 @@ public class User implements Serializable {
         this.role = role;
         return this;
     }
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", login=" + login + ", hashCodePass=" + hashCodePass + ", password=" + password
-				+ ", name=" + name + ", surname=" + surname + ", email=" + email + ", role=" + role + "]";
-	}
-    
-    
 }

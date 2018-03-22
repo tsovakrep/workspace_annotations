@@ -13,4 +13,5 @@ public class PageHelper {
 	public static List<String> getBasePackagePageList() {
 		return pageScanner.getPageList(FrameworkConstant.PATH_PAGES);
 	}
+	
 }

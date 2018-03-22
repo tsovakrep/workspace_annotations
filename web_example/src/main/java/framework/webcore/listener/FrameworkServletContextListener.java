@@ -23,8 +23,10 @@ public class FrameworkServletContextListener implements ServletContextListener {
 		DataContext.getInstance(servletContext);
 
 		HelperLoader.init();
-
-		addServletMapping(servletContext);
+		
+		List<String> pages = PageHelper.getBasePackagePageList();
+		servletContext.setAttribute("listOfPages", pages);
+		addServletMapping(servletContext, pages);
 
 		System.out.println("context initilized");
 	}
@@ -34,11 +36,9 @@ public class FrameworkServletContextListener implements ServletContextListener {
 		System.out.println("context destroyed");
 	}
 
-	private void addServletMapping(ServletContext servletContext) {
-		List<String> pages = PageHelper.getBasePackagePageList();
+	private void addServletMapping(ServletContext servletContext, List<String> pages) {
 		registerJspServlet(servletContext, pages);
 		registerDefaultServlet(servletContext);
-		
 	}
 
 	private void registerJspServlet(ServletContext servletContext, List<String> pages) {
@@ -53,9 +53,7 @@ public class FrameworkServletContextListener implements ServletContextListener {
 	private void registerDefaultServlet(ServletContext servletContext) {
 		ServletRegistration defaultServlet = servletContext.getServletRegistration("default");
 		String resourcePath = FrameworkConstant.PATH_PAGES;
-		if (ObjectUtils.isNotEmptyString(resourcePath)) {
-			defaultServlet.addMapping(resourcePath);
-		}
+		defaultServlet.addMapping(resourcePath);
 	}
 
 }

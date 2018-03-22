@@ -1,17 +1,29 @@
 package framework.webcore.coder;
 
+import java.io.UnsupportedEncodingException;
+
+import org.apache.commons.codec.binary.Base64;
+
+import static framework.util.FrameworkConstant.*;
+
 public class Encoder extends CipherMachine {
-	
-	public static <T> T encrypt(T data) {
-		return (T) getEncryptData(converterDataIntoAnArrayOfIntegers(data), 
-				converterKeyIntoAnArrayOfIntegers());
+	private static byte[] dataArray;
+	public static String encrypt(String data) {
+		try {
+			dataArray = data.getBytes(ENCODING);
+		} catch (UnsupportedEncodingException e) {
+		}
+		return encrypt();
 	}
 	
-	private static <T> T getEncryptData(int[] dataArrayInt, int[] keyArrayInt) {
-		char[] dataEncryptArrayChar = new char[dataLength];
-		for(int i = 0; i < dataLength; i++) {
-			dataEncryptArrayChar[i] = (char) (dataArrayInt[i] + keyArrayInt[i]);
+	private static String encrypt() {
+		String encryptedString = null;
+		try {
+			byte[] encryptedText = encipher.doFinal(dataArray);
+			encryptedString = new String(Base64.encodeBase64(encryptedText));
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return (T) dataEncryptArrayChar;
+		return encryptedString;
 	}
 }

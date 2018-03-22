@@ -4,7 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import static util.CarConstant.*;
 
-public class AbstractLanguageController {
+public abstract class AbstractLanguageController {
 
 	protected String fetchLanguage(HttpSession session) {
 		String language = (String)  session.getAttribute(REQUEST_ACTION_LANGUAGE);

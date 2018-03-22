@@ -12,5 +12,6 @@
 </head>
 <body>
 	<h2>Hello Palakian. You are regular fellow!</h2>
+	<p>${user.getLogin()}</p>
 </body>
 </html>

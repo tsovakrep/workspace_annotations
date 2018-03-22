@@ -1,17 +1,18 @@
 package framework.webcore.coder;
 
-public class Decoder extends CipherMachine {
+import org.apache.commons.codec.binary.Base64;
 
-	private String getDecryptData(int[] dataArrayInt, int[] keyArrayInt) {
-		char[] dataDecryptArrayChar = new char[dataArrayInt.length];
-		for(int i = 0, l = dataArrayInt.length; i < l; i++) {
-			dataDecryptArrayChar[i] = (char) (dataArrayInt[i] - keyArrayInt[i]);
-		}
-		return new String(dataDecryptArrayChar);
-	}
+public class Decoder extends CipherMachine {
 	
-	public String decrypt(String data) {
-		return getDecryptData(converterDataIntoAnArrayOfIntegers(data), 
-				converterKeyIntoAnArrayOfIntegers());
+	public static String decrypt(String encryptedString) {
+		String text = null;
+		try {
+			byte[] encryptedText = Base64.decodeBase64(encryptedString);
+			byte[] plainText = decipher.doFinal(encryptedText);
+			text = new String(plainText);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return text;
 	}
 }

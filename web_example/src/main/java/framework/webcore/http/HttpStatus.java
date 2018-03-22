@@ -1,5 +1,8 @@
 package framework.webcore.http;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum HttpStatus {
 	// 1xx Informational
 	
@@ -75,6 +78,33 @@ public enum HttpStatus {
 	NOT_EXTENDED(510, "Not Extended"),
 	NETWORK_AUTHENTICATION_REQUIRED(511, "Network Authentication Required");
 	
+	private static final Map<String, HttpStatus> informational = new HashMap<>();
+	private static final Map<String, HttpStatus> success = new HashMap<>();
+	private static final Map<String, HttpStatus> redirection = new HashMap<>();
+	private static final Map<String, HttpStatus> client_error = new HashMap<>();
+	private static final Map<String, HttpStatus> server_error = new HashMap<>();
+	
+	private static final int denominator = 100;
+	
+	static {
+		for (HttpStatus httpStatus : values()) {
+			if (httpStatus.value() / denominator == 1) {
+				informational.put(httpStatus.name(), httpStatus);
+			}
+			if (httpStatus.value() / denominator == 2) {
+				success.put(httpStatus.name(), httpStatus);
+			}
+			if (httpStatus.value() / denominator == 3) {
+				redirection.put(httpStatus.name(), httpStatus);
+			}
+			if (httpStatus.value() / denominator == 4) {
+				client_error.put(httpStatus.name(), httpStatus);
+			}
+			if (httpStatus.value() / denominator == 5) {
+				server_error.put(httpStatus.name(), httpStatus);
+			}
+		}
+	}
 	
 	private final int value;
 	private final String phrase;
@@ -90,5 +120,33 @@ public enum HttpStatus {
 	
 	public String getPhrase() {
 		return this.phrase;
+	}
+	
+	public HttpStatus resolveInformational(String method) {
+		return (method != null ? informational.get(method) : null);
+	}
+	
+	public HttpStatus resolveSuccess(String method) {
+		return (method != null ? success.get(method) : null);
+	}
+	
+	public boolean isSuccess(String method) {
+		return resolveSuccess(method) != null;
+	}
+	
+	public HttpStatus resolveRedirection(String method) {
+		return (method != null ? redirection.get(method) : null);
+	}
+	
+	public boolean isRediraction(String method) {
+		return resolveRedirection(method) != null;
+	}
+	
+	public HttpStatus resolveClientError(String method) {
+		return (method != null ? client_error.get(method) : null);
+	}
+	
+	public HttpStatus resolveServerError(String method) {
+		return (method != null ? server_error.get(method) : null);
 	}
 }

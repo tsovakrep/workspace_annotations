@@ -12,8 +12,6 @@ import framework.webcore.handler.HandlerInvoker;
 import framework.webcore.handler.HandlerMapping;
 import framework.webcore.handler.impl.HandlerInvokerImpl;
 import framework.webcore.handler.impl.HandlerMappingImpl;
-import framework.webcore.responseentity.ResponseEntityResolver;
-import framework.webcore.responseentity.impl.ResponseEntityResolverImpl;
 import framework.webcore.view.ViewResolver;
 import framework.webcore.view.impl.ViewResolverImpl;
 
@@ -29,7 +27,6 @@ public class InstanceFactory {
 	private static final String HANDLER_INVOKER = "handler_invoker";
 	private static final String HANDLER_MAPPING = "handler_mapping";
 	private static final String VIEW_RESOLVER = "view_resolver";
-	private static final String RESPONSE_ENTITY_RESOLVER = "response_entity_resolver";
 
 	public static ClassScanner getClassScanner() {
         return getInstance(CLASS_SCANNER, ClassScannerImpl.class);
@@ -49,10 +46,6 @@ public class InstanceFactory {
 
     public static ViewResolver getViewResolver() {
         return getInstance(VIEW_RESOLVER, ViewResolverImpl.class);
-    }
-    
-    public static ResponseEntityResolver getResponseEntityResolver() {
-    	return getInstance(RESPONSE_ENTITY_RESOLVER, ResponseEntityResolverImpl.class);
     }
     
 	@SuppressWarnings("unchecked")

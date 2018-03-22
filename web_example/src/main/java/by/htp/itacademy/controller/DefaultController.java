@@ -2,50 +2,62 @@ package by.htp.itacademy.controller;
 
 import javax.servlet.http.HttpSession;
 
-import framework.util.FrameworkConstant;
+import framework.webcore.bean.View;
+import framework.webcore.http.HttpStatus;
 import framework.webcore.annotation.controller.Controller;
 import framework.webcore.annotation.controller.Mapping;
 import framework.webcore.annotation.controller.method.DeleteMapping;
 import framework.webcore.annotation.controller.method.GetMapping;
 import framework.webcore.annotation.controller.method.PostMapping;
+import framework.webcore.annotation.controller.method.PutMapping;
 import framework.webcore.annotation.controller.parameter.PathVariable;
 import framework.webcore.annotation.controller.parameter.ReqBody;
 import framework.webcore.annotation.controller.parameter.ReqParam;
-import framework.webcore.annotation.initialization.AutoInit;
-import framework.webcore.bean.View;
 
 @Controller
 @Mapping("/")
 public class DefaultController extends AbstractLanguageController {
 
 	@GetMapping
-	public void load(HttpSession session) {
+	public View<?> load(HttpSession session) {
 		System.out.println("was called GET method");
 		loadLanguage(session);
 		System.out.println(session.getAttribute("language"));
+		return new View<>("/", HttpStatus.NOT_MODIFIED);
+	}
+	
+	@GetMapping("pages/{name}")
+	public View<?> pages(@PathVariable("name") String name) {
+		return new View<>(name);
+	}
+	
+	@PutMapping
+	public void madfj() {
+		System.out.println("was called PUT method");
 	}
 
 	@GetMapping("callMethod/ts")
-	public View fsadf(HttpSession session) {
+	public View<?> fsadf(HttpSession session) {
 		System.out.println("was called GET method ygy");
-		return new View("template/index3.jsp");
+		return new View<>("template/index3.jsp");
 	}
 	
 	@GetMapping("callMethod/pl")
-	public View fasadf(HttpSession session) {
+	public View<?> fasadf(HttpSession session) {
 		System.out.println("was called GET method");
-		return new View(FrameworkConstant.PATH_PAGES + "template/index3.jsp");
+		return new View<>("template/index3.jsp");
 	}
 	
 	@PostMapping("index/show")
-	public void fsaddf(HttpSession session) {
+	public View<?> fsaddf(HttpSession session) {
 		System.out.println("was called  index/show  method");
+		return new View<>("template/index3.jsp");
 	}
 
 	@PostMapping
-	public View dffasdfw() {
+	public View<?> dffasdfw() {
 		System.out.println("was called POST method");
-		return new View("template/index3.jsp");
+		return new View<>("/callMethod/ts", HttpStatus.SEE_OTHER);
 	}
 
 	@DeleteMapping
@@ -54,12 +66,13 @@ public class DefaultController extends AbstractLanguageController {
 	}
 	
 	@PostMapping("callMethod")
-	public void fsafdf(HttpSession session) {
-		System.out.println("was called POST method");
+	public View<?> fsafdf(HttpSession session) {
+		System.out.println("was called POST98 method");
+		return new View<>("/callMethod/ts", HttpStatus.SEE_OTHER);
 	}
 
 	@PostMapping("welcome/{name}")
-	public View loadHomePage(
+	public View<User> adfsdfa(
 			@ReqParam(value = "userName", defaultValue = "Tsovak1") String value,
 			@ReqParam(value = "userName1", defaultValue = "Tsovak2") String value2, 
 			@PathVariable("name") String name,
@@ -70,7 +83,7 @@ public class DefaultController extends AbstractLanguageController {
 		System.out.println(value2);
 		System.out.println(name);
 		System.out.println(user);
-		return new View("template/index3.jsp");
+		return new View<User>("/callMethod", new User("Tsovak Palakian!"), HttpStatus.NOT_MODIFIED);
 	}
 
 	private void loadLanguage(HttpSession session) {

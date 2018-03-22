@@ -61,6 +61,22 @@ public class ObjectUtils {
 		return !obj.getClass().getTypeName().equals(clazz.getName());
 	}
 	
+	public static boolean isEquals(String str1, String str2) {
+		return str1 != null && str1.equals(str2) ? true : str1 == str2; 
+	}
+	
+	public static boolean isNotEquals(String str1, String str2) {
+		return !isEquals(str1, str2);
+	}
+	
+	public static boolean isEquals(Integer int1, Integer int2) {
+		return int1 != null && int1.equals(int2) ? true : int1 == int2; 
+	}
+	
+	public static boolean isNotEquals(Integer int1, Integer int2) {
+		return !isEquals(int1, int2);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public static <T> T cast(Object obj) {
         return (T) obj;

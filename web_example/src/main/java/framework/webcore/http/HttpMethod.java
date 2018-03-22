@@ -22,5 +22,5 @@ public enum HttpMethod {
 	public boolean matches(String method) {
 		return (this == resolve(method));
 	}
-
+	
 }
