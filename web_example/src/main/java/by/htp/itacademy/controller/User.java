@@ -2,6 +2,7 @@ package by.htp.itacademy.controller;
 
 import java.io.Serializable;
 
+import framework.webcore.annotation.coder.Crypt;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ public class User implements Serializable {
 
 	private Long id;
 	private String login;
-	private String password;
+	@Crypt private String password;
 	private String name;
 	private String surname;
 	private String email;

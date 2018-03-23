@@ -13,15 +13,22 @@ import framework.webcore.annotation.controller.method.PutMapping;
 import framework.webcore.annotation.controller.parameter.PathVariable;
 import framework.webcore.annotation.controller.parameter.ReqBody;
 import framework.webcore.annotation.controller.parameter.ReqParam;
+import framework.webcore.annotation.initialization.AutoInit;
 
 @Controller
 @Mapping("/")
 public class DefaultController extends AbstractLanguageController {
 
+	@AutoInit
+	private UserService userService;
+	@AutoInit
+	private UserService2 userService2;
 	@GetMapping
 	public View<?> load(HttpSession session) {
 		System.out.println("was called GET method");
 		loadLanguage(session);
+		System.out.println(userService);
+		System.out.println(userService2);
 		System.out.println(session.getAttribute("language"));
 		return new View<>("/", HttpStatus.NOT_MODIFIED);
 	}

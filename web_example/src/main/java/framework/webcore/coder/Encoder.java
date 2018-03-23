@@ -7,8 +7,10 @@ import org.apache.commons.codec.binary.Base64;
 import static framework.util.FrameworkConstant.*;
 
 public class Encoder extends CipherMachine {
-	private static byte[] dataArray;
-	public static String encrypt(String data) {
+	private byte[] dataArray;
+	
+	@Override
+	public String encrypt(String data) {
 		try {
 			dataArray = data.getBytes(ENCODING);
 		} catch (UnsupportedEncodingException e) {
@@ -16,7 +18,7 @@ public class Encoder extends CipherMachine {
 		return encrypt();
 	}
 	
-	private static String encrypt() {
+	private String encrypt() {
 		String encryptedString = null;
 		try {
 			byte[] encryptedText = encipher.doFinal(dataArray);
@@ -25,5 +27,10 @@ public class Encoder extends CipherMachine {
 			e.printStackTrace();
 		}
 		return encryptedString;
+	}
+
+	@Override
+	public String decrypt(String encryptedString) {
+		return null;
 	}
 }

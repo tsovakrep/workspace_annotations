@@ -26,7 +26,7 @@ public class ClassScannerImpl implements ClassScanner {
 		return new SuperClassTemplate(packageName, superClass) {
             @Override
             protected boolean checkAddClass(Class<?> clz) {
-                return superClass.isAssignableFrom(clz);
+                return superClass.isAssignableFrom(clz) && !clz.isInterface();
             }
         }.getFileList();
 	}

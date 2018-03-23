@@ -3,7 +3,6 @@ package framework.webcore.view.impl;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletRegistration;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,7 +25,6 @@ public class ViewResolverImpl implements ViewResolver {
             	Object body = ObjectUtils.cast(view.getBody());
             	Map<String, ?> viewData = view.getData();
             	HttpStatus httpStatus = view.getHttpStatus();
-            	System.out.println(viewPath);
         		
             	if (ObjectUtils.isNotNullObject(httpStatus)) {
         			if (httpStatus.isRediraction(httpStatus.name())) {
@@ -34,10 +32,10 @@ public class ViewResolverImpl implements ViewResolver {
         			}
         		} else {
         			boolean isPage = false;
-        			List<String> pages = (List<String>) request.getServletContext().getAttribute("listOfPages");
+        			@SuppressWarnings("unchecked")
+					List<String> pages = (List<String>) request.getServletContext().getAttribute("listOfPages");
             		for(String page : pages) {
             			if (page.contains(viewPath)) {
-            				System.out.println(page);
             				viewPath = page;
             				isPage = !isPage;
             			}

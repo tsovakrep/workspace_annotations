@@ -1,4 +1,4 @@
-package framework.webcore.validation;
+package framework.webcore.util;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -35,7 +35,7 @@ public final class MethodUtil {
 		return null;
 	}
 	
-	protected static Field[] getDeclaredFields(Object obj) 
+	public static Field[] getDeclaredFields(Object obj) 
 			throws IllegalParameterException {
 		
 		if (obj == null) {

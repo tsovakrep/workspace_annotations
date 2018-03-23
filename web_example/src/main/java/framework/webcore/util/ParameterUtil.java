@@ -17,7 +17,6 @@ import framework.webcore.annotation.controller.parameter.ReqBody;
 import framework.webcore.annotation.controller.parameter.ReqParam;
 import framework.webcore.bean.Handler;
 import framework.webcore.bean.Params;
-import framework.webcore.validation.ObjectValidation;
 
 /**
  * @author Tsovak Palakian
@@ -86,10 +85,10 @@ public class ParameterUtil {
 			if (parameter.isAnnotationPresent(ReqBody.class)) {
 				String jsonString = JSONUtil.getJsonString(request);
 				Object object = JSONUtil.fromJSON(jsonString, parameter.getType());
-				Map<String, String> objectRegex = ObjectValidation.mapRegex(object);
-				if (ObjectUtils.isNotEmptyMap(objectRegex)) {
+				Map<String, String> objectRegex = ObjectValidatorUtil.mapRegex(object);
+				if (ObjectUtils.isNotNullObject(object) && ObjectUtils.isNotEmptyMap(objectRegex)) {
 					try {
-						ObjectValidation.validator(object, objectRegex);
+						ObjectValidatorUtil.validator(object, objectRegex);
 					} catch (Exception e) {
 						
 					}

@@ -25,8 +25,8 @@ public class BeanHelper {
 				for (int i = 0; i < basePackageClassList.size(); i++) {
 					Class<?> cls = basePackageClassList.get(i);
 					if (cls.isAnnotationPresent(Controller.class)
-							|| cls.isAnnotationPresent(Service.class)
-							|| cls.isAnnotationPresent(Component.class)) {
+						|| cls.isAnnotationPresent(Service.class)
+						|| cls.isAnnotationPresent(Component.class)) {
 						
 						beanClassList.add(cls);
 						Object instance = cls.newInstance();

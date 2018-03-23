@@ -66,5 +66,11 @@ public class Main {
 //		Encoder.encrypt(new Tsovak());
 //		MyCipher mc = new MyCipher();
 //		mc.encoder();
+//		boolean is = A.class.isAssignableFrom(B.class);
+//		System.out.println(is);
+		
 	}
 }
+
+//interface A{}
+//class B implements A{}
