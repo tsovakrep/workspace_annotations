@@ -1,8 +1,11 @@
 package by.htp.itacademy.controller;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.Serializable;
+import java.lang.reflect.Method;
+import java.net.URL;
 import java.security.DigestInputStream;
 import java.security.DigestOutputStream;
 import java.security.InvalidKeyException;
@@ -68,9 +71,40 @@ public class Main {
 //		mc.encoder();
 //		boolean is = A.class.isAssignableFrom(B.class);
 //		System.out.println(is);
+//		System.out.println(B.class.getConstructor().isAccessible());
+
+//		Package[] p = Package.getPackages();
+//		for (Package pa : p) {
+//			System.out.println(pa);
+//		}
+		Method method = B.class.getMethod("getInstance", null);
+		Object obj = method.invoke(null, null);
+		System.out.println(B.getInstance());
+		System.out.println(obj);
+		System.out.println(B.class.newInstance());
 		
 	}
 }
 
-//interface A{}
-//class B implements A{}
+interface A{}
+class B implements A{
+	public B() {}
+	private static class Singletone {
+		private static final B INSTANCE = new B();
+	}
+	public static B getInstance() {
+		return Singletone.INSTANCE;
+	}
+}
+
+/*private AccessoryDaoImpl() {
+		super(Accessory.class);
+	}
+
+	private static class Singletone {
+		private static final AccessoryDaoImpl INSTANCE = new AccessoryDaoImpl();
+	}
+
+	public static AccessoryDaoImpl getInstance() {
+		return Singletone.INSTANCE;
+	}*/

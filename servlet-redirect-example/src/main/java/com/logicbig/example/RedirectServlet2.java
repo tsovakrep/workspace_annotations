@@ -12,14 +12,50 @@ import java.io.IOException;
 public class RedirectServlet2 extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req,
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
+
+        System.out.println("----- Request for /test3 ---------");
+//        System.out.println(req.getParameter("name"));
+//        resp.setStatus(307);
+//        resp.setHeader("Location", "http://localhost:8080/servlet-redirect-example/test4");
+        request.getRequestDispatcher("/test4").forward(request, response);
+    }
+    
+    @Override
+    protected void doGet(HttpServletRequest req,
                           HttpServletResponse resp)
             throws ServletException, IOException {
 
-
         System.out.println("----- Request for /test3 ---------");
         System.out.println(req.getParameter("name"));
-        resp.setStatus(307);
-        resp.setHeader("Location", "http://localhost:8080/servlet-redirect-example/test4");
+        resp.setContentType("text/html");
+        resp.sendRedirect("myForm.html");
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

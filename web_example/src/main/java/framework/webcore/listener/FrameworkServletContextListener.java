@@ -8,7 +8,9 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.ServletRegistration;
 import javax.servlet.annotation.WebListener;
 
+import framework.classcore.ClassScanner;
 import framework.classcore.helper.PageHelper;
+import framework.classcore.impl.ClassScannerImpl;
 import framework.util.FrameworkConstant;
 import framework.util.ObjectUtils;
 import framework.webcore.DataContext;
@@ -19,6 +21,13 @@ public class FrameworkServletContextListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
+		
+		ClassScanner scanner = new ClassScannerImpl();
+        List<Class<?>> classList = scanner.getClassList("by/htp");
+        for (Class clz : classList) {
+            System.out.println(clz.getName());
+        }
+        
 		ServletContext servletContext = servletContextEvent.getServletContext();
 		DataContext.getInstance(servletContext);
 
